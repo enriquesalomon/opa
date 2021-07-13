@@ -73,7 +73,16 @@ include('dbconnect.php');
   <link rel="stylesheet" href="../assets/plugins/dropzone/min/dropzone.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
-  <style>
+<style>
+* {
+font-size: 13px;
+line-height: 1.428;
+}
+/* style.css */
+* {
+font-size: 15px;
+line-height: 2;
+}
 
 .main-sidebar { background-color: rgb(165,42,42) !important }
 
@@ -325,27 +334,98 @@ unset($_SESSION['error_remarks']);
       <div class="container-fluid">
         <div class="row">
 
-          <div class="col-12">      
+          <div class="col-12">  
+          <?php     
+                 $examsubjectid = $_GET['examsubjectid'];      
+                $examcatid = $_GET['examcategoryid'];
+                $classnameid = $_GET['classnameid'];
+                $eid = $_GET['eid'];
+                $sy = $_GET['sy'];
+
+                include('dbconnect.php');                         
+
+                if(!empty($_GET["examsubjectid"]) && !empty($_GET["examcategoryid"]) && !empty($_GET["classnameid"]) && !empty($_GET["eid"]) && !empty($_GET["sy"]) ){
+
+                  $check=mysqli_query($conn,"select * from examsubject where id='" .$examsubjectid . "'");
+                  $erow=mysqli_fetch_array($check);
+                  if($erow>0) {              
+                  }else{
+                    header("location:examdetails.php?examcategoryid=".$examcatid."&classnameid=".$classnameid."&id=".$eid."&sy=".$sy."");
+                  exit();
+                  }   
+                  $check=mysqli_query($conn,"select * from exam where sy='" .$sy . "'");
+                  $erow=mysqli_fetch_array($check);
+                  if($erow>0) {              
+                  }else{
+                    header("location:examdetails.php?examcategoryid=".$examcatid."&classnameid=".$classnameid."&id=".$eid."&sy=".$sy."");
+              
+                  exit();
+                  }   
+                  $check=mysqli_query($conn,"select * from class where id='" .$classnameid . "'");
+                  $erow=mysqli_fetch_array($check);
+                  if($erow>0) {              
+                  }else{
+                    header("location:examdetails.php?examcategoryid=".$examcatid."&classnameid=".$classnameid."&id=".$eid."&sy=".$sy."");
+              
+                  exit();
+                  }   
+                  $check=mysqli_query($conn,"select * from examcategory where id='" .$examcatid . "'");
+                  $erow=mysqli_fetch_array($check);
+                  if($erow>0) {              
+                  }else{
+                    header("location:examdetails.php?examcategoryid=".$examcatid."&classnameid=".$classnameid."&id=".$eid."&sy=".$sy."");
+              
+                  exit();
+                  }   
+
+                }else{
+                  header("location:examdetails.php?examcategoryid=".$examcatid."&classnameid=".$classnameid."&id=".$eid."&sy=".$sy."");
+    
+                }
 
 
 
-          <div class="callout callout-info">
+
+                $getrow1=mysqli_query($conn,"SELECT * FROM examcategory where id='$examcatid'");
+                $getrow1=mysqli_fetch_array($getrow1);
+                 $examcat=$getrow1['examcategoryname'];
+
+                 $getrow1=mysqli_query($conn,"SELECT * FROM class where id='$classnameid'");
+                 $getrow1=mysqli_fetch_array($getrow1);
+                  $classname=$getrow1['classname'];
+
+
+                  $getrow1=mysqli_query($conn,"SELECT * FROM examsubject where id='$examsubjectid'");
+                  $getrow1=mysqli_fetch_array($getrow1);
+                   $subjectid=$getrow1['subjectid'];
+                   $getrow1=mysqli_query($conn,"SELECT * FROM subjects where id='$subjectid'");
+                   $getrow1=mysqli_fetch_array($getrow1);
+                    $subjectname=$getrow1['subjectname'];
+
+
+               
+            ?>
+               
+
+        <!--  examsubjectid=40&examcategoryid=1&classnameid=7&eid=21&sy=2020-2021 -->
+
+           <div class="callout callout-info">
               <h5><i class="far fa-file-alt"></i> Examination Details:</h5> 
-              <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Periodical Exam: ' ?></br>
-              <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Class: ' ?></br>
-              <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SY: '?></br> 
-        
+              <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Periodical Exam: '. $examcat; ?></br>
+              <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Class: '. $classname; ?></br>
+              <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SY: '. $sy; ?></br> </br> 
+              <h5><i class="far fa-file-alt"></i> Subject: <?php echo ''. $subjectname; ?></h5> 
             </div>
            
-       
+         
             <!-- Main content -->
             <div class="invoice p-3 mb-3">
               <!-- title row -->
-              <div class="row">
-             
+              <div class="row">            
               <div class="col-12">
-              <a  href="./examdetails.php"><button class="btn btn-info"style="margin-bottom: 15px;"data-toggle="modal" ><i class="fas fa-angle-double-left"></i> Back to Exam Subjects </button></a>
-                <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam-subject"><i class="fa fa-plus" aria-hidden="true"></i>New Question</button>
+              <?php   echo "<a href='./examdetails.php?examcategoryid=".$examcatid."&classnameid=".$classnameid."&id=".$eid."&sy=".$sy."'><button class='btn btn-info' style='margin-bottom: 15px;'data-toggle='modal' ><i class='fas fa-angle-double-left'></i> Back to Exam Subjects </button></a>";
+            ?>
+              <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam-subject"><i class="fa fa-plus" aria-hidden="true"></i>New Question</button>
                 </div>
                 <!-- /.col -->
               </div>

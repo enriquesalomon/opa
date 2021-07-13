@@ -46,6 +46,15 @@ include('dbconnect.php');
   <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="toastr/css/toastr.min.css">
   <style>
+* {
+font-size: 13px;
+line-height: 1.428;
+}
+/* style.css */
+* {
+font-size: 15px;
+line-height: 2;
+}
 
 .main-sidebar { background-color: rgb(165,42,42) !important }
 
@@ -361,7 +370,7 @@ unset($_SESSION['error_remarks']);
                     ?>
                </td>   
                <td hidden><?php echo $classnameid; ?></td>    
-               <td hidden><?php echo $examnameid; ?></td>               
+               <td hidden><?php echo $examcatid; ?></td>               
                 </tr> 
 <?php
 }                      
@@ -474,8 +483,8 @@ $(document).ready(function(){
           return $(this).text();
         }).get();
 
-        $('#id').val(data[0]);     
-        $('#examnameid').val(data[8]);   
+        $('#id').val(data[0]);    
+        $('#examnameid').val(data[8]);    
         $('#classnameid').val(data[7]);   
         $('#schoolyearid').val(data[3]);       
        
@@ -528,6 +537,7 @@ $(document).ready(function(){
 							<label class="control-label" style="position:relative; top:7px;">Exam Name</label>
 						</div>
 						<div class="col-lg-8">
+           
                             <select name="examname" id="examnameid" class="form-control custom-select" required>
                             <option selected value="" disabled>Select Class</option>
                           <?php

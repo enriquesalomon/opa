@@ -74,6 +74,15 @@ include('dbconnect.php');
   <!-- Theme style -->
   <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
   <style>
+    * {
+font-size: 13px;
+line-height: 1.428;
+}
+/* style.css */
+* {
+font-size: 15px;
+line-height: 2;
+}
 
 .main-sidebar { background-color: rgb(165,42,42) !important }
 
@@ -360,6 +369,8 @@ unset($_SESSION['error_remarks']);
                     $erow=mysqli_fetch_array($check);
                     if($erow>0) {              
                     }else{
+      
+                
                     header('location:exam.php');
                     exit();
                     }   
@@ -437,7 +448,6 @@ unset($_SESSION['error_remarks']);
                  
                  $examcatid = $_GET['examcategoryid'];
                  $classnameid = $_GET['classnameid'];
-                 $eid = $_GET['id'];
                  $sy = $_GET['sy'];
                  
                 ?>  
@@ -450,7 +460,7 @@ unset($_SESSION['error_remarks']);
                       <td ><?php                  
                         echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                         echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
-                        echo "<a href='examsubjquestion.php?examsubjectid=".$id."&examcategoryid=".$examcatid."&classnameid=".$classnameid."&id=".$id."&sy=".$sy."' class='btn btn-sm btn-success'> <i class='fas fa-folder'></i>Manage Questions</a>";
+                        echo "<a href='examsubjquestion.php?examsubjectid=".$id."&examcategoryid=".$examcatid."&classnameid=".$classnameid."&eid=".$eid."&sy=".$sy."' class='btn btn-sm btn-success'> <i class='fas fa-folder'></i>Manage Questions</a>";
                     
                    ?>
                      </td>   

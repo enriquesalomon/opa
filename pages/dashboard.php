@@ -14,12 +14,24 @@ include('dbconnect.php');
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Online Proctored Web App | Admin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Online Proctored Web App | Admin</title>
 
-  <style>
-    .main-sidebar { background-color: rgb(165,42,42) !important }
+<style>
+* {
+font-size: 13px;
+line-height: 1.428;
+}
+
+/* style.css */
+* {
+font-size: 15px;
+line-height: 2;
+}
+
+
+.main-sidebar { background-color: rgb(165,42,42) !important }
 
 /**
 .main-sidebar { background-color: rgb(67 144 85) !important }

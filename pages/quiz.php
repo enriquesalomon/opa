@@ -17,7 +17,16 @@ include('dbconnect.php');
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Online Proctored Web App | Admin</title>
 
-  <style>
+<style>
+* {
+font-size: 13px;
+line-height: 1.428;
+}
+/* style.css */
+* {
+font-size: 15px;
+line-height: 2;
+}
 
 
 

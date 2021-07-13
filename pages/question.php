@@ -45,7 +45,16 @@ include('dbconnect.php');
   <!-- Theme style -->
   <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
   <link rel="stylesheet" href="toastr/css/toastr.min.css">
-  <style>
+<style>
+* {
+font-size: 13px;
+line-height: 1.428;
+}
+/* style.css */
+* {
+font-size: 15px;
+line-height: 2;
+}
 
 .main-sidebar { background-color: rgb(165,42,42) !important }
 
