@@ -6,7 +6,7 @@ session_start();
 $username = "";
 $errors = array();
 
-$db = mysqli_connect('localhost', 'root', '123456','ope');
+$db = mysqli_connect('localhost', 'root', '','ope');
 
 
 if (isset($_POST['user_login'])) {
@@ -44,7 +44,6 @@ if (mysqli_num_rows($results) == 1) {
 
 $_SESSION['username'] = $username;
 $_SESSION['success'] = " ".$username."!";
-$_SESSION['success'] ="success";
 header('location: pages/dashboard.php');
 
 

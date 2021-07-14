@@ -284,15 +284,13 @@ include('../includes/pagetopbar.php');
 
 <?php
 if ( isset( $_SESSION['success']) ) {
-$successmsg=$_SESSION['success'];
-include '../toast-welcome.php';
-}
+  $successmsg=$_SESSION['success'];
+  include '../toast-welcome.php';
 
-
-if ( isset( $_SESSION['success']) ) {
-  include('toast-welcome.php');
-}
   unset($_SESSION['success']);
+
+}
+
 ?>
 
     <!-- Main content -->
@@ -505,79 +503,6 @@ $(document).ready(function(){
 </html>
 
 
-<!--modal delete  -->
-<div id="deletemodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-<div class="modal-dialog modal-md" role="document">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-<span aria-hidden="true">&times;</span>
-</button>
-</div>
-<form action="query-delete.php" method="POST">
-<div class="modal-body">
- <center><h6>Are you sure you want to delete this record?</h6> </center>
-<input type="hidden" name="iddelete" id="iddelete">
-<div style="height:10px;"></div>
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Class Name</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" id="classnameid" class="form-control" name="classname" required readonly>
-						</div>
-					</div>
-					<div style="height:10px;"></div>
-</div>
-
-
-<div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-<button type="submit" name="deletegradelevel" class="btn btn-primary">Yes</button>
-</div>       
-</form>
-
-
-</div>
-</div>
-</div>
-
-<!-- Add edit -->
-<div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    
-                <h4 class="modal-title" id="myModalLabel">Edit Class Name</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-				<div class="container-fluid">
-				<form method="POST" action="query-edit.php" enctype="multipart/form-data">			
-				
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Class Name</label>
-						</div>
-						<div class="col-lg-8">
-            <input type="hidden" class="form-control" id="id" name="id" required >
-							<input type="text" class="form-control" name="classname" id="classname" required>
-						</div>
-					</div>				
-					
-                </div> 
-				</div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <button type="submit" name="editgradevel" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
-   
-                </div>
-                </form>
-				
-            </div>
-        </div>
-    </div>
 <?php 
 include 'modal-logout.php';
 ?>
