@@ -6,7 +6,7 @@ session_start();
 $username = "";
 $errors = array();
 
-$db = mysqli_connect('localhost', 'root', '','ope');
+$db = mysqli_connect('localhost', 'root', '123456','ope');
 
 
 if (isset($_POST['user_login'])) {
