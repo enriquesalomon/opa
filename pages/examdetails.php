@@ -438,8 +438,19 @@ unset($_SESSION['error_remarks']);
                 $id=$getrow['id'];   
                 $examnameid=$getrow['examid'];             
                 $subjectid=$getrow['subjectid'];    
-                $examdatetime=$getrow['examdatetime'];      
-                $totalquestion=$getrow['totalquestion'];        
+                $examdatetime=$getrow['examdatetime'];     
+                
+                $getrow1=mysqli_query($conn,"SELECT COUNT(id) as totalQ FROM examquestion where examsubjectid='$id' AND examid='$eid' ");
+                $getrow1=mysqli_fetch_array($getrow1);
+                 $totalquestion=$getrow1['totalQ'];      
+                 
+                 $getrow1=mysqli_query($conn,"SELECT SUM(rightmark) as totalPoints FROM examquestion where examsubjectid='$id' AND examid='$eid' ");
+                 $getrow1=mysqli_fetch_array($getrow1);
+                  $totalPoints=$getrow1['totalPoints'];  
+
+                  if ($totalPoints==""){
+                    $totalPoints='0';
+                  }
                
 
                 $getrow1=mysqli_query($conn,"SELECT * FROM subjects where id='$subjectid'");
@@ -456,7 +467,7 @@ unset($_SESSION['error_remarks']);
                       <td><?php echo $subjectname; ?></td>
                       <td><?php echo $examdatetime; ?></td>
                       <td><?php echo $totalquestion; ?></td>
-                      <td>0</td>
+                      <td><?php echo $totalPoints; ?></td>
                       <td ><?php                  
                         echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                         echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';

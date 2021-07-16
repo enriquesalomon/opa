@@ -329,7 +329,7 @@ unset($_SESSION['error_remarks']);
 
 
 ?> 
-<?php include 'modal-add-exam-subject.php'?>
+<?php include 'modal-add-exam-question.php'?>
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -439,16 +439,62 @@ unset($_SESSION['error_remarks']);
                   <table class="table table-striped">
                     <thead>
                     <tr>
-                      <th>ID</th>
-                      <th>Subject</th>
-                      <th>Date & Time of Exam</th>
-                      <th>Total Question</th>
-                      <th>Total Points</th>
+                      <th hidden>ID</th>
+                      <th>Question</th>
+                      <th>Option1</th>
+                      <th>Option2</th>
+                      <th>Option3</th>
+                      <th>Option4</th>
+                      <th>answer</th>
+                      <th>rightmark</th>
+                      <th>wrongmark</th>
                       <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
+                    <?php
+                include('dbconnect.php');                           
+                $query=mysqli_query($conn," select *  from examquestion where examsubjectid='".$examsubjectid."'");                                            
+                while($getrow=mysqli_fetch_array($query)){
+                ?>
+                <?php 
+                $id=$getrow['id'];   
+                $examsubjectid=$getrow['examsubjectid'];             
+                $questiontitle=$getrow['questiontitle'];    
+                $option1=$getrow['option1'];      
+                $option2=$getrow['option2'];   
+                $option3=$getrow['option3'];   
+                $option4=$getrow['option4']; 
+                $answer=$getrow['answer'];   
+                $rightmark=$getrow['rightmark'];   
+                $wrongmark=$getrow['wrongmark'];   
+                $createdon=$getrow['createdon'];       
+               
+
                  
+                ?>  
+                    <tr>
+                      <td hidden><?php echo $id; ?></td>
+                      <td><?php echo $questiontitle; ?></td>
+                      <td><?php echo $option1; ?></td>
+                      <td><?php echo $option2; ?></td>
+                      <td><?php echo $option3; ?></td>
+                      <td><?php echo $option4; ?></td>
+                      <td><?php echo $answer; ?></td>
+                      <td><?php echo $rightmark; ?></td>
+                      <td><?php echo $wrongmark; ?></td>                     
+                      <td ><?php                  
+                        echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
+                        echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
+                      //  echo "<a href='examsubjquestion.php?examsubjectid=".$id."&examcategoryid=".$examcatid."&classnameid=".$classnameid."&eid=".$eid."&sy=".$sy."' class='btn btn-sm btn-success'> <i class='fas fa-folder'></i>Manage Questions</a>";
+                    
+                   ?>
+                     </td>                              
+
+                    </tr>
+                    <?php
+}                      
+?>       
                     </tbody>
                   </table>
                 </div>
@@ -733,50 +779,99 @@ $(document).ready(function(){
      <input type="hidden" class="form-control" name="examcategoryid" value="<?php echo $_GET['examcategoryid']; ?>" required >
 
 
-        <div class="row">
+     <div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Date and Time</label>
-						</div>
-                        <div class="col-lg-8">
-                            <div class="input-group date" id="reservationdatetimes" data-target-input="nearest">
-                                <input type="text" id="examdatetimeedit" name="examdatetime" class="form-control datetimepicker-input" data-target="#reservationdatetimes" required/>
-                                <div class="input-group-append" data-target="#reservationdatetimes" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                </div>
-                            </div>
-                        </div> 
-                    </div>                
-             
-				    <div style="height:10px;"></div>
-                    <div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Subject</label>
+							<label class="control-label" style="position:relative; top:7px;">Question Title</label>
 						</div>
 						<div class="col-lg-8">
-                            <select name="subjectnameid" id="subjectidedit" class="form-control custom-select" required>
-                            <option selected value="" disabled>Select Subject</option>
-                          <?php
-                                  include('dbconnect.php'); 
-                          $query = mysqli_query($conn,"SELECT * FROM subjects");
-
-                          while ($result = mysqli_fetch_array($query)) {
-                          echo "<option value="  .$result['id']. ">" .$result['subjectname']."</option>";
-                          }
-                          ?>
-                          </select>
-						</div>
-					</div>
-					
-						<div style="height:10px;"></div>
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Total Question</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" class="form-control" name="totalquestion" id="totalquestionedit" onkeypress='validate(event)' required>
+                            <textarea id="titlequestionedit" class="form-control" rows="2" name="titlequestion"required></textarea>
                            
 						</div>
 					</div>
+                    <div style="height:10px;"></div>
+					<div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Option 1</label>
+						</div>
+						<div class="col-lg-8">
+							<input type="text" class="form-control" id="option1edit" name="option1" required>
+                           
+						</div>
+					</div>
+                    <div style="height:10px;"></div>
+					<div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Option 2</label>
+						</div>
+						<div class="col-lg-8">
+							<input type="text" class="form-control"  id="option2edit"  name="option2" required>
+                           
+						</div>
+					</div>
+                    <div style="height:10px;"></div>
+					<div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Option 3</label>
+						</div>
+						<div class="col-lg-8">
+							<input type="text" class="form-control" id="option3edit"  name="option3" required>
+                           
+						</div>
+					</div>
+					<div style="height:10px;"></div>
+					<div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Option 4</label>
+						</div>
+						<div class="col-lg-8">
+							<input type="text" class="form-control" id="option4edit" name="option4" required>
+                           
+						</div>
+					</div>		
+                    
+                <div style="height:10px;"></div>
+                <div class="row">
+                <div class="col-lg-4">
+                <label class="control-label" style="position:relative; top:7px;">Answer</label>
+                </div>
+                <div class="col-lg-8">
+                <select name="answer" id="answeredit" class="form-control custom-select" required>
+                <option selected value="" disabled>Select</option> 
+                <option value="1">Option 1</option>"     
+                <option value="2">Option 2</option>"     
+                <option value="3">Option 3</option>" 
+                <option value="4">Option 4</option>"
+                <option value="5">None of the above</option>"          
+                </select>
+                </div>
+                </div>
+             
+
+                <div style="height:10px;"></div>
+					<div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Right Ans(Mark +):</label>
+						</div>
+						<div class="col-lg-8">
+							<input type="text" class="form-control" name="rightmarkedit"  name="rightmark"  onkeypress='validate(event)'  required>
+                           
+						</div>
+					</div>		
+					
+                    <div style="height:10px;"></div>
+					<div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Wrong Ans(Mark -):</label>
+						</div>
+						<div class="col-lg-8">
+							<input type="text" class="form-control" name="wrongmarkedit" name="wrongmark"  onkeypress='validate(event)'  required>
+                           
+						</div>
+					</div>		
+					
+
+
+
 									
         
 									
