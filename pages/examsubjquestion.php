@@ -468,10 +468,8 @@ unset($_SESSION['error_remarks']);
                 $answer=$getrow['answer'];   
                 $rightmark=$getrow['rightmark'];   
                 $wrongmark=$getrow['wrongmark'];   
-                $createdon=$getrow['createdon'];       
-               
-
-                 
+                $createdon=$getrow['createdon'];                    
+           
                 ?>  
                     <tr>
                       <td hidden><?php echo $id; ?></td>
@@ -719,10 +717,16 @@ $(document).ready(function(){
           return $(this).text();
         }).get();
 
-        $('#id').val(data[0]);     
-        $('#examdatetimeedit').val(data[2]);   
-        $('#subjectidedit').val(data[6]);   
-        $('#totalquestionedit').val(data[3]);       
+      
+      $('#idedit').val(data[0]);       
+      $('#questiontitleedit').val(data[1]);   
+      $('#option1edit').val(data[2]); 
+      $('#option2edit').val(data[3]);      
+      $('#option3edit').val(data[4]);      
+      $('#option4edit').val(data[5]);  
+      $('#answeredit').val(data[6]);      
+      $('#rightmarkedit').val(data[7]);      
+      $('#wrongmarkedit').val(data[8]);      
        
    
 
@@ -741,9 +745,7 @@ $(document).ready(function(){
         }).get();
 
         $('#iddelete').val(data[0]);  
-        $('#examnamedelete').val(data[1]); 
-        $('#classnamedelete').val(data[2]); 
-        $('#schoolyeardelete').val(data[3]); 
+        $('#questiontitledelete').val(data[1]);   
               
        
   });
@@ -771,20 +773,21 @@ $(document).ready(function(){
 				<form method="POST" action="query-edit.php" enctype="multipart/form-data">
         <input type="hidden" class="form-control" id="id" name="idedit" required >
 
- 
 
-     <input type="hidden" class="form-control" name="eid" value="<?php echo$_GET['id']; ?>" required >
-     <input type="hidden" class="form-control" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
-     <input type="hidden" class="form-control" name="sy" value="<?php echo $_GET['sy']; ?>" required >
-     <input type="hidden" class="form-control" name="examcategoryid" value="<?php echo $_GET['examcategoryid']; ?>" required >
+     <input type="hidden" class="form-control" id="examsubjectidedit" name="examsubjectid" value="<?php echo$_GET['examsubjectid']; ?>" required >
+     <input type="hidden" class="form-control" id="examcategoryidedit" name="examcategoryid" value="<?php echo $_GET['examcategoryid']; ?>" required >
+     <input type="hidden" class="form-control" id="classnameidedit" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
+     <input type="hidden" class="form-control" id="examidedit" name="examid" value="<?php echo $_GET['eid']; ?>" required >
+     <input type="hidden" class="form-control" id="syedit" name="sy" value="<?php echo $_GET['sy']; ?>" required >
 
+     <input type="hidden" class="form-control" id="idedit" name="id" required >  
 
      <div class="row">
 						<div class="col-lg-4">
 							<label class="control-label" style="position:relative; top:7px;">Question Title</label>
 						</div>
 						<div class="col-lg-8">
-                            <textarea id="titlequestionedit" class="form-control" rows="2" name="titlequestion"required></textarea>
+                            <textarea id="questiontitleedit" class="form-control" rows="2" name="titlequestion"required></textarea>
                            
 						</div>
 					</div>
@@ -853,7 +856,7 @@ $(document).ready(function(){
 							<label class="control-label" style="position:relative; top:7px;">Right Ans(Mark +):</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" class="form-control" name="rightmarkedit"  name="rightmark"  onkeypress='validate(event)'  required>
+							<input type="text" class="form-control" id="rightmarkedit"  name="rightmark"  onkeypress='validate(event)'  required>
                            
 						</div>
 					</div>		
@@ -864,7 +867,7 @@ $(document).ready(function(){
 							<label class="control-label" style="position:relative; top:7px;">Wrong Ans(Mark -):</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" class="form-control" name="wrongmarkedit" name="wrongmark"  onkeypress='validate(event)'  required>
+							<input type="text" class="form-control" id="wrongmarkedit" name="wrongmark"  onkeypress='validate(event)'  required>
                            
 						</div>
 					</div>		
@@ -879,7 +882,7 @@ $(document).ready(function(){
 				</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <button type="submit"name="editexamsubject" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+                    <button type="submit"name="editexamquestion" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
                     	
 				</form>
                 </div>
@@ -906,48 +909,33 @@ $(document).ready(function(){
 </div>
 <form action="query-delete.php" method="POST">
 <div class="modal-body">
- <center><h6>Are you sure you want to delete this Exam Subject ?</h6> </center>
+ <center><h6>Are you sure you want to delete this Question?</h6> </center>
 
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Exam Name</label>
-						</div>
-						<div class="col-lg-8">
-<input type="hidden" name="iddelete" id="iddelete">           
-<input type="hidden" class="form-control" name="eid" value="<?php echo$_GET['id']; ?>" required >
-<input type="hidden" class="form-control" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
-<input type="hidden" class="form-control" name="sy" value="<?php echo $_GET['sy']; ?>" required >
-<input type="hidden" class="form-control" name="examcategoryid" value="<?php echo $_GET['examcategoryid']; ?>" required >
+		
+<input type="hidden" class="form-control" id="examsubjectiddelete" name="examsubjectid" value="<?php echo$_GET['examsubjectid']; ?>" required >
+<input type="hidden" class="form-control" id="examcategoryiddelete" name="examcategoryid" value="<?php echo $_GET['examcategoryid']; ?>" required >
+<input type="hidden" class="form-control" id="classnameiddelete" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
+<input type="hidden" class="form-control" id="examiddelete" name="examid" value="<?php echo $_GET['eid']; ?>" required >
+<input type="hidden" class="form-control" id="sydelete" name="sy" value="<?php echo $_GET['sy']; ?>" required >
 
-							<input type="text" id="examnamedelete" class="form-control" name="" required readonly>
-						</div>
-					</div>
+<input type="hidden" class="form-control" id="iddelete" name="id" required >  
+
 					<div style="height:10px;"></div>
           <div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Class Name</label>
+							<label class="control-label" style="position:relative; top:7px;">Question Title</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" id="classnamedelete" class="form-control" name="" required readonly>
-						</div>
-					</div>
-          <div style="height:10px;"></div>
-          <div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">School Year</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" id="schoolyeardelete" class="form-control" name="" required readonly>
-						</div>
-					</div>
-
-          
+              <textarea id="questiontitledelete" class="form-control" rows="2" name="questiontitle"required readonly></textarea>
+                         
+            </div>
+					</div>             
 </div>
 
 
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-<button type="submit" name="deleteexamsubjects" class="btn btn-primary">Yes</button>
+<button type="submit" name="deleteexamquestion" class="btn btn-primary">Yes</button>
 </div>       
 </form>
 
