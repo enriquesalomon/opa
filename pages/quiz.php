@@ -171,12 +171,7 @@ include('../includes/pagetopbar.php');
                   <p>Exam</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="./quiz.php" class="nav-link active">
-                  <i class="far fa-file nav-icon"></i>
-                  <p>Quiz</p>
-                </a>
-              </li>
+           
               <li class="nav-item">
                 <a href="pages/mailbox/materials.php" class="nav-link">
                   <i class="far fa-file nav-icon"></i>
