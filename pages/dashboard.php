@@ -282,16 +282,6 @@ include('../includes/pagetopbar.php');
     </div>
     <!-- /.content-header -->
 
-<?php
-if ( isset( $_SESSION['success']) ) {
-  $successmsg=$_SESSION['success'];
-  include '../toast-welcome.php';
-
-  unset($_SESSION['success']);
-
-}
-
-?>
 
     <!-- Main content -->
     <section class="content">
@@ -508,4 +498,14 @@ include 'modal-logout.php';
 ?>
 
 
+<?php
+if ( isset( $_SESSION['success']) ) {
+  $successmsg=$_SESSION['success'];
+  include '../toast-welcome.php';
+
+  unset($_SESSION['success']);
+
+}
+
+?>
   
