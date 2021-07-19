@@ -308,7 +308,7 @@ unset($_SESSION['error_remarks']);
        <div class="container-fluid">
        <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam"><i class="fa fa-plus" aria-hidden="true"></i></button>
 
-        <div class="row">
+       <div class="row">
           <div class="col-12">
             
            

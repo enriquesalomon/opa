@@ -301,14 +301,14 @@ unset($_SESSION['error_remarks']);
        <div class="container-fluid">
        <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-subject"><i class="fa fa-plus" aria-hidden="true"></i></button>
 
-        <div class="row">
+       <div class="row">
           <div class="col-12">
            
 
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
+                <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                   <th hidden>Id</th>
