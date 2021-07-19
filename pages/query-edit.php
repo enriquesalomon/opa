@@ -257,7 +257,7 @@ session_start();
      $sy = mysqli_real_escape_string($conn, $_POST['sy']);  
      $examcategoryid = mysqli_real_escape_string($conn, $_POST['examcategoryid']);  
 
-     if(!empty($_POST["subjectnameid"])) {
+    /** if(!empty($_POST["subjectnameid"])) {
       $check=mysqli_query($conn,"select * from examsubject where examid='". $_POST["eid"] ."' AND subjectid='" . $_POST["subjectnameid"] . "' AND id <> '$id' ");
      $erow=mysqli_fetch_array($check);
       if($erow>0) {
@@ -269,6 +269,7 @@ session_start();
               exit();
                 }      
       }
+       */
       
                 if (!mysqli_query($conn, "UPDATE examsubject set examid='$eid',subjectid='$subjectnameid',examdatetime='$examdatetime',totalquestion='$totalquestion',timelimit='$timelimit' where id='$id'")) {
             echo("Error description: " . mysqli_error($conn));
