@@ -250,6 +250,7 @@ session_start();
 		$examdatetime= mysqli_real_escape_string($conn, $_POST['examdatetime']);  
     $subjectnameid= mysqli_real_escape_string($conn, $_POST['subjectnameid']);  
      $totalquestion= mysqli_real_escape_string($conn, $_POST['totalquestion']);  
+     $timelimit= mysqli_real_escape_string($conn, $_POST['timelimit']);  
 
      $eid =  mysqli_real_escape_string($conn, $_POST['eid']);  
      $classnameid =mysqli_real_escape_string($conn, $_POST['classnameid']);  
@@ -269,7 +270,7 @@ session_start();
                 }      
       }
       
-                if (!mysqli_query($conn, "UPDATE examsubject set examid='$eid',subjectid='$subjectnameid',examdatetime='$examdatetime',totalquestion='$totalquestion' where id='$id'")) {
+                if (!mysqli_query($conn, "UPDATE examsubject set examid='$eid',subjectid='$subjectnameid',examdatetime='$examdatetime',totalquestion='$totalquestion',timelimit='$timelimit' where id='$id'")) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
                       $_SESSION["edited"]="edit";

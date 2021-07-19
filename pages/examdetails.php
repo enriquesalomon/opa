@@ -73,6 +73,8 @@ include('dbconnect.php');
   <link rel="stylesheet" href="../assets/plugins/dropzone/min/dropzone.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="../assets/dist/css/adminlte.min.css">
+
+  
   <style>
     * {
 font-size: 13px;
@@ -419,6 +421,7 @@ unset($_SESSION['error_remarks']);
                       <th>Subject</th>
                       <th>Date & Time of Exam</th>
                       <th>Total Question</th>
+                      <th>Time Limit</th>
                       <th>Total Points</th>
                       <th>Action</th>
                     </tr>
@@ -433,7 +436,8 @@ unset($_SESSION['error_remarks']);
                 $id=$getrow['id'];   
                 $examnameid=$getrow['examid'];             
                 $subjectid=$getrow['subjectid'];    
-                $examdatetime=$getrow['examdatetime'];     
+                $examdatetime=$getrow['examdatetime'];    
+                $timelimit=$getrow['timelimit'];   
                 
                 $getrow1=mysqli_query($conn,"SELECT COUNT(id) as totalQ FROM examquestion where examsubjectid='$id' AND examid='$eid' ");
                 $getrow1=mysqli_fetch_array($getrow1);
@@ -462,6 +466,7 @@ unset($_SESSION['error_remarks']);
                       <td><?php echo $subjectname; ?></td>
                       <td><?php echo $examdatetime; ?></td>
                       <td><?php echo $totalquestion; ?></td>
+                      <td><?php echo $timelimit; ?></td>
                       <td><?php echo $totalPoints; ?></td>
                       <td ><?php                  
                         echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
@@ -703,7 +708,8 @@ $(document).ready(function(){
         $('#id').val(data[0]);     
         $('#examdatetimeedit').val(data[2]);   
         $('#subjectidedit').val(data[6]);   
-        $('#totalquestionedit').val(data[3]);       
+        $('#totalquestionedit').val(data[3]);     
+        $('#timelimitedit').val(data[4]);     
        
    
 
@@ -804,7 +810,17 @@ $(document).ready(function(){
                            
 						</div>
 					</div>
-									
+          <div style="height:10px;"></div>
+					<div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Time Limit</label>
+						</div>
+						<div class="col-lg-8">
+							<input type="text" class="form-control" id="timelimitedit" name="timelimit" required>
+                           
+						</div>
+					</div>
+							
         
 									
                 </div> 

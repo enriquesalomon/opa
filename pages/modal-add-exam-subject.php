@@ -65,6 +65,22 @@ $date = date('Y-m-d H:i:s');
                            
 						</div>
 					</div>
+
+                    <div style="height:10px;"></div>
+                <div class="row">
+                <div class="col-lg-4">
+                <label class="control-label" style="position:relative; top:7px;">Time Limit</label>
+                </div>
+                <div class="col-lg-8">
+                <select name="timelimit" id="" class="form-control custom-select" required>
+                <option selected value="" disabled>Select</option> 
+                <option value="1">1hr</option>"     
+                <option value="2">2hrs</option>"     
+                <option value="3">3hrs</option>"                   
+                </select>
+                </div>
+                </div>
+
 								
 									
                 </div> 
@@ -117,6 +133,7 @@ $date = date('Y-m-d H:i:s');
       $examdatetime= mysqli_real_escape_string($conn, $_POST['examdatetime']);
 		$subjectnameid= mysqli_real_escape_string($conn, $_POST['subjectnameid']);
         $totalquestion = mysqli_real_escape_string($conn, $_POST['totalquestion']);
+        $timelimit = mysqli_real_escape_string($conn, $_POST['timelimit']);
         $eid = $_GET['id'];
         $classnameid = $_GET['classnameid'];
         $sy = $_GET['sy'];
@@ -138,7 +155,7 @@ $date = date('Y-m-d H:i:s');
             }
            
      
-        $sql = "INSERT INTO examsubject VALUES (DEFAULT,'$eid','$subjectnameid','$examdatetime','$totalquestion','$date')";   
+        $sql = "INSERT INTO examsubject VALUES (DEFAULT,'$eid','$subjectnameid','$examdatetime','$totalquestion','$date','$timelimit')";   
         if (!mysqli_query($conn, $sql)) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
