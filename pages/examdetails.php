@@ -438,10 +438,11 @@ unset($_SESSION['error_remarks']);
                 $subjectid=$getrow['subjectid'];    
                 $examdatetime=$getrow['examdatetime'];    
                 $timelimit=$getrow['timelimit'];   
+                $totalquestion=$getrow['totalquestion'];      
                 
-                $getrow1=mysqli_query($conn,"SELECT COUNT(id) as totalQ FROM examquestion where examsubjectid='$id' AND examid='$eid' ");
-                $getrow1=mysqli_fetch_array($getrow1);
-                 $totalquestion=$getrow1['totalQ'];      
+              //  $getrow1=mysqli_query($conn,"SELECT COUNT(id) as totalQ FROM examquestion where examsubjectid='$id' AND examid='$eid' ");
+               // $getrow1=mysqli_fetch_array($getrow1);
+              //   $totalquestion=$getrow1['totalQ'];      
                  
                  $getrow1=mysqli_query($conn,"SELECT SUM(rightmark) as totalPoints FROM examquestion where examsubjectid='$id' AND examid='$eid' ");
                  $getrow1=mysqli_fetch_array($getrow1);
@@ -707,7 +708,7 @@ $(document).ready(function(){
 
         $('#id').val(data[0]);     
         $('#examdatetimeedit').val(data[2]);   
-        $('#subjectidedit').val(data[6]);   
+        $('#subjectidedit').val(data[7]);   
         $('#totalquestionedit').val(data[3]);     
         $('#timelimitedit').val(data[4]);     
        
@@ -731,6 +732,7 @@ $(document).ready(function(){
         $('#examnamedelete').val(data[1]); 
         $('#classnamedelete').val(data[2]); 
         $('#schoolyeardelete').val(data[3]); 
+        $('#subjectiddelete').val(data[7]);   
               
        
   });
@@ -866,6 +868,7 @@ $(document).ready(function(){
 <input type="hidden" class="form-control" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
 <input type="hidden" class="form-control" name="sy" value="<?php echo $_GET['sy']; ?>" required >
 <input type="hidden" class="form-control" name="examcategoryid" value="<?php echo $_GET['examcategoryid']; ?>" required >
+<input type="hidden" name="subjectid" id="subjectiddelete">    
 
 							<input type="text" id="examnamedelete" class="form-control" name="" required readonly>
 						</div>

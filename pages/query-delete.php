@@ -214,21 +214,23 @@ if (isset($_POST['deleteexamsubjects'])) {
   $classnameid =mysqli_real_escape_string($conn, $_POST['classnameid']);  
   $sy = mysqli_real_escape_string($conn, $_POST['sy']);  
   $examcategoryid = mysqli_real_escape_string($conn, $_POST['examcategoryid']);  
+  //$subjectid = mysqli_real_escape_string($conn, $_POST['subjectid']);  
+  
   
 
       if(!empty($_POST["iddelete"])) { 
        // check if has 1-1 relationship to other table
-     /**  $check=mysqli_query($conn,"select * from examsubjectquestion where id='" . $id . "'");
+   $check=mysqli_query($conn,"select * from examquestion where examsubjectid='" .$id. "'");
        $erow=mysqli_fetch_array($check);
         if($erow>0) {
-                 $_SESSION["error_remarks"]="Cannot be deleted, found existing record to exam result";
+                 $_SESSION["error_remarks"]="Cannot be deleted, found existing record to exam subject question";
                 //  
                 $_SESSION["error"]="error";
-               header('location:examdetails.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
-                      
+                header('location:examdetails.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
+                          
                 exit();
                   }       
-          */
+      
 
               if (!mysqli_query($conn, "DELETE from examsubject where id='$id'")) {
           echo("Error description: " . mysqli_error($conn));
