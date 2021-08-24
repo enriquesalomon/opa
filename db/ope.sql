@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2021 at 01:52 AM
+-- Generation Time: Aug 24, 2021 at 10:32 PM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -64,9 +64,7 @@ CREATE TABLE `exam` (
 --
 
 INSERT INTO `exam` (`id`, `examcategoryid`, `classnameid`, `sy`, `resultdatetime`, `createdon`) VALUES
-(23, '2', '7', '2020-2021', '', '2021-07-13 07:24:53'),
-(22, '1', '8', '2020-2021', '', '2021-07-13 05:50:06'),
-(21, '1', '7', '2020-2021', '', '2021-07-13 05:42:20');
+(24, '1', '7', '2020-2021', '', '2021-07-20 05:16:18');
 
 -- --------------------------------------------------------
 
@@ -92,6 +90,34 @@ INSERT INTO `examcategory` (`id`, `examcategoryname`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `examquestion`
+--
+
+CREATE TABLE `examquestion` (
+  `id` int(11) NOT NULL,
+  `examsubjectid` varchar(255) NOT NULL,
+  `examid` varchar(255) NOT NULL,
+  `questiontitle` text NOT NULL,
+  `option1` varchar(255) NOT NULL,
+  `option2` varchar(255) NOT NULL,
+  `option3` varchar(255) NOT NULL,
+  `option4` varchar(255) NOT NULL,
+  `answer` varchar(255) NOT NULL,
+  `rightmark` varchar(255) NOT NULL,
+  `wrongmark` varchar(255) NOT NULL,
+  `createdon` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `examquestion`
+--
+
+INSERT INTO `examquestion` (`id`, `examsubjectid`, `examid`, `questiontitle`, `option1`, `option2`, `option3`, `option4`, `answer`, `rightmark`, `wrongmark`, `createdon`) VALUES
+(10, '47', '24', 'sasmp[lefasf', 'sugbaon', 'molangoy', 'lumsan', 'kilawon', '2', '1', '1', '2021-07-24');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `examsubject`
 --
 
@@ -101,18 +127,17 @@ CREATE TABLE `examsubject` (
   `subjectid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `examdatetime` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `totalquestion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `createdon` datetime NOT NULL
+  `createdon` datetime NOT NULL,
+  `timelimit` time NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `examsubject`
 --
 
-INSERT INTO `examsubject` (`id`, `examid`, `subjectid`, `examdatetime`, `totalquestion`, `createdon`) VALUES
-(41, '21', '4', '07/29/2021 3:28 PM', '3', '2021-07-13 06:28:26'),
-(38, '21', '6', '07/15/2021 1:48 PM', '10', '2021-07-13 06:19:08'),
-(40, '21', '4', '07/22/2021 3:28 PM', '3', '2021-07-13 06:28:17'),
-(42, '22', '4', '07/14/2021 8:25 AM', '50', '2021-07-13 07:25:34');
+INSERT INTO `examsubject` (`id`, `examid`, `subjectid`, `examdatetime`, `totalquestion`, `createdon`, `timelimit`) VALUES
+(46, '24', '6', '07/19/2021 1:00 PM', '50', '2021-07-20 05:17:04', '00:00:01'),
+(47, '24', '6', '07/22/2021 3:28 PM', '20', '2021-07-20 05:17:25', '00:00:01');
 
 -- --------------------------------------------------------
 
@@ -257,7 +282,8 @@ CREATE TABLE `subjects` (
 INSERT INTO `subjects` (`id`, `subjectname`, `createdon`, `status`) VALUES
 (6, 'FILIPINO 2', '2021-07-11 19:06:57', 'active'),
 (4, 'FILIPINO 1', '2021-07-10 10:44:25', 'active'),
-(7, 'FILIPINO 3', '2021-07-11 19:07:03', 'active');
+(7, 'FILIPINO 3', '2021-07-11 19:07:03', 'active'),
+(8, 'FILIPINO 1', '2021-07-14 04:43:11', 'active');
 
 -- --------------------------------------------------------
 
@@ -299,6 +325,12 @@ ALTER TABLE `exam`
 -- Indexes for table `examcategory`
 --
 ALTER TABLE `examcategory`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `examquestion`
+--
+ALTER TABLE `examquestion`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -363,7 +395,7 @@ ALTER TABLE `class`
 -- AUTO_INCREMENT for table `exam`
 --
 ALTER TABLE `exam`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `examcategory`
@@ -372,10 +404,16 @@ ALTER TABLE `examcategory`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `examquestion`
+--
+ALTER TABLE `examquestion`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `examsubject`
 --
 ALTER TABLE `examsubject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `question`
@@ -411,7 +449,7 @@ ALTER TABLE `subjectclass`
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user`
