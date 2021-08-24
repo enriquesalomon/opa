@@ -33,7 +33,7 @@ $date = date('Y-m-d H:i:s');
                     <div style="height:10px;"></div>
 					<div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Option 1</label>
+							<label class="control-label" style="position:relative; top:7px;">Choice A</label>
 						</div>
 						<div class="col-lg-8">
 							<input type="text" class="form-control" name="option1" required>
@@ -43,7 +43,7 @@ $date = date('Y-m-d H:i:s');
                     <div style="height:10px;"></div>
 					<div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Option 2</label>
+							<label class="control-label" style="position:relative; top:7px;">Choice B</label>
 						</div>
 						<div class="col-lg-8">
 							<input type="text" class="form-control" name="option2" required>
@@ -53,7 +53,7 @@ $date = date('Y-m-d H:i:s');
                     <div style="height:10px;"></div>
 					<div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Option 3</label>
+							<label class="control-label" style="position:relative; top:7px;">Choice C</label>
 						</div>
 						<div class="col-lg-8">
 							<input type="text" class="form-control" name="option3" required>
@@ -63,7 +63,7 @@ $date = date('Y-m-d H:i:s');
 					<div style="height:10px;"></div>
 					<div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Option 4</label>
+							<label class="control-label" style="position:relative; top:7px;">Choice D</label>
 						</div>
 						<div class="col-lg-8">
 							<input type="text" class="form-control" name="option4" required>
@@ -79,10 +79,10 @@ $date = date('Y-m-d H:i:s');
                 <div class="col-lg-8">
                 <select name="answer" id="" class="form-control custom-select" required>
                 <option selected value="" disabled>Select</option> 
-                <option value="1">Option 1</option>"     
-                <option value="2">Option 2</option>"     
-                <option value="3">Option 3</option>" 
-                <option value="4">Option 4</option>"
+                <option value="1">Choice A</option>"     
+                <option value="2">Choice B</option>"     
+                <option value="3">Choice C</option>" 
+                <option value="4">Choice D</option>"
                 <option value="5">None of the above</option>"          
                 </select>
                 </div>

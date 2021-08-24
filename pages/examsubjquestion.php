@@ -436,13 +436,13 @@ unset($_SESSION['error_remarks']);
                     <tr>
                       <th hidden>ID</th>
                       <th>Question</th>
-                      <th>Option1</th>
-                      <th>Option2</th>
-                      <th>Option3</th>
-                      <th>Option4</th>
-                      <th>answer</th>
-                      <th>rightmark</th>
-                      <th>wrongmark</th>
+                      <th>Choice A</th>
+                      <th>Choice B</th>
+                      <th>Choice C</th>
+                      <th>Choice D</th>
+                      <th>Answer</th>
+                      <th>Right Mark</th>
+                      <th>WrongMark</th>
                       <th>Action</th>
                     </tr>
                     </thead>
@@ -789,7 +789,7 @@ $(document).ready(function(){
                     <div style="height:10px;"></div>
 					<div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Option 1</label>
+							<label class="control-label" style="position:relative; top:7px;">Choice A</label>
 						</div>
 						<div class="col-lg-8">
 							<input type="text" class="form-control" id="option1edit" name="option1" required>
@@ -799,7 +799,7 @@ $(document).ready(function(){
                     <div style="height:10px;"></div>
 					<div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Option 2</label>
+							<label class="control-label" style="position:relative; top:7px;">Choice B</label>
 						</div>
 						<div class="col-lg-8">
 							<input type="text" class="form-control"  id="option2edit"  name="option2" required>
@@ -809,7 +809,7 @@ $(document).ready(function(){
                     <div style="height:10px;"></div>
 					<div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Option 3</label>
+							<label class="control-label" style="position:relative; top:7px;">Choice C</label>
 						</div>
 						<div class="col-lg-8">
 							<input type="text" class="form-control" id="option3edit"  name="option3" required>
@@ -819,7 +819,7 @@ $(document).ready(function(){
 					<div style="height:10px;"></div>
 					<div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Option 4</label>
+							<label class="control-label" style="position:relative; top:7px;">Choice D</label>
 						</div>
 						<div class="col-lg-8">
 							<input type="text" class="form-control" id="option4edit" name="option4" required>

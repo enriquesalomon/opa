@@ -310,7 +310,8 @@ unset($_SESSION['error_remarks']);
             <div class="card">
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="example1" class="table table-bordered table-striped">
+               <!--   <table id="example1" class="table table-bordered table-striped">-->
+                   <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                     <th hidden>ID</th>
