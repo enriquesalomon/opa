@@ -323,7 +323,7 @@ unset($_SESSION['error_remarks']);
                     <th>Email</th>
                     <th>Address</th>
                     <th>OPE Username</th>
-                    <th>OPE Password</th>
+                    <th>OPE PIN</th>
                     <th>Created On</th>
                     <th>Action</th> 
                   </tr>
