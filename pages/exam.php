@@ -371,13 +371,13 @@ unset($_SESSION['error_remarks']);
                        echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                        echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
                    if ($examtype=='Multiple Choice'){
-                    echo '<a href="examdetails.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i>Manage Exam Subjects</a>';
+                    echo '<a href="examdetails.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
                    }
                    if ($examtype=='True or False'){
-                    echo '<a href="examdetailsTF.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i>Manage Exam Subjects</a>';
+                    echo '<a href="examdetailsTF.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
                    }
                    if ($examtype=='Essay'){
-                    echo '<a href="examdetailsEssay.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i>Manage Exam Subjects</a>';
+                    echo '<a href="examdetailsEssay.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
                    }
                           ?>
                </td>   
@@ -545,7 +545,7 @@ $(document).ready(function(){
         <input type="hidden" class="form-control" id="id" name="idedit" required >
         <div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Exam Name</label>
+							<label class="control-label" style="position:relative; top:7px;">Grading Period</label>
 						</div>
 						<div class="col-lg-8">
            

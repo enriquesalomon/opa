@@ -351,6 +351,7 @@ unset($_SESSION['error_remarks']);
                   }else{
                     header("location:examdetailsEssay.php?examcategoryid=".$examcatid."&classnameid=".$classnameid."&id=".$eid."&sy=".$sy."");
                   exit();
+                  
                   }   
                   $check=mysqli_query($conn,"select * from exam where sy='" .$sy . "'");
                   $erow=mysqli_fetch_array($check);
@@ -394,7 +395,7 @@ unset($_SESSION['error_remarks']);
                   $classname=$getrow1['classname'];
 
 
-                  $getrow1=mysqli_query($conn,"SELECT * FROM examsubject where id='$examsubjectid'");
+                  $getrow1=mysqli_query($conn,"SELECT * FROM examsubject_essay where id='$examsubjectid'");
                   $getrow1=mysqli_fetch_array($getrow1);
                    $subjectid=$getrow1['subjectid'];
                    $getrow1=mysqli_query($conn,"SELECT * FROM subjects where id='$subjectid'");
@@ -424,7 +425,7 @@ unset($_SESSION['error_remarks']);
               <div class="col-12">
               <?php   echo "<a href='./examdetailsEssay.php?examcategoryid=".$examcatid."&classnameid=".$classnameid."&id=".$eid."&sy=".$sy."'><button class='btn btn-info' style='margin-bottom: 15px;'data-toggle='modal' ><i class='fas fa-angle-double-left'></i> Back</button></a>";
             ?>
-              <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam-subject"><i class="fa fa-plus" aria-hidden="true"></i>New Question</button>
+              <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam-subject"><i class="fa fa-plus" aria-hidden="true"></i> New Question</button>
                 </div>
                 <!-- /.col -->
               </div>
@@ -440,6 +441,7 @@ unset($_SESSION['error_remarks']);
                     <tr>
                       <th hidden>ID</th>
                       <th>Question</th>
+                      <th>Highest Mark</th>
                       <th>Action</th>
                     </tr>
                     </thead>
@@ -453,12 +455,14 @@ unset($_SESSION['error_remarks']);
                 $id=$getrow['id'];   
                 $examsubjectid=$getrow['examsubjectid'];             
                 $questiontitle=$getrow['questiontitle'];     
-                $createdon=$getrow['createdon'];                    
+                $createdon=$getrow['createdon'];      
+                $highestmark=$getrow['highestmark'];                  
            
                 ?>  
                     <tr>
                       <td hidden><?php echo $id; ?></td>
-                      <td><?php echo $questiontitle; ?></td>                    
+                      <td><?php echo $questiontitle; ?></td>      
+                      <td><?php echo $highestmark; ?></td>                 
                       <td ><?php                  
                         echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                         echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
@@ -698,7 +702,7 @@ $(document).ready(function(){
       
       $('#idedit').val(data[0]);       
       $('#questiontitleedit').val(data[1]);   
-      $('#option1edit').val(data[2]); 
+      $('#highestmarkedit').val(data[2]); 
      
    
 
@@ -749,8 +753,12 @@ $(document).ready(function(){
      <input type="hidden" class="form-control" id="examsubjectidedit" name="examsubjectid" value="<?php echo$_GET['examsubjectid']; ?>" required >
      <input type="hidden" class="form-control" id="examcategoryidedit" name="examcategoryid" value="<?php echo $_GET['examcategoryid']; ?>" required >
      <input type="hidden" class="form-control" id="classnameidedit" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
-     <input type="hidden" class="form-control" id="examidedit" name="examid" value="<?php echo $_GET['eid']; ?>" required >
+     <input type="hidden" class="form-control" id="examidedit" name="eid" value="<?php echo $_GET['eid']; ?>" required >
      <input type="hidden" class="form-control" id="syedit" name="sy" value="<?php echo $_GET['sy']; ?>" required >
+
+
+
+
 
      <input type="hidden" class="form-control" id="idedit" name="id" required >  
 
@@ -763,13 +771,22 @@ $(document).ready(function(){
             </div>
         </div>
 
-        
+        <div style="height:10px;"></div>
+                    <div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Highest Mark</label>
+						</div>
+						<div class="col-lg-8">
+							<input type="number" id="highestmarkedit"  class="form-control" name="highestmark"required>
+						</div>
+					</div>
+                    <div style="height:10px;"></div>
 									
         </div> 
         </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <button type="submit"name="editexamquestion" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+                    <button type="submit"name="editexamquestion_essay" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
                     	
 				</form>
                 </div>
@@ -822,7 +839,7 @@ $(document).ready(function(){
 
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-<button type="submit" name="deleteexamquestion" class="btn btn-primary">Yes</button>
+<button type="submit" name="deleteexamquestion_essay" class="btn btn-primary">Yes</button>
 </div>       
 </form>
 

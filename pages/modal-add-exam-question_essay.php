@@ -31,6 +31,16 @@ $date = date('Y-m-d H:i:s');
 						</div>
 					</div>
                     <div style="height:10px;"></div>
+                    <div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Highest Mark</label>
+						</div>
+						<div class="col-lg-8">
+							<input type="number" class="form-control" name="highestmark"required>
+						</div>
+					</div>
+                    <div style="height:10px;"></div>
+				
 				
 					
 									
@@ -81,7 +91,7 @@ $date = date('Y-m-d H:i:s');
 
  
 $titlequestion= mysqli_real_escape_string($conn, $_POST['titlequestion']);
-
+$highestmark =  mysqli_real_escape_string($conn, $_POST['highestmark']);
 
 $examsubjectid = $_GET['examsubjectid'];
 $examcategoryid = $_GET['examcategoryid'];
@@ -89,6 +99,7 @@ $classnameid = $_GET['classnameid'];
 $examid = $_GET['eid'];
 $sy = $_GET['sy'];
 $date = date('Y-m-d H:i:s');
+
 
 
 
@@ -106,7 +117,7 @@ $date = date('Y-m-d H:i:s');
             }
            
      
-        $sql = "INSERT INTO examquestion_essay VALUES (DEFAULT,'$examsubjectid','$examid','$titlequestion','$date')";   
+        $sql = "INSERT INTO examquestion_essay VALUES (DEFAULT,'$examsubjectid','$examid','$titlequestion','$date','$highestmark')";   
         if (!mysqli_query($conn, $sql)) {
             echo("Error description: " . mysqli_error($conn));
                 }else{

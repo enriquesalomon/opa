@@ -284,6 +284,8 @@ session_start();
 
   }
 
+  
+
   if (isset($_POST['editexamsubject_essay'])) {
   
     $id= mysqli_real_escape_string($conn, $_POST['idedit']);
@@ -299,7 +301,7 @@ session_start();
 
   
       
-                if (!mysqli_query($conn, "UPDATE examsubject_ESSAY set examid='$eid',subjectid='$subjectnameid',examdatetime='$examdatetime',totalquestion='$totalquestion',timelimit='$timelimit' where id='$id'")) {
+                if (!mysqli_query($conn, "UPDATE examsubject_essay set examid='$eid',subjectid='$subjectnameid',examdatetime='$examdatetime',totalquestion='$totalquestion',timelimit='$timelimit' where id='$id'")) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
                       $_SESSION["edited"]="edit";
@@ -309,6 +311,33 @@ session_start();
                 }
 
   }
+  
+  if (isset($_POST['editexamsubject_truefalse'])) {
+  
+    $id= mysqli_real_escape_string($conn, $_POST['idedit']);
+		$examdatetime= mysqli_real_escape_string($conn, $_POST['examdatetime']);  
+    $subjectnameid= mysqli_real_escape_string($conn, $_POST['subjectnameid']);  
+     $totalquestion= mysqli_real_escape_string($conn, $_POST['totalquestion']);  
+     $timelimit= mysqli_real_escape_string($conn, $_POST['timelimit']);  
+
+     $eid =  mysqli_real_escape_string($conn, $_POST['eid']);  
+     $classnameid =mysqli_real_escape_string($conn, $_POST['classnameid']);  
+     $sy = mysqli_real_escape_string($conn, $_POST['sy']);  
+     $examcategoryid = mysqli_real_escape_string($conn, $_POST['examcategoryid']);  
+
+  
+      
+                if (!mysqli_query($conn, "UPDATE examsubject_truefalse set examid='$eid',subjectid='$subjectnameid',examdatetime='$examdatetime',totalquestion='$totalquestion',timelimit='$timelimit' where id='$id'")) {
+            echo("Error description: " . mysqli_error($conn));
+                }else{
+                      $_SESSION["edited"]="edit";
+                      header('location:examdetailsTF.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
+          
+                      
+                }
+
+  }
+  
   
   if (isset($_POST['editexamquestion'])) {
   
@@ -320,6 +349,48 @@ session_start();
     $examcategoryid =mysqli_real_escape_string($conn, $_POST['examcategoryid']);
     $classnameid =mysqli_real_escape_string($conn, $_POST['classnameid']);
     $examid = mysqli_real_escape_string($conn, $_POST['examid']);
+    $sy = mysqli_real_escape_string($conn, $_POST['sy']);
+    $date = date('Y-m-d H:i:s');
+    
+
+    if(!empty($_POST["titlequestion"])) {
+      $check=mysqli_query($conn,"select * from examquestion where examsubjectid='".$examsubjectid."' AND  questiontitle='".$titlequestion."' AND id <> '$id'");        
+     $erow=mysqli_fetch_array($check);
+      if($erow>0) {
+        $_SESSION["error_remarks"]="Cannot be saved, found question title duplication";
+           
+              $_SESSION["error"]="error";
+              header('location:examsubjquestion.php?examsubjectid='.$examsubjectid.'&examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&eid='.$examid.'&sy='.$sy.'');
+
+              exit();
+                }      
+      }     
+    
+      
+                if (!mysqli_query($conn, "UPDATE examquestion set questiontitle='$titlequestion' where id='$id'")) {
+            echo("Error description: " . mysqli_error($conn));
+                }else{
+                      $_SESSION["edited"]="edit";
+                      header('location:examsubjquestion.php?examsubjectid='.$examsubjectid.'&examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&eid='.$examid.'&sy='.$sy.'');
+
+                      
+                }
+
+  }
+
+  
+
+  
+  if (isset($_POST['editexamquestion_essay'])) {
+  
+    $id= mysqli_real_escape_string($conn, $_POST['id']);
+    $titlequestion= mysqli_real_escape_string($conn, $_POST['titlequestion']);
+    $highestmark= mysqli_real_escape_string($conn, $_POST['highestmark']);
+    
+    $examsubjectid = mysqli_real_escape_string($conn, $_POST['examsubjectid']);
+    $examcategoryid =mysqli_real_escape_string($conn, $_POST['examcategoryid']);
+    $classnameid =mysqli_real_escape_string($conn, $_POST['classnameid']);
+    $examid = mysqli_real_escape_string($conn, $_POST['eid']);
     $sy = mysqli_real_escape_string($conn, $_POST['sy']);
     $date = date('Y-m-d H:i:s');
     
@@ -338,19 +409,15 @@ session_start();
       }     
     
       
-                if (!mysqli_query($conn, "UPDATE examquestion_essay set questiontitle='$titlequestion' where id='$id'")) {
+                if (!mysqli_query($conn, "UPDATE examquestion_essay set questiontitle='$titlequestion',highestmark='$highestmark' where id='$id'")) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
                       $_SESSION["edited"]="edit";
                       header('location:examsubjquestion_essay.php?examsubjectid='.$examsubjectid.'&examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&eid='.$examid.'&sy='.$sy.'');
 
-                      
+                        
                 }
 
   }
-
-  
-
-  
   
 ?>

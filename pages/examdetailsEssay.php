@@ -408,7 +408,7 @@ unset($_SESSION['error_remarks']);
              
               <div class="col-12">
               <a  href="./exam.php"><button class="btn btn-info"style="margin-bottom: 15px;"data-toggle="modal" ><i class="fas fa-angle-double-left"></i> Back</button></a>
-                <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam-subject"><i class="fa fa-plus" aria-hidden="true"></i>New Subject</button>
+                <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam-subject"><i class="fa fa-plus" aria-hidden="true"></i> New Subject</button>
                 </div>
                 <!-- /.col -->
               </div>
@@ -468,7 +468,7 @@ unset($_SESSION['error_remarks']);
                       <td ><?php                  
                         echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                         echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
-                        echo "<a href='examsubjquestion_essay.php?examsubjectid=".$id."&examcategoryid=".$examcatid."&classnameid=".$classnameid."&eid=".$eid."&sy=".$sy."' class='btn btn-sm btn-success'> <i class='fas fa-folder'></i>Manage Questions</a>";
+                        echo "<a href='examsubjquestion_essay.php?examsubjectid=".$id."&examcategoryid=".$examcatid."&classnameid=".$classnameid."&eid=".$eid."&sy=".$sy."' class='btn btn-sm btn-success'> <i class='fas fa-folder'></i> Manage Questions</a>";
                     
                    ?>
                      </td>   

@@ -14,7 +14,7 @@ $date = date('Y-m-d H:i:s');
             <div class="modal-content">
                 <div class="modal-header">
                     
-                    <center><h4 class="modal-title" id="myModalLabel">Add New Exam Subject for Essay Category</h4></center>
+                    <center><h4 class="modal-title" id="myModalLabel">Add Subject for True or False Category</h4></center>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -142,25 +142,25 @@ $date = date('Y-m-d H:i:s');
 		$date = date('Y-m-d H:i:s');
 
         if(!empty($_POST["examdatetime"])) {
-            $check=mysqli_query($conn,"select * from examsubject_essay where examid='" .$eid. "' AND  subjectid='" .$subjectnameid. "' AND  examdatetime='" .$examdatetime. "'");        
+            $check=mysqli_query($conn,"select * from examsubject_truefalse where examid='" .$eid. "' AND  subjectid='" .$subjectnameid. "' AND  examdatetime='" .$examdatetime. "'");        
            $erow=mysqli_fetch_array($check);
             if($erow>0) {
               $_SESSION["error_remarks"]="Cannot be saved, found exam subject info duplication";
                  
                     $_SESSION["error"]="error";
-                    header('location:examdetailsEssay.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
+                    header('location:examdetailsTF.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
                 
                     exit();
                       }      
             }
            
      
-        $sql = "INSERT INTO examsubject_essay VALUES (DEFAULT,'$eid','$subjectnameid','$examdatetime','$totalquestion','$date','$timelimit')";   
+        $sql = "INSERT INTO examsubject_truefalse VALUES (DEFAULT,'$eid','$subjectnameid','$examdatetime','$totalquestion','$date','$timelimit')";   
         if (!mysqli_query($conn, $sql)) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
                       $_SESSION["added"]="add";
-                      header('location:examdetailsEssay.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
+                      header('location:examdetailsTF.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
                       
                 }
 

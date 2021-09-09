@@ -24,7 +24,7 @@ $date = date('Y-m-d H:i:s');
 			
         <div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Exam Name</label>
+							<label class="control-label" style="position:relative; top:7px;">Grading Period</label>
 						</div>
 						<div class="col-lg-8">
                             <select name="examname" id="" class="form-control custom-select" required>

@@ -422,9 +422,9 @@ unset($_SESSION['error_remarks']);
               <!-- title row -->
               <div class="row">            
               <div class="col-12">
-              <?php   echo "<a href='./examdetails.php?examcategoryid=".$examcatid."&classnameid=".$classnameid."&id=".$eid."&sy=".$sy."'><button class='btn btn-info' style='margin-bottom: 15px;'data-toggle='modal' ><i class='fas fa-angle-double-left'></i> Back to Exam Subjects </button></a>";
+              <?php   echo "<a href='./examdetails.php?examcategoryid=".$examcatid."&classnameid=".$classnameid."&id=".$eid."&sy=".$sy."'><button class='btn btn-info' style='margin-bottom: 15px;'data-toggle='modal' ><i class='fas fa-angle-double-left'></i> Back </button></a>";
             ?>
-              <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam-subject"><i class="fa fa-plus" aria-hidden="true"></i>New Question</button>
+              <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam-subject"><i class="fa fa-plus" aria-hidden="true"></i> New Question</button>
                 </div>
                 <!-- /.col -->
               </div>
