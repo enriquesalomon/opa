@@ -393,7 +393,7 @@ unset($_SESSION['error_remarks']);
 
 
           <div class="callout callout-info">
-              <h5><i class="far fa-file-alt"></i> Examination Details: Multiple Choice</h5> 
+              <h5><i class="far fa-file-alt"></i> Examination Details: Essay</h5> 
               <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Periodical Exam: '. $examcat; ?> </br>
               <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Class: '. $classname; ?></br>
               <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SY: '. $sy; ?></br> 

@@ -322,6 +322,7 @@ unset($_SESSION['error_remarks']);
                   <tr>
                   <th hidden>Id</th>
                   <th>Exam Name</th>
+                  <th>Exam Type</th>
                     <th>Class Name</th>
                     <th>School Year</th>
                       <th>Result Date & Time</th>
@@ -346,6 +347,7 @@ unset($_SESSION['error_remarks']);
                   $resultdatetime= "Not Publish";
                 }
                 $createdon=$getrow['createdon'];  
+                $examtype=$getrow['examtype']; 
 
                 $getrow1=mysqli_query($conn,"SELECT * FROM class where id='$classnameid'");
                 $getrow1=mysqli_fetch_array($getrow1);
@@ -360,6 +362,7 @@ unset($_SESSION['error_remarks']);
                 <tr>
                 <td hidden><?php echo $id; ?></td>
                 <td><?php echo $examcat; ?></td>
+                <td><?php echo $examtype; ?></td>
                 <td ><?php echo $classname; ?></td>   
                 <td ><?php echo $schoolyear; ?></td>               
                 <td><?php echo $resultdatetime; ?></td>   
@@ -367,8 +370,16 @@ unset($_SESSION['error_remarks']);
                 <td ><?php                  
                        echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                        echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
-                       echo '<a href="examdetails.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i>Manage Exam Subjects</a>';
-                    ?>
+                   if ($examtype=='Multiple Choice'){
+                    echo '<a href="examdetails.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i>Manage Exam Subjects</a>';
+                   }
+                   if ($examtype=='True or False'){
+                    echo '<a href="examdetailsTF.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i>Manage Exam Subjects</a>';
+                   }
+                   if ($examtype=='Essay'){
+                    echo '<a href="examdetailsEssay.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i>Manage Exam Subjects</a>';
+                   }
+                          ?>
                </td>   
                <td hidden><?php echo $classnameid; ?></td>    
                <td hidden><?php echo $examcatid; ?></td>               
@@ -485,9 +496,10 @@ $(document).ready(function(){
         }).get();
 
         $('#id').val(data[0]);    
-        $('#examnameid').val(data[8]);    
-        $('#classnameid').val(data[7]);   
-        $('#schoolyearid').val(data[3]);       
+        $('#examtypeid').val(data[2]);   
+        $('#examnameid').val(data[9]);    
+        $('#classnameid').val(data[8]);   
+        $('#schoolyearid').val(data[4]);       
        
    
 
@@ -518,8 +530,6 @@ $(document).ready(function(){
 </script>
 
    
-
-  
 <!-- Edit -->
 <div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog ">
@@ -552,6 +562,24 @@ $(document).ready(function(){
                           </select>
 						</div>
 					</div>
+          
+          <div style="height:10px;"></div>
+                <div class="row">
+                    <div class="col-lg-4">
+                      <label class="control-label" style="position:relative; top:7px;">Exam Type</label>
+                      </div>
+                      <div class="col-lg-8">
+                        <select name="examtype" id="examtypeid" class="form-control custom-select" required>
+                        <option selected value="" disabled>Select</option> 
+                        <option value="Multiple Choice">Multiple Choice</option>"     
+                        <option value="Essay">Essay</option>"     
+                        <option value="True or False">True or False</option>"  
+                        </select>
+                      </div>
+                  </div>	
+
+
+								<div style="height:10px;"></div>
 								<div style="height:10px;"></div>
 				<div class="row">
 						<div class="col-lg-4">
@@ -633,6 +661,7 @@ $(document).ready(function(){
 						</div>
 					</div>
 					<div style="height:10px;"></div>
+          
           <div class="row">
 						<div class="col-lg-4">
 							<label class="control-label" style="position:relative; top:7px;">Class Name</label>
