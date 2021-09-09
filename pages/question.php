@@ -200,13 +200,7 @@ include('../includes/pagetopbar.php');
                   <p>Student</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="./assignstudent.php" class="nav-link">
-                <i class="far fas-file nav-icon"></i>
-                  <p>Assign Student</p>
-                </a>
-              </li>
-             
+            
             </ul>
           </li>
 
@@ -231,7 +225,20 @@ include('../includes/pagetopbar.php');
                   <p>Exam Subject</p>
                 </a>
               </li> -->
-             
+              <li class="nav-item">
+                <a href="./question.php" class="nav-link">
+                  <i class="far fas-file nav-icon"></i>
+                  <p>Question</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./allowexaminees.php" class="nav-link">
+                <i class="far fas-file nav-icon"></i>
+                  <p>Allow Examinees</p>
+                </a>
+              </li>
+           
+
             </ul>
           </li>
 

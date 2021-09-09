@@ -61,6 +61,11 @@ line-height: 2;
 
 }
 
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
+      background-color: #bcc148 !important;
+      color: #fff !important;
+}
+
 
   </style>
   
@@ -199,12 +204,7 @@ include('../includes/pagetopbar.php');
                   <p>Student</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="./assignstudent.php" class="nav-link">
-                <i class="far fas-file nav-icon"></i>
-                  <p>Assign Student</p>
-                </a>
-              </li>
+            
              
             </ul>
           </li>
@@ -231,6 +231,15 @@ include('../includes/pagetopbar.php');
                 </a>
               </li> -->
            
+         
+              <li class="nav-item">
+                <a href="./allowexaminees.php" class="nav-link">
+                <i class="far fas-file nav-icon"></i>
+                  <p>Allow Examinees</p>
+                </a>
+              </li>
+         
+
             </ul>
           </li>
 

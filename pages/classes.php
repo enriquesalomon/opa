@@ -54,6 +54,10 @@ line-height: 2;
     
    }
 
+   .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+  background-color: #bcc148 !important;
+  color: #fff !important;
+  }
    
 
    [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
@@ -230,9 +234,16 @@ include('../includes/pagetopbar.php');
                   <p>Exam Subject</p>
                 </a>
               </li> -->
-          
+         
+              <li class="nav-item">
+                <a href="./allowexaminees.php" class="nav-link">
+                <i class="far fas-file nav-icon"></i>
+                  <p>Allow Examinees</p>
+                </a>
+              </li>
             </ul>
-          </li>
+            </li>
+
 
          
         

@@ -57,6 +57,10 @@ line-height: 2;
     
    }
 
+  .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+  background-color: #bcc148 !important;
+  color: #fff !important;
+  }
    
 
    [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
@@ -64,6 +68,7 @@ line-height: 2;
     background-color: rgb(50 143 232 / 90%) !important;
 
 }
+
 
 
   </style>
@@ -138,7 +143,7 @@ include('../includes/pagetopbar.php');
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="dashboard.php" class="nav-link">
+            <a href="dashboard.php" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -154,7 +159,7 @@ include('../includes/pagetopbar.php');
          
          
            <li class="nav-item">
-            <a href="./classes.php" class="nav-link active">
+            <a href="./classes.php" class="nav-link ">
               <i class="nav-icon fas fa-columns"></i>
               <p>
                 Classes
@@ -202,13 +207,7 @@ include('../includes/pagetopbar.php');
                   <p>Student</p>
                 </a>
               </li>
-              <li class="nav-item">
-                <a href="./assignstudent.php" class="nav-link">
-                <i class="far fas-file nav-icon"></i>
-                  <p>Assign Student</p>
-                </a>
-              </li>
-             
+            
             </ul>
           </li>
 
@@ -227,18 +226,24 @@ include('../includes/pagetopbar.php');
                   <p>Exam</p>
                 </a>
               </li>
+
+             
                 <!-- <li class="nav-item">
                 <a href="./examsubject.php" class="nav-link">
                 <i class="far fas-file nav-icon"></i>
                   <p>Exam Subject</p>
                 </a>
               </li> -->
+             
+
+              
               <li class="nav-item">
-                <a href="./question.php" class="nav-link">
-                  <i class="far fas-file nav-icon"></i>
-                  <p>Question</p>
+                <a href="./allowexaminees.php" class="nav-link">
+                <i class="far fas-file nav-icon"></i>
+                  <p>Allow Examinees</p>
                 </a>
               </li>
+
             </ul>
           </li>
 
