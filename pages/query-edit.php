@@ -284,18 +284,37 @@ session_start();
 
   }
 
+  if (isset($_POST['editexamsubject_essay'])) {
+  
+    $id= mysqli_real_escape_string($conn, $_POST['idedit']);
+		$examdatetime= mysqli_real_escape_string($conn, $_POST['examdatetime']);  
+    $subjectnameid= mysqli_real_escape_string($conn, $_POST['subjectnameid']);  
+     $totalquestion= mysqli_real_escape_string($conn, $_POST['totalquestion']);  
+     $timelimit= mysqli_real_escape_string($conn, $_POST['timelimit']);  
+
+     $eid =  mysqli_real_escape_string($conn, $_POST['eid']);  
+     $classnameid =mysqli_real_escape_string($conn, $_POST['classnameid']);  
+     $sy = mysqli_real_escape_string($conn, $_POST['sy']);  
+     $examcategoryid = mysqli_real_escape_string($conn, $_POST['examcategoryid']);  
+
+  
+      
+                if (!mysqli_query($conn, "UPDATE examsubject_ESSAY set examid='$eid',subjectid='$subjectnameid',examdatetime='$examdatetime',totalquestion='$totalquestion',timelimit='$timelimit' where id='$id'")) {
+            echo("Error description: " . mysqli_error($conn));
+                }else{
+                      $_SESSION["edited"]="edit";
+                      header('location:examdetailsEssay.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
+          
+                      
+                }
+
+  }
   
   if (isset($_POST['editexamquestion'])) {
   
     $id= mysqli_real_escape_string($conn, $_POST['id']);
     $titlequestion= mysqli_real_escape_string($conn, $_POST['titlequestion']);
-    $option1= mysqli_real_escape_string($conn, $_POST['option1']);
-    $option2 = mysqli_real_escape_string($conn, $_POST['option2']);
-    $option3= mysqli_real_escape_string($conn, $_POST['option3']);
-    $option4 = mysqli_real_escape_string($conn, $_POST['option4']);
-    $answer = mysqli_real_escape_string($conn, $_POST['answer']);
-    $rightmark = mysqli_real_escape_string($conn, $_POST['rightmark']);
-    $wrongmark = mysqli_real_escape_string($conn, $_POST['wrongmark']);
+    
     
     $examsubjectid = mysqli_real_escape_string($conn, $_POST['examsubjectid']);
     $examcategoryid =mysqli_real_escape_string($conn, $_POST['examcategoryid']);
@@ -306,29 +325,31 @@ session_start();
     
 
     if(!empty($_POST["titlequestion"])) {
-      $check=mysqli_query($conn,"select * from examquestion where examsubjectid='".$examsubjectid."' AND  questiontitle='".$titlequestion."' AND id <> '$id'");        
+      $check=mysqli_query($conn,"select * from examquestion_essay where examsubjectid='".$examsubjectid."' AND  questiontitle='".$titlequestion."' AND id <> '$id'");        
      $erow=mysqli_fetch_array($check);
       if($erow>0) {
         $_SESSION["error_remarks"]="Cannot be saved, found question title duplication";
            
               $_SESSION["error"]="error";
-              header('location:examsubjquestion.php?examsubjectid='.$examsubjectid.'&examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&eid='.$examid.'&sy='.$sy.'');
+              header('location:examsubjquestion_essay.php?examsubjectid='.$examsubjectid.'&examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&eid='.$examid.'&sy='.$sy.'');
 
               exit();
                 }      
       }     
     
       
-                if (!mysqli_query($conn, "UPDATE examquestion set questiontitle='$titlequestion',option1='$option1',option2='$option2',option3='$option3',option4='$option4',answer='$answer',rightmark='$rightmark',wrongmark='$wrongmark' where id='$id'")) {
+                if (!mysqli_query($conn, "UPDATE examquestion_essay set questiontitle='$titlequestion' where id='$id'")) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
                       $_SESSION["edited"]="edit";
-                      header('location:examsubjquestion.php?examsubjectid='.$examsubjectid.'&examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&eid='.$examid.'&sy='.$sy.'');
+                      header('location:examsubjquestion_essay.php?examsubjectid='.$examsubjectid.'&examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&eid='.$examid.'&sy='.$sy.'');
 
                       
                 }
 
   }
+
+  
 
   
   

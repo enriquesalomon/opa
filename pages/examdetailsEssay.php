@@ -330,7 +330,7 @@ unset($_SESSION['error_remarks']);
 
 
 ?> 
-<?php include 'modal-add-exam-subject.php'?>
+<?php include 'modal-add-exam-subject_essay.php'?>
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -393,7 +393,7 @@ unset($_SESSION['error_remarks']);
 
 
           <div class="callout callout-info">
-              <h5><i class="far fa-file-alt"></i> Examination Details: Essay</h5> 
+              <h5><i class="far fa-file-alt"></i> Examination Type: Essay</h5> 
               <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Periodical Exam: '. $examcat; ?> </br>
               <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Class: '. $classname; ?></br>
               <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SY: '. $sy; ?></br> 
@@ -407,7 +407,7 @@ unset($_SESSION['error_remarks']);
               <div class="row">
              
               <div class="col-12">
-              <a  href="./exam.php"><button class="btn btn-info"style="margin-bottom: 15px;"data-toggle="modal" ><i class="fas fa-angle-double-left"></i> Back to Exam </button></a>
+              <a  href="./exam.php"><button class="btn btn-info"style="margin-bottom: 15px;"data-toggle="modal" ><i class="fas fa-angle-double-left"></i> Back</button></a>
                 <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam-subject"><i class="fa fa-plus" aria-hidden="true"></i>New Subject</button>
                 </div>
                 <!-- /.col -->
@@ -427,14 +427,13 @@ unset($_SESSION['error_remarks']);
                       <th>Date & Time of Exam</th>
                       <th>Total Question</th>
                       <th>Time Limit</th>
-                      <th>Total Points</th>
                       <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
                 include('dbconnect.php');                           
-                $query=mysqli_query($conn," select *  from examsubject where examid='".$eid."'");                                            
+                $query=mysqli_query($conn," select *  from examsubject_essay where examid='".$eid."'");                                            
                 while($getrow=mysqli_fetch_array($query)){
                 ?>
                 <?php 
@@ -449,14 +448,7 @@ unset($_SESSION['error_remarks']);
                // $getrow1=mysqli_fetch_array($getrow1);
               //   $totalquestion=$getrow1['totalQ'];      
                  
-                 $getrow1=mysqli_query($conn,"SELECT SUM(rightmark) as totalPoints FROM examquestion where examsubjectid='$id' AND examid='$eid' ");
-                 $getrow1=mysqli_fetch_array($getrow1);
-                  $totalPoints=$getrow1['totalPoints'];  
-
-                  if ($totalPoints==""){
-                    $totalPoints='0';
-                  }
-               
+                
 
                 $getrow1=mysqli_query($conn,"SELECT * FROM subjects where id='$subjectid'");
                 $getrow1=mysqli_fetch_array($getrow1);
@@ -473,11 +465,10 @@ unset($_SESSION['error_remarks']);
                       <td><?php echo $examdatetime; ?></td>
                       <td><?php echo $totalquestion; ?></td>
                       <td><?php echo $timelimit; ?></td>
-                      <td><?php echo $totalPoints; ?></td>
                       <td ><?php                  
                         echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                         echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
-                        echo "<a href='examsubjquestion.php?examsubjectid=".$id."&examcategoryid=".$examcatid."&classnameid=".$classnameid."&eid=".$eid."&sy=".$sy."' class='btn btn-sm btn-success'> <i class='fas fa-folder'></i>Manage Questions</a>";
+                        echo "<a href='examsubjquestion_essay.php?examsubjectid=".$id."&examcategoryid=".$examcatid."&classnameid=".$classnameid."&eid=".$eid."&sy=".$sy."' class='btn btn-sm btn-success'> <i class='fas fa-folder'></i>Manage Questions</a>";
                     
                    ?>
                      </td>   
@@ -713,7 +704,7 @@ $(document).ready(function(){
 
         $('#id').val(data[0]);     
         $('#examdatetimeedit').val(data[2]);   
-        $('#subjectidedit').val(data[7]);   
+        $('#subjectidedit').val(data[6]);   
         $('#totalquestionedit').val(data[3]);     
         $('#timelimitedit').val(data[4]);     
        
@@ -834,7 +825,7 @@ $(document).ready(function(){
 				</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <button type="submit"name="editexamsubject" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+                    <button type="submit"name="editexamsubject_essay" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
                     	
 				</form>
                 </div>
@@ -903,7 +894,7 @@ $(document).ready(function(){
 
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-<button type="submit" name="deleteexamsubjects" class="btn btn-primary">Yes</button>
+<button type="submit" name="deleteexamsubjects_essay" class="btn btn-primary">Yes</button>
 </div>       
 </form>
 

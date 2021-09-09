@@ -244,6 +244,43 @@ if (isset($_POST['deleteexamsubjects'])) {
 }
 }
 
+if (isset($_POST['deleteexamsubjects_essay'])) {
+  
+  $id= mysqli_real_escape_string($conn, $_POST['iddelete']);
+  $eid =  mysqli_real_escape_string($conn, $_POST['eid']);  
+  $classnameid =mysqli_real_escape_string($conn, $_POST['classnameid']);  
+  $sy = mysqli_real_escape_string($conn, $_POST['sy']);  
+  $examcategoryid = mysqli_real_escape_string($conn, $_POST['examcategoryid']);  
+  //$subjectid = mysqli_real_escape_string($conn, $_POST['subjectid']);  
+  
+  
+
+      if(!empty($_POST["iddelete"])) { 
+       // check if has 1-1 relationship to other table
+   $check=mysqli_query($conn,"select * from examquestion_essay where examsubjectid='" .$id. "'");
+       $erow=mysqli_fetch_array($check);
+        if($erow>0) {
+                 $_SESSION["error_remarks"]="Cannot be deleted, found existing record to exam subject question";
+                //  
+                $_SESSION["error"]="error";
+                header('location:examdetailsEssay.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
+                          
+                exit();
+                  }       
+      
+
+              if (!mysqli_query($conn, "DELETE from examsubject_essay where id='$id'")) {
+          echo("Error description: " . mysqli_error($conn));
+              }else{
+                    $_SESSION["deleted"]="delete";
+                    header('location:examdetailsEssay.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
+                      
+                    
+              }
+
+}
+}
+
 
 if (isset($_POST['deleteexamquestion'])) {
   
