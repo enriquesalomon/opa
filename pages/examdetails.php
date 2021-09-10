@@ -735,8 +735,8 @@ $(document).ready(function(){
 
         $('#iddelete').val(data[0]);  
         $('#examnamedelete').val(data[1]); 
-        $('#classnamedelete').val(data[2]); 
-        $('#schoolyeardelete').val(data[3]); 
+        $('#datetimeexamdelete').val(data[2]); 
+        $('#totalquestiondelete').val(data[3]); 
         $('#subjectiddelete').val(data[7]);   
               
        
@@ -865,7 +865,7 @@ $(document).ready(function(){
 
 					<div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Exam Name</label>
+							<label class="control-label" style="position:relative; top:7px;">Subject Name</label>
 						</div>
 						<div class="col-lg-8">
 <input type="hidden" name="iddelete" id="iddelete">           
@@ -881,19 +881,19 @@ $(document).ready(function(){
 					<div style="height:10px;"></div>
           <div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Class Name</label>
+							<label class="control-label" style="position:relative; top:7px;">Date & Time of Exam</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" id="classnamedelete" class="form-control" name="" required readonly>
+							<input type="text" id="datetimeexamdelete" class="form-control" name="" required readonly>
 						</div>
 					</div>
           <div style="height:10px;"></div>
           <div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">School Year</label>
+							<label class="control-label" style="position:relative; top:7px;">Total Question</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" id="schoolyeardelete" class="form-control" name="" required readonly>
+							<input type="text" id="totalquestiondelete" class="form-control" name="" required readonly>
 						</div>
 					</div>
 

@@ -519,8 +519,8 @@ $(document).ready(function(){
 
         $('#iddelete').val(data[0]);  
         $('#examnamedelete').val(data[1]); 
-        $('#classnamedelete').val(data[2]); 
-        $('#schoolyeardelete').val(data[3]); 
+        $('#classnamedelete').val(data[3]); 
+        $('#schoolyeardelete').val(data[4]); 
               
        
   });

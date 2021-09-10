@@ -328,7 +328,7 @@ unset($_SESSION['error_remarks']);
 
 
 ?> 
-<?php include 'modal-add-exam-question.php'?>
+<?php include 'modal-add-exam-question_truefalse.php'?>
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -422,7 +422,7 @@ unset($_SESSION['error_remarks']);
               <!-- title row -->
               <div class="row">            
               <div class="col-12">
-              <?php   echo "<a href='./examdetails.php?examcategoryid=".$examcatid."&classnameid=".$classnameid."&id=".$eid."&sy=".$sy."'><button class='btn btn-info' style='margin-bottom: 15px;'data-toggle='modal' ><i class='fas fa-angle-double-left'></i> Back </button></a>";
+              <?php   echo "<a href='./examdetailsTF.php?examcategoryid=".$examcatid."&classnameid=".$classnameid."&id=".$eid."&sy=".$sy."'><button class='btn btn-info' style='margin-bottom: 15px;'data-toggle='modal' ><i class='fas fa-angle-double-left'></i> Back </button></a>";
             ?>
               <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam-subject"><i class="fa fa-plus" aria-hidden="true"></i> New Question</button>
                 </div>
@@ -714,12 +714,10 @@ $(document).ready(function(){
       $('#idedit').val(data[0]);       
       $('#questiontitleedit').val(data[1]);   
       $('#option1edit').val(data[2]); 
-      $('#option2edit').val(data[3]);      
-      $('#option3edit').val(data[4]);      
-      $('#option4edit').val(data[5]);  
-      $('#answeredit').val(data[6]);      
-      $('#rightmarkedit').val(data[7]);      
-      $('#wrongmarkedit').val(data[8]);      
+      $('#option2edit').val(data[3]);   
+      $('#answeredit').val(data[4]);      
+      $('#rightmarkedit').val(data[5]);      
+      $('#wrongmarkedit').val(data[6]);      
        
    
 
@@ -805,27 +803,6 @@ $(document).ready(function(){
 						</div>
 					</div>
                     <div style="height:10px;"></div>
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Choice C</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" class="form-control" id="option3edit"  name="option3" required>
-                           
-						</div>
-					</div>
-					<div style="height:10px;"></div>
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Choice D</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" class="form-control" id="option4edit" name="option4" required>
-                           
-						</div>
-					</div>		
-                    
-                <div style="height:10px;"></div>
                 <div class="row">
                 <div class="col-lg-4">
                 <label class="control-label" style="position:relative; top:7px;">Answer</label>
@@ -833,11 +810,8 @@ $(document).ready(function(){
                 <div class="col-lg-8">
                 <select name="answer" id="answeredit" class="form-control custom-select" required>
                 <option selected value="" disabled>Select</option> 
-                <option value="1">Option 1</option>"     
-                <option value="2">Option 2</option>"     
-                <option value="3">Option 3</option>" 
-                <option value="4">Option 4</option>"
-                <option value="5">None of the above</option>"          
+                <option value="TRUE">TRUE</option>"     
+                <option value="FALSE">FALSE</option>"            
                 </select>
                 </div>
                 </div>
@@ -875,7 +849,7 @@ $(document).ready(function(){
 				</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <button type="submit"name="editexamquestion" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+                    <button type="submit"name="editexamquestion_truefalse" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
                     	
 				</form>
                 </div>
@@ -928,7 +902,7 @@ $(document).ready(function(){
 
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-<button type="submit" name="deleteexamquestion" class="btn btn-primary">Yes</button>
+<button type="submit" name="deleteexamquestion_truefalse" class="btn btn-primary">Yes</button>
 </div>       
 </form>
 

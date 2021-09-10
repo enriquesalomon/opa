@@ -361,6 +361,34 @@ if (isset($_POST['deleteexamquestion_essay'])) {
   }
   
 
+
+  if (isset($_POST['deleteexamquestion_truefalse'])) {
+  
+    $id= mysqli_real_escape_string($conn, $_POST['id']);
+    $examsubjectid = mysqli_real_escape_string($conn, $_POST['examsubjectid']);
+    $examcategoryid =mysqli_real_escape_string($conn, $_POST['examcategoryid']);
+    $classnameid =mysqli_real_escape_string($conn, $_POST['classnameid']);
+    $examid = mysqli_real_escape_string($conn, $_POST['examid']);
+    $sy = mysqli_real_escape_string($conn, $_POST['sy']);
+    $date = date('Y-m-d H:i:s');
+    
+      
+    
+          if(!empty($_POST["id"])) { 
+       
+                  if (!mysqli_query($conn, "DELETE from examquestion_truefalse where id='$id'")) {
+              echo("Error description: " . mysqli_error($conn));
+                  }else{
+                        $_SESSION["deleted"]="delete";
+                        header('location:examsubjquestion_truefalse.php?examsubjectid='.$examsubjectid.'&examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&eid='.$examid.'&sy='.$sy.'');
+        
+                        
+                  }
+    
+    }
+    }
+    
+    
   
 if (isset($_POST['deleteexamsubjects_truefalse'])) {
   
