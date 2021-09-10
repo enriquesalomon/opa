@@ -298,7 +298,8 @@ include('../includes/pagetopbar.php');
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Details</li>
+              <li class="breadcrumb-item active">True or False</li>
+              <li class="breadcrumb-item active">Question</li>
             </ol>
           </div>
         </div>
@@ -756,7 +757,7 @@ $(document).ready(function(){
             <div class="modal-content">
                 <div class="modal-header">
                     
-                    <center><h4 class="modal-title" id="myModalLabel">Edit Exam</h4></center>
+                    <center><h4 class="modal-title" id="myModalLabel">Edit Question</h4></center>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">  
@@ -823,7 +824,7 @@ $(document).ready(function(){
 							<label class="control-label" style="position:relative; top:7px;">Right Ans(Mark +):</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" class="form-control" id="rightmarkedit"  name="rightmark"  onkeypress='validate(event)'  required>
+							<input type="number" class="form-control" id="rightmarkedit"  name="rightmark"  onkeypress='validate(event)'  required>
                            
 						</div>
 					</div>		
@@ -834,7 +835,7 @@ $(document).ready(function(){
 							<label class="control-label" style="position:relative; top:7px;">Wrong Ans(Mark -):</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" class="form-control" id="wrongmarkedit" name="wrongmark"  onkeypress='validate(event)'  required>
+							<input type="number" class="form-control" id="wrongmarkedit" name="wrongmark"  onkeypress='validate(event)'  required>
                            
 						</div>
 					</div>		

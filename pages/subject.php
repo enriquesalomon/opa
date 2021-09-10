@@ -61,7 +61,7 @@ line-height: 2;
 }
 
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
-      background-color: #bcc148 !important;
+      background-color: #FFCC00 !important;
       color: #fff !important;
 }
 

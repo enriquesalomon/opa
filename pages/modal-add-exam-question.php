@@ -14,7 +14,7 @@ $date = date('Y-m-d H:i:s');
             <div class="modal-content">
                 <div class="modal-header">
                     
-                    <center><h4 class="modal-title" id="myModalLabel">Add New Subject Question</h4></center>
+                    <center><h4 class="modal-title" id="myModalLabel">Add New Question</h4></center>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -95,7 +95,7 @@ $date = date('Y-m-d H:i:s');
 							<label class="control-label" style="position:relative; top:7px;">Right Ans(Mark +):</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" class="form-control" name="rightmark"  onkeypress='validate(event)'  required>
+							<input type="number" class="form-control" name="rightmark"  onkeypress='validate(event)'  required>
                            
 						</div>
 					</div>		
@@ -106,7 +106,7 @@ $date = date('Y-m-d H:i:s');
 							<label class="control-label" style="position:relative; top:7px;">Wrong Ans(Mark -):</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" class="form-control" name="wrongmark"  onkeypress='validate(event)'  required>
+							<input type="number" class="form-control" name="wrongmark"  onkeypress='validate(event)'  required>
                            
 						</div>
 					</div>		

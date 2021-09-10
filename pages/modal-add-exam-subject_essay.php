@@ -61,7 +61,7 @@ $date = date('Y-m-d H:i:s');
 							<label class="control-label" style="position:relative; top:7px;">Total Question</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" class="form-control" name="totalquestion"  onkeypress='validate(event)'  required>
+							<input type="number" class="form-control" name="totalquestion"  onkeypress='validate(event)'  required>
                            
 						</div>
 					</div>

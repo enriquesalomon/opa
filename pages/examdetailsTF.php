@@ -300,7 +300,7 @@ include('../includes/pagetopbar.php');
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Details</li>
+              <li class="breadcrumb-item active">True or False</li>
             </ol>
           </div>
         </div>
@@ -804,7 +804,7 @@ $(document).ready(function(){
 							<label class="control-label" style="position:relative; top:7px;">Total Question</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" class="form-control" name="totalquestion" id="totalquestionedit" onkeypress='validate(event)' required>
+							<input type="number" class="form-control" name="totalquestion" id="totalquestionedit" onkeypress='validate(event)' required>
                            
 						</div>
 					</div>

@@ -58,9 +58,13 @@ line-height: 2;
    }
 
   .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
-  background-color: #bcc148 !important;
+  background-color: #FFCC00 !important;
   color: #fff !important;
   }
+ /** .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+  background-color: #bcc148 !important; */
+  
+  
    
 
    [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
@@ -279,7 +283,7 @@ include('../includes/pagetopbar.php');
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Dashboard v1</li>
+              <li class="breadcrumb-item active">Dashboard</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -321,14 +325,26 @@ while($row=mysqli_fetch_array($query)){
               <div class="inner">
               <?php
 include('dbconnect.php');
-
-$query=mysqli_query($conn,"select count(*) as num from quiz");
+$totalqmc=0;
+$totalqessay=0;
+$totalqtf0;
+$query=mysqli_query($conn,"select count(*) as num from examquestion");
 while($row=mysqli_fetch_array($query)){
-?>                
-                <h3><?php echo ($row['num']);?></h3>
-<?php }?>
+  $totalqmc=$row['num'];                 
+}
 
-                <p>Total Quiz</p>
+$query=mysqli_query($conn,"select count(*) as num from examquestion_essay");
+while($row=mysqli_fetch_array($query)){
+  $totalqessay=$row['num'];                 
+}
+$query=mysqli_query($conn,"select count(*) as num from examquestion_truefalse");
+while($row=mysqli_fetch_array($query)){
+  $totalqtf=$row['num'];                 
+}
+$totalquestions= $totalqtf+$totalqessay+$totalqmc;
+?>
+<h3><?php echo $totalquestions ;?></h3>
+                <p>Total Questions</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -363,7 +379,7 @@ while($row=mysqli_fetch_array($query)){
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>65</h3>
+                <h3>1</h3>
 
                 <p>Unique Visitors</p>
               </div>

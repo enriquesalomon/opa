@@ -83,15 +83,15 @@ line-height: 2;
     
    }
 
+   
    [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
     color: #f8f9fa !important;
     background-color: rgb(50 143 232 / 90%) !important;
 
 }
 
-
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
-      background-color: #bcc148 !important;
+      background-color: #FFCC00 !important;
       color: #fff !important;
 }
 
@@ -232,7 +232,7 @@ include('../includes/pagetopbar.php');
               </li> -->
            
               <li class="nav-item">
-                <a href="./allowexaminees.php" class="nav-link">
+                <a href="#" class="nav-link">
                 <i class="far fas-file nav-icon"></i>
                   <p>Allow Examinees</p>
                 </a>
