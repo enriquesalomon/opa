@@ -219,20 +219,19 @@ include('../includes/pagetopbar.php');
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./exam.php" class="nav-link active">
+                <a href="./exam.php" class="nav-link ">
                 <i class="far fas-file nav-icon"></i>
                   <p>Exam</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./allowexaminees.php" class="nav-link">
+                <a href="./allowexaminees.php" class="nav-link active">
                 <i class="far fas-file nav-icon"></i>
                   <p>Allow Examinees</p>
                 </a>
               </li>
            
-             
-
+            
             </ul>
           </li>
 
@@ -262,12 +261,12 @@ include('../includes/pagetopbar.php');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Exam Management</h1>
+            <h1>List of Examinees</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Exam </li>
+              <li class="breadcrumb-item active">Examinees </li>
             </ol>
           </div>
         </div>
@@ -302,8 +301,30 @@ unset($_SESSION['error_remarks']);
  <?php include 'modal-add-exam.php'?>
  <section class="content">
        <div class="container-fluid">
-       <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam"><i class="fa fa-plus" aria-hidden="true"></i></button>
+       
+       <div class="row">
+						<div class="col-lg-4">
+						<button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam"><i class="fa fa-plus" aria-hidden="true"></i></button>
+						</div>
+						<div class="col-lg-6">
+                            <select name="classnameid" id="classname" class="form-control custom-select" required>
+                            <option selected value="" disabled>Select Exam</option>
+                          <?php
+                                  include('dbconnect.php'); 
+                          $query = mysqli_query($conn,"SELECT * FROM class");
 
+                          while ($result = mysqli_fetch_array($query)) {
+                          echo "<option value="  .$result['id']. ">" .$result['classname']."</option>";
+                          }
+                          ?>
+                          </select>
+                          
+						</div>
+            <div class="col-lg-2">
+            <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam">Filter Data</button>
+   
+            </div> 
+				</div>
        <div class="row">
           <div class="col-12">
             
@@ -315,15 +336,12 @@ unset($_SESSION['error_remarks']);
                   <table class="table table-striped">
                   <thead>
                   <tr>
-                  <th hidden>Id</th>
-                  <th>Exam Name</th>
-                  <th>Exam Type</th>
-                    <th>Class Name</th>
-                    <th>School Year</th>
-                      <th>Result Date & Time</th>
-                    <th>Created On</th>
+                  <th>No</th>
+                  <th>Student No.</th>
+                  <th>Student Name</th>
+                    <th>Exam</th>
+                    <th>Status</th>
                     <th>Action</th>
-                    <th hidden>classid </th>
                   </tr>
                   </thead>
                   <tbody>
@@ -355,29 +373,18 @@ unset($_SESSION['error_remarks']);
                 
                 ?>             
                 <tr>
-                <td hidden><?php echo $id; ?></td>
-                <td><?php echo $examcat; ?></td>
-                <td><?php echo $examtype; ?></td>
-                <td ><?php echo $classname; ?></td>   
-                <td ><?php echo $schoolyear; ?></td>               
-                <td><?php echo $resultdatetime; ?></td>   
-                <td><?php echo $createdon; ?></td>    
+                <td >No</td>
+                <td >No</td>
+                <td >No</td>
+                <td >No</td>
+                <td >No</td>
                 <td ><?php                  
                        echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                        echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
-                   if ($examtype=='Multiple Choice'){
-                    echo '<a href="examdetails.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
-                   }
-                   if ($examtype=='True or False'){
-                    echo '<a href="examdetailsTF.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
-                   }
-                   if ($examtype=='Essay'){
-                    echo '<a href="examdetailsEssay.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
-                   }
+                 
                           ?>
                </td>   
-               <td hidden><?php echo $classnameid; ?></td>    
-               <td hidden><?php echo $examcatid; ?></td>               
+                            
                 </tr> 
 <?php
 }                      
