@@ -259,18 +259,22 @@ include('../includes/pagetopbar.php');
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>List of Examinees</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Examinees </li>
-            </ol>
-          </div>
-        </div>
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                  <h1>List of Examinees </h1>
+                </div>
+                <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Examinees </li>
+                  </ol>
+                </div>
+            
+            </div>
+
+       
       </div><!-- /.container-fluid -->
+     
     </section>
     <?php
 if ( isset( $_SESSION['examadded']) ) {
@@ -299,6 +303,35 @@ unset($_SESSION['error_remarks']);
  <!-- Main content -->
     
  <?php include 'modal-add-exam.php'?>
+
+<section class="content">
+<div class="container-fluid">
+<div class="row mb-4">
+<div class="col-sm-12">
+<h3>
+      <?php 
+      if (isset( $_GET['examid'])){
+      $getexamid=$_GET['examid'];
+      if($getexamid==""){ $getexamid=0;}
+
+      include('dbconnect.php'); 
+      $query = mysqli_query($conn,"SELECT e.id as eid,e.examtype as examtype,c.classname as cclassname,e.sy as sy,ex.examcategoryname as examcategoryname FROM exam e INNER JOIN class c ON e.classnameid=c.id INNER JOIN examcategory ex ON ex.id=e.examcategoryid WHERE e.id=$getexamid");
+
+      while ($result = mysqli_fetch_array($query)) {
+
+      echo $result['examcategoryname']. ' '.$result['examtype']. ' '.$result['sy']. ' '.$result['cclassname'] ;
+
+
+      }
+    }
+      ?>
+
+  </h3>
+  </div>
+  </div>
+</div>
+</section>
+
  <section class="content">
        <div class="container-fluid">
        
@@ -315,7 +348,7 @@ unset($_SESSION['error_remarks']);
             ?>
 						</div>
 						<div class="col-lg-6">
-                            <select name="classnameid" id="classname" class="form-control custom-select" required>
+                            <select name="classnameid" id="examid" class="form-control custom-select" required>
                             <option selected value="" disabled>Select Exam</option>
                           <?php
                                   include('dbconnect.php'); 
@@ -329,7 +362,7 @@ unset($_SESSION['error_remarks']);
                           
 						</div>
             <div class="col-lg-2">
-            <a  href="./allowexaminees.php?examid=1"><button class="btn btn-success"style="margin-bottom: 15px;">Filter Data</button></a>
+         <button class="btn btn-success"style="margin-bottom: 15px;" onclick="btnFilter();">Filter Data</button>
       
             
             </div> 
@@ -715,6 +748,13 @@ $(document).ready(function(){
 <?php 
 include 'modal-logout.php';
 ?>
+
+<script>
+function btnFilter(){
+  var examid=document.getElementById("examid").value;  
+  location.href = './allowexaminees.php?examid='+examid;
+};   
+</script>
 
 
 
