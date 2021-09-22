@@ -235,7 +235,7 @@ include('../includes/pagetopbar.php');
               </li> -->
          
               <li class="nav-item">
-                <a href="./allowexaminees.php" class="nav-link">
+              <a href="./allowexaminees.php?examid=0" class="nav-link">
                 <i class="far fas-file nav-icon"></i>
                   <p>Allow Examinees</p>
                 </a>

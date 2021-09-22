@@ -225,7 +225,7 @@ include('../includes/pagetopbar.php');
                 </a>
               </li>
               <li class="nav-item">
-                <a href="./allowexaminees.php" class="nav-link active">
+              <a href="./allowexaminees.php?examid=0" class="nav-link">
                 <i class="far fas-file nav-icon"></i>
                   <p>Allow Examinees</p>
                 </a>
@@ -304,25 +304,34 @@ unset($_SESSION['error_remarks']);
        
        <div class="row">
 						<div class="col-lg-4">
-						<button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam"><i class="fa fa-plus" aria-hidden="true"></i></button>
+
+            <?php
+            if (isset( $_GET['examid'])){
+              if ($_GET['examid']!=0){
+                echo "	<button class='btn btn-success'style='margin-bottom: 15px;'data-toggle='modal' data-target='#add-exam'><i class='fa fa-plus' aria-hidden='true'></i></button>";
+     
+              }
+              }
+            ?>
 						</div>
 						<div class="col-lg-6">
                             <select name="classnameid" id="classname" class="form-control custom-select" required>
                             <option selected value="" disabled>Select Exam</option>
                           <?php
                                   include('dbconnect.php'); 
-                          $query = mysqli_query($conn,"SELECT * FROM class");
+                          $query = mysqli_query($conn,"SELECT e.id as eid,e.examtype as examtype,c.classname as cclassname,e.sy as sy,ex.examcategoryname as examcategoryname FROM exam e INNER JOIN class c ON e.classnameid=c.id INNER JOIN examcategory ex ON ex.id=e.examcategoryid");
 
                           while ($result = mysqli_fetch_array($query)) {
-                          echo "<option value="  .$result['id']. ">" .$result['classname']."</option>";
+                          echo "<option value="  .$result['eid']. ">" .$result['examcategoryname']. " | ".$result['examtype']. " | ".$result['sy']. " | ".$result['cclassname']."</option>";
                           }
                           ?>
                           </select>
                           
 						</div>
             <div class="col-lg-2">
-            <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam">Filter Data</button>
-   
+            <a  href="./allowexaminees.php?examid=1"><button class="btn btn-success"style="margin-bottom: 15px;">Filter Data</button></a>
+      
+            
             </div> 
 				</div>
        <div class="row">
@@ -346,30 +355,37 @@ unset($_SESSION['error_remarks']);
                   </thead>
                   <tbody>
                 <?php
-                include('dbconnect.php');                           
-                $query=mysqli_query($conn," select *  from exam");                                            
+               
+               
+
+                include('dbconnect.php');    
+                
+                if (isset($_GET["examid"])){
+                  $getexamid = $_GET['examid'];
+
+                if(!empty($_GET["examid"])) {
+                $check=mysqli_query($conn,"select * from exam where id='" .$getexamid . "'");
+                $erow=mysqli_fetch_array($check);
+                if($erow>0) {              
+                }else{
+                header('location:allowexaminees.php?examid=0');
+                }               
+                }
+
+
+              }else{
+                header('location:allowexaminees.php?examid=0');
+              }
+
+                $query=mysqli_query($conn," select *  from examinee WHERE  examid='$getexamid'  ORDER BY studentname ASC");                                            
                 while($getrow=mysqli_fetch_array($query)){
                 ?>
                 <?php 
                 $id=$getrow['id'];   
-                $examcatid=$getrow['examcategoryid'];             
-                $classnameid=$getrow['classnameid'];    
-                $schoolyear=$getrow['sy'];           
-                $resultdatetime=$getrow['resultdatetime'];
-                if ($resultdatetime ==''){
-                  $resultdatetime= "Not Publish";
-                }
-                $createdon=$getrow['createdon'];  
-                $examtype=$getrow['examtype']; 
-
-                $getrow1=mysqli_query($conn,"SELECT * FROM class where id='$classnameid'");
-                $getrow1=mysqli_fetch_array($getrow1);
-                 $classname=$getrow1['classname'];
-
-                 
-                $getrow1=mysqli_query($conn,"SELECT * FROM examcategory where id='$examcatid'");
-                $getrow1=mysqli_fetch_array($getrow1);
-                 $examcat=$getrow1['examcategoryname'];
+                $studentno=$getrow['studentno'];             
+                $studentname=$getrow['studentname'];    
+                $examid=$getrow['examid'];         
+                $status=$getrow['status'];  
                 
                 ?>             
                 <tr>
