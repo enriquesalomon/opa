@@ -454,6 +454,7 @@ unset($_SESSION['error_remarks']);
                     </thead>
                     <tbody>
                     <?php
+                  
                 include('dbconnect.php');                           
                 $query=mysqli_query($conn," select *  from examquestion where examsubjectid='".$examsubjectid."'");                                            
                 while($getrow=mysqli_fetch_array($query)){
@@ -470,7 +471,7 @@ unset($_SESSION['error_remarks']);
                 $rightmark=$getrow['rightmark'];   
                 $wrongmark=$getrow['wrongmark'];   
                 $createdon=$getrow['createdon'];                    
-           
+         
                 ?>  
                     <tr>
                       <td hidden><?php echo $id; ?></td>

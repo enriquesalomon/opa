@@ -1,6 +1,7 @@
 <?php
  date_default_timezone_set('Asia/Manila');
 $date = date('Y-m-d H:i:s');
+$examsubjectid = $_GET['examsubjectid']; 
 ?>
 <!--date picker
 <link rel="stylesheet" href="../assets/css/bootstrap-datepicker.css" />
@@ -22,6 +23,24 @@ $date = date('Y-m-d H:i:s');
 				<form method="POST" enctype="multipart/form-data">	 
                      <!-- Date and time -->             
                      <div class="row">
+                        <div class="col-lg-4">
+                        <label class="control-label" style="position:relative; top:7px;">Question #</label>
+                        </div>
+                        <div class="col-lg-8">				
+                        <?php
+                        include('dbconnect.php'); 
+                        $query = mysqli_query($conn,"SELECT COUNT(*) as num from examquestion_essay where examsubjectid='".$examsubjectid."'");
+                        while ($result = mysqli_fetch_array($query)) {  
+                        $questno  =  $result['num'];     
+                        $questno+=1;                
+                        echo " <input type='text' class='form-control' name='questno' value="  .$questno. "  required readonly>";
+                        }
+                        ?>
+
+                        </div>
+					</div>
+                    <div style="height:10px;"></div>     
+                    <div class="row">
 						<div class="col-lg-4">
 							<label class="control-label" style="position:relative; top:7px;">Question Title</label>
 						</div>
@@ -92,6 +111,7 @@ $date = date('Y-m-d H:i:s');
  
 $titlequestion= mysqli_real_escape_string($conn, $_POST['titlequestion']);
 $highestmark =  mysqli_real_escape_string($conn, $_POST['highestmark']);
+$questno = mysqli_real_escape_string($conn, $_POST['questno']);
 
 $examsubjectid = $_GET['examsubjectid'];
 $examcategoryid = $_GET['examcategoryid'];
@@ -117,7 +137,7 @@ $date = date('Y-m-d H:i:s');
             }
            
      
-        $sql = "INSERT INTO examquestion_essay VALUES (DEFAULT,'$examsubjectid','$examid','$titlequestion','$date','$highestmark')";   
+        $sql = "INSERT INTO examquestion_essay VALUES (DEFAULT,'$examsubjectid','$examid','$questno','$titlequestion','$date','$highestmark')";   
         if (!mysqli_query($conn, $sql)) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
