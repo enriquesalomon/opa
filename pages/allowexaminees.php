@@ -302,7 +302,7 @@ unset($_SESSION['error_remarks']);
 ?> 
  <!-- Main content -->
     
- <?php include 'modal-add-exam.php'?>
+ <?php include 'modal-add-assignexaminee.php'?>
 
 <section class="content">
 <div class="container-fluid">
@@ -381,8 +381,6 @@ unset($_SESSION['error_remarks']);
                   <th>No</th>
                   <th>Student No.</th>
                   <th>Student Name</th>
-                    <th>Exam</th>
-                    <th>Status</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -415,18 +413,21 @@ unset($_SESSION['error_remarks']);
                 ?>
                 <?php 
                 $id=$getrow['id'];   
-                $studentno=$getrow['studentno'];             
-                $studentname=$getrow['studentname'];    
+                $studentid=$getrow['studentid'];                 
+                 
+                $getrow1=mysqli_query($conn,"SELECT * FROM student where id='$studentid'");
+                $getrow1=mysqli_fetch_array($getrow1);
+                 $studentno=$getrow1['studentno'];           
+                $studentname=$getrow1['firstname']." ".$getrow1['middlename']." ".$getrow1['lastname'];    
                 $examid=$getrow['examid'];         
                 $status=$getrow['status'];  
                 
                 ?>             
                 <tr>
                 <td >No</td>
-                <td >No</td>
-                <td >No</td>
-                <td >No</td>
-                <td >No</td>
+                <td><?php echo $studentno; ?></td>
+                <td><?php echo $studentname; ?></td>
+               
                 <td ><?php                  
                        echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                        echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
