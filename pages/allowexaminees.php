@@ -83,7 +83,7 @@ line-height: 2;
     
    }
 
-   
+
    [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
     color: #f8f9fa !important;
     background-color: rgb(50 143 232 / 90%) !important;
@@ -94,7 +94,6 @@ line-height: 2;
       background-color: #FFCC00 !important;
       color: #fff !important;
 }
-
 
   </style>
 <style>
@@ -225,7 +224,7 @@ include('../includes/pagetopbar.php');
                 </a>
               </li>
               <li class="nav-item">
-              <a href="./allowexaminees.php?examid=0" class="nav-link">
+              <a href="./allowexaminees.php?examid=0" class="nav-link active">
                 <i class="far fas-file nav-icon"></i>
                   <p>Allow Examinees</p>
                 </a>
