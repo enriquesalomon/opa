@@ -76,10 +76,11 @@ session_start();
     $examname= mysqli_real_escape_string($conn, $_POST['examname']);
     $schoolyear= mysqli_real_escape_string($conn, $_POST['schoolyear']);
     $examtype= mysqli_real_escape_string($conn, $_POST['examtype']);
+    $status= mysqli_real_escape_string($conn, $_POST['status']);
     
 
         if(!empty($_POST["classname"])) {
-            $check=mysqli_query($conn,"select * from exam where examcategoryid='" . $_POST["examname"] . "' AND  classnameid='" . $_POST["classname"] . "'AND  classnameid='" . $_POST["classname"] . "'AND examtype='" . $_POST["examtype"] . "'  AND id <> '$id' ");
+            $check=mysqli_query($conn,"select * from exam where examcategoryid='" . $_POST["examname"] . "' AND  classnameid='" . $_POST["classname"] . "'AND  classnameid='" . $_POST["classname"] . "'AND examtype='" . $_POST["examtype"] . "'AND status='" . $_POST["status"] . "'  AND id <> '$id' ");
            $erow=mysqli_fetch_array($check);
             if($erow>0) {
               $_SESSION["error_remarks"]="Cannot be saved, found exam info duplication";
@@ -91,7 +92,7 @@ session_start();
             }
                
 
-                if (!mysqli_query($conn, "UPDATE exam set examcategoryid='$examname',classnameid='$classname',sy='$schoolyear',examtype='$examtype' where id='$id'")) {
+                if (!mysqli_query($conn, "UPDATE exam set examcategoryid='$examname',classnameid='$classname',sy='$schoolyear',examtype='$examtype',status='$status' where id='$id'")) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
                       $_SESSION["examedited"]="edit";

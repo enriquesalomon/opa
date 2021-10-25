@@ -321,7 +321,7 @@ unset($_SESSION['error_remarks']);
                     <th>Class Name</th>
                     <th>School Year</th>
                       <th>Result Date & Time</th>
-                    <th>Created On</th>
+                    <th>Status</th>
                     <th>Action</th>
                     <th hidden>classid </th>
                   </tr>
@@ -343,6 +343,7 @@ unset($_SESSION['error_remarks']);
                 }
                 $createdon=$getrow['createdon'];  
                 $examtype=$getrow['examtype']; 
+                $status=$getrow['status']; 
 
                 $getrow1=mysqli_query($conn,"SELECT * FROM class where id='$classnameid'");
                 $getrow1=mysqli_fetch_array($getrow1);
@@ -361,7 +362,8 @@ unset($_SESSION['error_remarks']);
                 <td ><?php echo $classname; ?></td>   
                 <td ><?php echo $schoolyear; ?></td>               
                 <td><?php echo $resultdatetime; ?></td>   
-                <td><?php echo $createdon; ?></td>    
+                <td><?php echo $status; ?></td>    
+                
                 <td ><?php                  
                        echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                        echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
@@ -494,7 +496,8 @@ $(document).ready(function(){
         $('#examtypeid').val(data[2]);   
         $('#examnameid').val(data[9]);    
         $('#classnameid').val(data[8]);   
-        $('#schoolyearid').val(data[4]);       
+        $('#schoolyearid').val(data[4]);     
+        $('#statusid').val(data[6]);     
        
    
 
@@ -607,6 +610,23 @@ $(document).ready(function(){
                  <option value="2022-2023">2022-2023</option>" 
                  <option value="2023-2024">2023-2024</option>"
                  <option value="2024-2025">2024-2025</option>"   
+                </select>
+                </div>
+                </div>	
+									
+
+
+
+                <div style="height:10px;"></div>
+                <div class="row">
+                <div class="col-lg-4">
+                <label class="control-label" style="position:relative; top:7px;">Exam Status</label>
+                </div>
+                <div class="col-lg-8">
+                <select name="status" id="statusid" class="form-control custom-select" required>
+                <option selected value="" disabled>Select</option> 
+                 <option value="OPEN">OPEN</option>"     
+                 <option value="CLOSED">CLOSED</option>"   
                 </select>
                 </div>
                 </div>	

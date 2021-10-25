@@ -94,6 +94,22 @@ $getexamid=$_GET['examid'];
 
 
     if(!empty($_POST["studentid"])) {
+
+
+            
+        include('dbconnect.php'); 
+        $query = mysqli_query($conn,"SELECT * FROM exam where id='$getexamid'");
+        while ($result = mysqli_fetch_array($query)) {
+        $status= $result['status'];
+        }
+        if ($status="CLOSED"){
+          $_SESSION["error_remarks"]="EXAM IS ALREADY CLOSED , CANNOT ADD NEW EXAMINEE";
+          $_SESSION["error"]="error";
+               header('location:allowexaminees.php?examid='.$getexamid.'');
+               exit();
+        }
+
+
       $check=mysqli_query($conn,"select * from examinee where studentid='" . $studentid . "' AND  examid='" . $getexamid . "'");
      $erow=mysqli_fetch_array($check);
       if($erow>0) {

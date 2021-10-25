@@ -407,13 +407,13 @@ unset($_SESSION['error_remarks']);
               }else{
                 header('location:allowexaminees.php?examid=0');
               }
-
+              $num=0;
                 $query=mysqli_query($conn," select *  from examinee WHERE  examid='$getexamid'  ORDER BY studentname ASC");                                            
                 while($getrow=mysqli_fetch_array($query)){
                 ?>
                 <?php 
                 $id=$getrow['id'];   
-                $studentid=$getrow['studentid'];                 
+                $studentid=$getrow['studentid'];               
                  
                 $getrow1=mysqli_query($conn,"SELECT * FROM student where id='$studentid'");
                 $getrow1=mysqli_fetch_array($getrow1);
@@ -421,10 +421,10 @@ unset($_SESSION['error_remarks']);
                 $studentname=$getrow1['firstname']." ".$getrow1['middlename']." ".$getrow1['lastname'];    
                 $examid=$getrow['examid'];         
                 $status=$getrow['status'];  
-                
+                $num+=1;
                 ?>             
                 <tr>
-                <td >No</td>
+                <td><?php echo $num; ?></td>
                 <td><?php echo $studentno; ?></td>
                 <td><?php echo $studentname; ?></td>
                
