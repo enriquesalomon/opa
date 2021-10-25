@@ -9,7 +9,16 @@
                 </div>
                 <div class="modal-body">
 				<div class="container-fluid">
-				<form method="POST" action="student.php"enctype="multipart/form-data">				
+				<form method="POST" action="student.php"enctype="multipart/form-data">		
+				<div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Student No.:</label>
+						</div>
+						<div class="col-lg-8">
+							<input type="text" class="form-control" name="studentno"required>
+						</div>
+					</div>
+					<div style="height:10px;"></div>		
 				
 					<div class="row">
 						<div class="col-lg-4">
@@ -113,6 +122,7 @@
         $email = mysqli_real_escape_string($conn, $_POST['email']);		
         $opeusername = mysqli_real_escape_string($conn, $_POST['username']);
         $opepassword = mysqli_real_escape_string($conn, $_POST['password']);
+		$studentno = mysqli_real_escape_string($conn, $_POST['studentno']);
 		$date = date('Y-m-d H:i:s');
 
         if(!empty($_POST["username"])) {
@@ -126,7 +136,7 @@
 					exit();
                       }      
             }
-        $sql = "INSERT INTO student VALUES (DEFAULT,'$firstname','$middlename','$lastname','$contactno','$email','$address','$opeusername','$opepassword','$date')";   
+        $sql = "INSERT INTO student VALUES (DEFAULT,'$firstname','$middlename','$lastname','$contactno','$email','$address','$opeusername','$opepassword','$date','$studentno')";   
         if (!mysqli_query($conn, $sql)) {
             echo("Error description: " . mysqli_error($conn));
                 }else{

@@ -333,6 +333,7 @@ unset($_SESSION['error_remarks']);
                     <th hidden>Fname</th>
                     <th hidden>Mname</th>
                     <th hidden>Lname</th>
+                    <th>Student No.</th>
                     <th>Fullname</th>
                     <th>Contact#</th>
                     <th>Email</th>
@@ -363,12 +364,14 @@ unset($_SESSION['error_remarks']);
                 $opeusername=$getrow['opeusername'];
                 $opepassword=$getrow['opepassword'];   
                 $dateadded=$getrow['dateaddedd'];   
+                $studentno=$getrow['studentno'];  
                 ?>             
                 <tr>
                 <td hidden><?php echo $id; ?></td>
                 <td hidden ><?php echo $fname; ?></td>
                 <td hidden><?php echo $mname; ?></td>
                 <td hidden><?php echo $lname; ?></td>
+                <td><?php echo $studentno; ?></td>   
                 <td><?php echo $fullname; ?></td>          
                 <td><?php echo $contact; ?></td>   
                 <td><?php echo $email; ?></td>
@@ -503,11 +506,12 @@ $(document).ready(function(){
          
           $('#mname').val(data[2]);
           $('#lname').val(data[3]);
-          $('#contact').val(data[5]);
-          $('#email').val(data[6]);
-          $('#addressedit').val(data[7]);
-          $('#username').val(data[8]);
-          $('#password').val(data[9]);
+          $('#sno').val(data[4]);
+          $('#contact').val(data[6]);
+          $('#email').val(data[7]);
+          $('#addressedit').val(data[8]);
+          $('#username').val(data[9]);
+          $('#password').val(data[10]);
 
        
 
@@ -592,6 +596,15 @@ $(document).ready(function(){
 				<div class="container-fluid">
 				<form method="POST" action="query-edit.php" enctype="multipart/form-data">				
         <input type="hidden" class="form-control" id="id" name="idedit" required >
+        <div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Studet No.:</label>
+						</div>
+						<div class="col-lg-8">
+							<input type="text" id="sno" class="form-control" name="studentno"required>
+						</div>
+					</div>
+					<div style="height:10px;"></div>
 					<div class="row">
 						<div class="col-lg-4">
 							<label class="control-label" style="position:relative; top:7px;">Firstname:</label>

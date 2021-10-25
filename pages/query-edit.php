@@ -14,6 +14,7 @@ session_start();
         $email = mysqli_real_escape_string($conn, $_POST['email']);		
         $opeusername = mysqli_real_escape_string($conn, $_POST['username']);
         $opepassword = mysqli_real_escape_string($conn, $_POST['password']);
+        $studentno = mysqli_real_escape_string($conn, $_POST['studentno']);
 		$date = date('Y-m-d H:i:s');
 
     if(!empty($_POST["username"])) {
@@ -27,7 +28,7 @@ session_start();
               exit();
                 }      
       }
-                if (!mysqli_query($conn, "UPDATE student set firstname='$firstname',middlename='$middlename',lastname='$lastname',contact='$contactno',email='$email',address='$address',opeusername='$opeusername',opepassword='$opepassword' where id='$id'")) {
+                if (!mysqli_query($conn, "UPDATE student set firstname='$firstname',middlename='$middlename',lastname='$lastname',contact='$contactno',email='$email',address='$address',opeusername='$opeusername',opepassword='$opepassword',studentno='$studentno' where id='$id'")) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
                       $_SESSION["studentedited"]="edit";
