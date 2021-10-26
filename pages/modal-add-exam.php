@@ -147,7 +147,7 @@ $('#dateexam2').datepicker();
                 }      
       }
      
-        $sql = "INSERT INTO exam VALUES (DEFAULT,'$examname','$classname','$schoolyear','','$date','$examtype')";   
+        $sql = "INSERT INTO exam VALUES (DEFAULT,'$examname','$classname','$schoolyear','','$date','$examtype','OPEN')";   
         if (!mysqli_query($conn, $sql)) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
