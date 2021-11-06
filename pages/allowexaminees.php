@@ -282,7 +282,7 @@ include('toast-add.php');
 if ( isset( $_SESSION['examedited']) ) {
   include('toast-edited.php');
   }
-if ( isset( $_SESSION['examdeleted']) ) {
+if ( isset( $_SESSION['delete']) ) {
 include('toast-deleted.php');
 }
 
@@ -293,7 +293,7 @@ if ( isset( $_SESSION['error']) ) {
 
 unset($_SESSION['examadded']);
 unset($_SESSION['examedited']);
-unset($_SESSION['examdeleted']);
+unset($_SESSION['delete']);
 unset($_SESSION['error']);
 unset($_SESSION['error_remarks']);
 
@@ -427,13 +427,14 @@ unset($_SESSION['error_remarks']);
                 <td><?php echo $studentno; ?></td>
                 <td><?php echo $studentname; ?></td>
                
-                <td ><?php                  
-                       echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
+                <td ><?php                         
                        echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
                  
                           ?>
                </td>   
-                            
+               
+               <td hidden><?php  echo $getexamid; ?></td>    
+               <td hidden><?php  echo $id; ?></td>       
                 </tr> 
 <?php
 }                      
@@ -568,10 +569,11 @@ $(document).ready(function(){
           return $(this).text();
         }).get();
 
-        $('#iddelete').val(data[0]);  
-        $('#examnamedelete').val(data[1]); 
-        $('#classnamedelete').val(data[3]); 
-        $('#schoolyeardelete').val(data[4]); 
+        $('#iddelete').val(data[5]);  
+        $('#studentnodelete').val(data[1]);  
+        
+        $('#examnamedelete').val(data[2]); 
+        $('#examiddelete').val(data[4]); 
               
        
   });
@@ -580,113 +582,10 @@ $(document).ready(function(){
 
 </script>
 
-   
-<!-- Edit -->
-<div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    
-                    <center><h4 class="modal-title" id="myModalLabel">Edit Exam</h4></center>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-				<div class="container-fluid">
-				<form method="POST" action="query-edit.php" enctype="multipart/form-data">
-        <input type="hidden" class="form-control" id="id" name="idedit" required >
-        <div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Grading Period</label>
-						</div>
-						<div class="col-lg-8">
-           
-                            <select name="examname" id="examnameid" class="form-control custom-select" required>
-                            <option selected value="" disabled>Select Class</option>
-                          <?php
-                                  include('dbconnect.php'); 
-                          $query = mysqli_query($conn,"SELECT * FROM examcategory");
-
-                          while ($result = mysqli_fetch_array($query)) {
-                          echo "<option value=" .$result['id']. ">" .$result['examcategoryname']."</option>";
-                          }
-                          ?>
-                          </select>
-						</div>
-					</div>
-          
-          <div style="height:10px;"></div>
-                <div class="row">
-                    <div class="col-lg-4">
-                      <label class="control-label" style="position:relative; top:7px;">Exam Type</label>
-                      </div>
-                      <div class="col-lg-8">
-                        <select name="examtype" id="examtypeid" class="form-control custom-select" required>
-                        <option selected value="" disabled>Select</option> 
-                        <option value="Multiple Choice">Multiple Choice</option>"     
-                        <option value="Essay">Essay</option>"     
-                        <option value="True or False">True or False</option>"  
-                        </select>
-                      </div>
-                  </div>	
-
-
-								<div style="height:10px;"></div>
-								<div style="height:10px;"></div>
-				<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Class</label>
-						</div>
-						<div class="col-lg-8">
-                            <select name="classname" id="classnameid" class="form-control custom-select" required>
-                            <option selected value="" disabled>Select Class</option>
-                          <?php
-                                  include('dbconnect.php'); 
-                          $query = mysqli_query($conn,"SELECT * FROM class");
-
-                          while ($result = mysqli_fetch_array($query)) {
-                          echo "<option value=" .$result['id']. ">" .$result['classname']."</option>";
-                          }
-                          ?>
-                          </select>
-						</div>
-					</div>
-          <div style="height:10px;"></div>
-                <div class="row">
-                <div class="col-lg-4">
-                <label class="control-label" style="position:relative; top:7px;">School Year</label>
-                </div>
-                <div class="col-lg-8">
-                <select name="schoolyear" id="schoolyearid" class="form-control custom-select" required>
-                <option selected value="" disabled>Select</option> 
-                 <option value="2020-2021">2020-2021</option>"     
-                 <option value="2021-2022">2021-2022</option>"     
-                 <option value="2022-2023">2022-2023</option>" 
-                 <option value="2023-2024">2023-2024</option>"
-                 <option value="2024-2025">2024-2025</option>"   
-                </select>
-                </div>
-                </div>	
-									
-        
-									
-                </div> 
-				</div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <button type="submit"name="editexam" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
-                    	
-				</form>
-                </div>
-				
-            </div>
-        </div>
-    </div>
-
 
 
 </body>
 </html>
-
 
 <!--modal delete  -->
 <div id="deletemodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
@@ -700,44 +599,35 @@ $(document).ready(function(){
 </div>
 <form action="query-delete.php" method="POST">
 <div class="modal-body">
- <center><h6>Are you sure you want to delete this Exam ?</h6> </center>
+ <center><h6>Are you sure you want to remove this Examinee in the List ?</h6> </center>
 
 					<div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Exam Name</label>
+							<label class="control-label" style="position:relative; top:7px;">Student No.:</label>
 						</div>
 						<div class="col-lg-8">
             <input type="hidden" name="iddelete" id="iddelete">
-							<input type="text" id="examnamedelete" class="form-control" name="" required readonly>
+            <input type="hidden" id="examiddelete" class="form-control" name="examid" required>
+							<input type="text" id="studentnodelete" class="form-control" name="" required readonly>
 						</div>
 					</div>
 					<div style="height:10px;"></div>
           
           <div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Class Name</label>
+							<label class="control-label" style="position:relative; top:7px;">Student Name</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" id="classnamedelete" class="form-control" name="" required readonly>
+							<input type="text" id="examnamedelete" class="form-control" name="" required readonly>
 						</div>
 					</div>
-          <div style="height:10px;"></div>
-          <div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">School Year</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" id="schoolyeardelete" class="form-control" name="" required readonly>
-						</div>
-					</div>
-
-          
+                    
 </div>
 
 
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-<button type="submit" name="deleteexam" class="btn btn-primary">Yes</button>
+<button type="submit" name="deleteexaminee" class="btn btn-primary">Yes</button>
 </div>       
 </form>
 

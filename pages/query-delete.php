@@ -427,4 +427,36 @@ if (isset($_POST['deleteexamsubjects_truefalse'])) {
 }
 }
 
+
+if (isset($_POST['deleteexaminee'])) {
+  
+  $id= mysqli_real_escape_string($conn, $_POST['iddelete']);  
+  $examid= mysqli_real_escape_string($conn, $_POST['examid']);  
+      if(!empty($_POST["iddelete"])) { 
+        
+          // check if has 1-1 relationship to other table
+          $check=mysqli_query($conn,"select * from examinee where examid='" . $examid . "' AND status='TAKE'");
+          $erow=mysqli_fetch_array($check);
+           if($erow>0) {
+                    $_SESSION["error_remarks"]="Cannot be deleted, Examinee has already taken the exam";
+                   //  
+                   $_SESSION["error"]="error";
+                   header('location:allowexaminees.php');
+                   header('location:allowexaminees.php?examid='.$examid.'');
+                   exit();
+                     }      
+           
+
+              if (!mysqli_query($conn, "DELETE from examinee where id='$id'")) {
+          echo("Error description: " . mysqli_error($conn));
+              }else{
+                    $_SESSION["deleted"]="delete";
+                    header('location:allowexaminees.php?examid='.$examid.'');
+                    
+              }
+
+}
+}
+
+
 ?>
