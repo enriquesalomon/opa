@@ -423,7 +423,7 @@ unset($_SESSION['error_remarks']);
               <div class="row">
              
               <div class="col-12">
-              <a  href="./exam.php"><button class="btn btn-info"style="margin-bottom: 15px;"data-toggle="modal" ><i class="fas fa-angle-double-left"></i> Back </button></a>
+              <a  href="./quizz.php"><button class="btn btn-info"style="margin-bottom: 15px;"data-toggle="modal" ><i class="fas fa-angle-double-left"></i> Back </button></a>
                 <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-quiz-subject"><i class="fa fa-plus" aria-hidden="true"></i> New Subject</button>
                 </div>
                 <!-- /.col -->
@@ -489,7 +489,7 @@ unset($_SESSION['error_remarks']);
                       <td ><?php                  
                         echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                         echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
-                        echo "<a href='quizsubjquestion.php?quizubjectid=".$id."&gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&qid=".$qid."&sy=".$sy."' class='btn btn-sm btn-success'> <i class='fas fa-folder'></i>Manage Questions</a>";
+                        echo "<a href='quizsubjquestion.php?quizubjectid=".$id."&gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&qid=".$qid."&sy=".$sy."' class='btn btn-sm btn-success'> <i class='fas fa-folder'></i> Manage Questions</a>";
                     
                    ?>
                      </td>   
@@ -724,7 +724,7 @@ $(document).ready(function(){
         }).get();
 
         $('#id').val(data[0]);     
-        $('#examdatetimeedit').val(data[2]);   
+        $('#quizdatetimeedit').val(data[2]);   
         $('#subjectidedit').val(data[7]);   
         $('#totalquestionedit').val(data[3]);     
         $('#timelimitedit').val(data[4]);     
@@ -746,8 +746,8 @@ $(document).ready(function(){
         }).get();
 
         $('#iddelete').val(data[0]);  
-        $('#examnamedelete').val(data[1]); 
-        $('#datetimeexamdelete').val(data[2]); 
+        $('#quiznamedelete').val(data[1]); 
+        $('#datetimequizdelete').val(data[2]); 
         $('#totalquestiondelete').val(data[3]); 
         $('#subjectiddelete').val(data[7]);   
               
@@ -769,7 +769,7 @@ $(document).ready(function(){
             <div class="modal-content">
                 <div class="modal-header">
                     
-                    <center><h4 class="modal-title" id="myModalLabel">Edit Exam</h4></center>
+                    <center><h4 class="modal-title" id="myModalLabel">Edit Quiz</h4></center>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">  
@@ -779,10 +779,10 @@ $(document).ready(function(){
 
  
 
-     <input type="hidden" class="form-control" name="eid" value="<?php echo$_GET['id']; ?>" required >
-     <input type="hidden" class="form-control" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
-     <input type="hidden" class="form-control" name="sy" value="<?php echo $_GET['sy']; ?>" required >
-     <input type="hidden" class="form-control" name="examcategoryid" value="<?php echo $_GET['examcategoryid']; ?>" required >
+     <input type="" class="form-control" name="qid" value="<?php echo$_GET['id']; ?>" required >
+     <input type="" class="form-control" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
+     <input type="" class="form-control" name="sy" value="<?php echo $_GET['sy']; ?>" required >
+     <input type="" class="form-control" name="gradingperiod" value="<?php echo $_GET['gradingperiod']; ?>" required >
 
 
         <div class="row">
@@ -791,7 +791,7 @@ $(document).ready(function(){
 						</div>
                         <div class="col-lg-8">
                             <div class="input-group date" id="reservationdatetimes" data-target-input="nearest">
-                                <input type="text" id="examdatetimeedit" name="examdatetime" class="form-control datetimepicker-input" data-target="#reservationdatetimes" required/>
+                                <input type="text" id="quizdatetimeedit" name="quizdatetime" class="form-control datetimepicker-input" data-target="#reservationdatetimes" required/>
                                 <div class="input-group-append" data-target="#reservationdatetimes" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
@@ -846,7 +846,7 @@ $(document).ready(function(){
 				</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <button type="submit"name="editexamsubject" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+                    <button type="submit"name="editquizsubject" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
                     	
 				</form>
                 </div>
@@ -873,7 +873,7 @@ $(document).ready(function(){
 </div>
 <form action="query-delete.php" method="POST">
 <div class="modal-body">
- <center><h6>Are you sure you want to delete this Exam Subject ?</h6> </center>
+ <center><h6>Are you sure you want to delete this Quiz Subject ?</h6> </center>
 
 					<div class="row">
 						<div class="col-lg-4">
@@ -881,13 +881,13 @@ $(document).ready(function(){
 						</div>
 						<div class="col-lg-8">
 <input type="hidden" name="iddelete" id="iddelete">           
-<input type="hidden" class="form-control" name="eid" value="<?php echo$_GET['id']; ?>" required >
+<input type="hidden" class="form-control" name="id" value="<?php echo$_GET['id']; ?>" required >
 <input type="hidden" class="form-control" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
 <input type="hidden" class="form-control" name="sy" value="<?php echo $_GET['sy']; ?>" required >
-<input type="hidden" class="form-control" name="examcategoryid" value="<?php echo $_GET['examcategoryid']; ?>" required >
+<input type="hidden" class="form-control" name="gradingperiod" value="<?php echo $_GET['gradingperiod']; ?>" required >
 <input type="hidden" name="subjectid" id="subjectiddelete">    
 
-							<input type="text" id="examnamedelete" class="form-control" name="" required readonly>
+							<input type="text" id="quiznamedelete" class="form-control" name="" required readonly>
 						</div>
 					</div>
 					<div style="height:10px;"></div>
@@ -896,7 +896,7 @@ $(document).ready(function(){
 							<label class="control-label" style="position:relative; top:7px;">Date & Time of Exam</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" id="datetimeexamdelete" class="form-control" name="" required readonly>
+							<input type="text" id="datetimequizdelete" class="form-control" name="" required readonly>
 						</div>
 					</div>
           <div style="height:10px;"></div>
@@ -915,7 +915,7 @@ $(document).ready(function(){
 
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-<button type="submit" name="deleteexamsubjects" class="btn btn-primary">Yes</button>
+<button type="submit" name="deletequizsubjects_mc" class="btn btn-primary">Yes</button>
 </div>       
 </form>
 

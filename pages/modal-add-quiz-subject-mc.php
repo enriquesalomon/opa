@@ -27,7 +27,7 @@ $date = date('Y-m-d H:i:s');
 						</div>
                         <div class="col-lg-8">
                             <div class="input-group date" id="reservationdatetime" data-target-input="nearest">
-                                <input type="text" name="examdatetime" class="form-control datetimepicker-input" data-target="#reservationdatetime" required/>
+                                <input type="text" name="quizdatetime" class="form-control datetimepicker-input" data-target="#reservationdatetime" required/>
                                 <div class="input-group-append" data-target="#reservationdatetime" data-toggle="datetimepicker">
                                     <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                 </div>
@@ -155,7 +155,7 @@ $date = date('Y-m-d H:i:s');
             }
            
      
-        $sql = "INSERT INTO quizsubject_mc VALUES (DEFAULT,'$qid','$subjectnameid','$examdatetime','$totalquestion','$date','$timelimit')";   
+        $sql = "INSERT INTO quizsubject_mc VALUES (DEFAULT,'$qid','$subjectnameid','$quizdatetime','$totalquestion','$date','$timelimit')";   
         if (!mysqli_query($conn, $sql)) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
