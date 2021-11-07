@@ -211,13 +211,13 @@ $date = date('Y-m-d H:i:s');
             }
            
      
-        $sql = "INSERT INTO quizquestion_mc VALUES (DEFAULT,'$quizsubjectid','$questno','$titlequestion','$option1','$option2','$option3','$option4','$answer','$rightmark','$wrongmark','$date')";   
+        $sql = "INSERT INTO quizquestion_mc VALUES (DEFAULT,'$quizsubjectid','$qid','$questno','$titlequestion','$option1','$option2','$option3','$option4','$answer','$rightmark','$wrongmark','$date')";   
         if (!mysqli_query($conn, $sql)) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
                       $_SESSION["added"]="add";
                       header('location:quizsubjquestion_mc.php?quizsubjectid='.$quizsubjectid.'&gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&qid='.$qid.'&sy='.$sy.'');
-                
+
                 }
 
   }

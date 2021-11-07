@@ -779,10 +779,10 @@ $(document).ready(function(){
 
  
 
-     <input type="" class="form-control" name="qid" value="<?php echo$_GET['id']; ?>" required >
-     <input type="" class="form-control" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
-     <input type="" class="form-control" name="sy" value="<?php echo $_GET['sy']; ?>" required >
-     <input type="" class="form-control" name="gradingperiod" value="<?php echo $_GET['gradingperiod']; ?>" required >
+     <input type="hidden" class="form-control" name="qid" value="<?php echo$_GET['id']; ?>" required >
+     <input type="hidden" class="form-control" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
+     <input type="hidden" class="form-control" name="sy" value="<?php echo $_GET['sy']; ?>" required >
+     <input type="hidden" class="form-control" name="gradingperiod" value="<?php echo $_GET['gradingperiod']; ?>" required >
 
 
         <div class="row">

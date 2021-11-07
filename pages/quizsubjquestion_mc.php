@@ -470,7 +470,7 @@ unset($_SESSION['error_remarks']);
                 ?>
                 <?php 
                 $id=$getrow['id'];   
-                $examsubjectid=$getrow['examsubjectid'];             
+               // $examsubjectid=$getrow['examsubjectid'];             
                 $questiontitle=$getrow['questiontitle'];    
                 $option1=$getrow['option1'];      
                 $option2=$getrow['option2'];   
@@ -851,10 +851,10 @@ $(document).ready(function(){
                 <div class="col-lg-8">
                 <select name="answer" id="answeredit" class="form-control custom-select" required>
                 <option selected value="" disabled>Select</option> 
-                <option value="1">Option 1</option>"     
-                <option value="2">Option 2</option>"     
-                <option value="3">Option 3</option>" 
-                <option value="4">Option 4</option>"
+                <option value="1">Choice A</option>"     
+                <option value="2">Choice B</option>"     
+                <option value="3">Choice C</option>" 
+                <option value="4">Choice D</option>"
                 <option value="5">None of the above</option>"          
                 </select>
                 </div>
@@ -923,11 +923,11 @@ $(document).ready(function(){
  <center><h6>Are you sure you want to delete this Question?</h6> </center>
 
 		
-<input type="hidden" class="form-control" id="examsubjectiddelete" name="examsubjectid" value="<?php echo$_GET['examsubjectid']; ?>" required >
-<input type="hidden" class="form-control" id="examcategoryiddelete" name="examcategoryid" value="<?php echo $_GET['examcategoryid']; ?>" required >
-<input type="hidden" class="form-control" id="classnameiddelete" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
-<input type="hidden" class="form-control" id="examiddelete" name="examid" value="<?php echo $_GET['eid']; ?>" required >
-<input type="hidden" class="form-control" id="sydelete" name="sy" value="<?php echo $_GET['sy']; ?>" required >
+<input type="" class="form-control" id="examsubjectiddelete" name="quizsubjectid" value="<?php echo$_GET['quizsubjectid']; ?>" required >
+<input type="" class="form-control" id="examcategoryiddelete" name="gradingperiod" value="<?php echo $_GET['gradingperiod']; ?>" required >
+<input type="" class="form-control" id="classnameiddelete" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
+<input type="" class="form-control" id="examiddelete" name="qid" value="<?php echo $_GET['qid']; ?>" required >
+<input type="" class="form-control" id="sydelete" name="sy" value="<?php echo $_GET['sy']; ?>" required >
 
 <input type="hidden" class="form-control" id="iddelete" name="id" required >  
 
@@ -946,7 +946,7 @@ $(document).ready(function(){
 
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-<button type="submit" name="deleteexamquestion" class="btn btn-primary">Yes</button>
+<button type="submit" name="deletequizquestion" class="btn btn-primary">Yes</button>
 </div>       
 </form>
 

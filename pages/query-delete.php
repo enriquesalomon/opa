@@ -500,4 +500,44 @@ if (isset($_POST['deletequiz'])) {
 }
 
 
+
+if (isset($_POST['deletequizquestion'])) {
+  
+  $id= mysqli_real_escape_string($conn, $_POST['id']);
+  $quizsubjectid = mysqli_real_escape_string($conn, $_POST['quizsubjectid']);
+  $gradingperiod =mysqli_real_escape_string($conn, $_POST['gradingperiod']);
+  $classnameid =mysqli_real_escape_string($conn, $_POST['classnameid']);
+  $qid = mysqli_real_escape_string($conn, $_POST['qid']);
+  $sy = mysqli_real_escape_string($conn, $_POST['sy']);
+  $date = date('Y-m-d H:i:s');
+  
+    
+  
+        if(!empty($_POST["id"])) { 
+         // check if has 1-1 relationship to other table
+       /**  $check=mysqli_query($conn,"select * from examsubjectquestion where id='" . $id . "'");
+         $erow=mysqli_fetch_array($check);
+          if($erow>0) {
+                   $_SESSION["error_remarks"]="Cannot be deleted, found existing record to exam result";
+                  //  
+                  $_SESSION["error"]="error";
+                 header('location:examdetails.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
+                        
+                  exit();
+                    }       
+            */
+  
+                if (!mysqli_query($conn, "DELETE from quizquestion_mc where id='$id'")) {
+            echo("Error description: " . mysqli_error($conn));
+                }else{
+                      $_SESSION["deleted"]="delete";
+                      header('location:quizsubjquestion_mc.php?quizsubjectid='.$quizsubjectid.'&gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&qid='.$qid.'&sy='.$sy.'');
+                      
+                }
+  
+  }
+  }
+  
+  
+
 ?>
