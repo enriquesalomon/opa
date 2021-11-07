@@ -475,7 +475,7 @@ unset($_SESSION['error_remarks']);
                       <td ><?php                  
                         echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                         echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
-                        echo "<a href='examsubjquestion.php?examsubjectid=".$id."&gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&eid=".$eid."&sy=".$sy."' class='btn btn-sm btn-success'> <i class='fas fa-folder'></i>Manage Questions</a>";
+                        echo "<a href='quizsubjquestion.php?examsubjectid=".$id."&gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&eid=".$eid."&sy=".$sy."' class='btn btn-sm btn-success'> <i class='fas fa-folder'></i>Manage Questions</a>";
                     
                    ?>
                      </td>   
