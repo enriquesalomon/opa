@@ -450,7 +450,7 @@ if (isset($_POST['deleteexaminee'])) {
               if (!mysqli_query($conn, "DELETE from examinee where id='$id'")) {
           echo("Error description: " . mysqli_error($conn));
               }else{
-                    $_SESSION["deleted"]="delete";
+                    $_SESSION["delete"]="delete";
                     header('location:allowexaminees.php?examid='.$examid.'');
                     
               }

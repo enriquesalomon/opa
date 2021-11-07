@@ -230,6 +230,18 @@ include('../includes/pagetopbar.php');
                   <p>Allow Examinees</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="./Examscores.php?examid=0" class="nav-link">
+                <i class="far fas-file nav-icon"></i>
+                  <p>Exam Score</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./Quizscores.php?examid=0" class="nav-link">
+                <i class="far fas-file nav-icon"></i>
+                  <p>Quiz Score</p>
+                </a>
+              </li>
            
              
 
