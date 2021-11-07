@@ -8,8 +8,9 @@ $date = date('Y-m-d H:i:s');
 <script src="../assets/js/bootstrap.js" type="text/javascript"></script>
 <script src="../assets/js/bootstrap-datepicker.js" type="text/javascript"></script>
 
+
 <!-- Add New -->
-<div class="modal fade" id="add-quiz" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="add-exam" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog ">
             <div class="modal-content">
                 <div class="modal-header">
@@ -19,81 +20,91 @@ $date = date('Y-m-d H:i:s');
                 </div>
                 <div class="modal-body">
 				<div class="container-fluid">
-				<form method="POST" enctype="multipart/form-data">				
-				<div class="row">
-                                    <div class="col-lg-4">
-                                      <label class="control-label" style="position:relative; top:7px;">Date of Exam</label>
-                                    </div>
-                                <div class="col-lg-8">
-                                    <div class="input-group">
-                                    <div class="input-group-prepend">
-                                      <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                                    </div>
-                              
-                  
-                                <input id="datequiz2" class="form-control"  name="datequiz" placeholder="mm/dd/yyyy" type="calendar" readonly />
-                                </div>
-                               </div>
-                      </div>			
-					  <div style="height:10px;"></div>
+				<form method="POST" enctype="multipart/form-data">	
+
+         
+            <div class="row">
+            <div class="col-lg-4">
+                <label class="control-label" style="position:relative; top:7px;">Quiz Name:</label>
+            </div>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" name="quizname"required>
+            </div>
+            </div>
+            <div style="height:10px;"></div>
+        <div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Grading Period</label>
+						</div>
+                        <div class="col-lg-8">
+                        <select name="gradingperiod" class="form-control custom-select" required>
+                        <option selected value="" disabled>Select</option> 
+                        <option value="First Grading">First Grading</option>"     
+                        <option value="Second Grading">Second Grading</option>"     
+                        <option value="Third Grading">Third Grading</option>"  
+                        <option value="Fourth Grading">Fourth Grading</option>"  
+                        </select>
+                      </div>
+					</div>
+
+            
+          <div style="height:10px;"></div>
+                <div class="row">
+                    <div class="col-lg-4">
+                      <label class="control-label" style="position:relative; top:7px;">Quiz Type</label>
+                      </div>
+                      <div class="col-lg-8">
+                        <select name="quiztype" class="form-control custom-select" required>
+                        <option selected value="" disabled>Select</option> 
+                        <option value="Multiple Choice">Multiple Choice</option>"     
+                        <option value="Essay">Essay</option>"     
+                        <option value="True or False">True or False</option>"  
+                        </select>
+                      </div>
+                  </div>	
+
+
+								<div style="height:10px;"></div>
 				<div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Grade & Section:</label>
+							<label class="control-label" style="position:relative; top:7px;">Class</label>
 						</div>
 						<div class="col-lg-8">
-                            <select name="grade" id="grade" class="form-control custom-select" required>
-                            <option selected value="" disabled>Select Grade & Section</option>
+                            <select name="classname" id="" class="form-control custom-select" required>
+                            <option selected value="" disabled>Select</option>
                           <?php
                                   include('dbconnect.php'); 
-                          $query = mysqli_query($conn,"SELECT * FROM gradelevel");
+                          $query = mysqli_query($conn,"SELECT * FROM class");
 
                           while ($result = mysqli_fetch_array($query)) {
-                          echo "<option value=" .$result['id']. ">" .$result['gradelevel'].' '.$result['section']."</option>";
+                          echo "<option value=" .$result['id']. ">" .$result['classname']."</option>";
                           }
                           ?>
                           </select>
 						</div>
 					</div>
-					
-					<div style="height:10px;"></div>
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Quiz Time Limit:</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" class="form-control" name="examtimelimit"required>
-						</div>
-					</div>
-					<div style="height:10px;"></div>
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Question Limit to display:</label>
-						</div>
-							<div style="height:10px;"></div>
-						<div class="col-lg-8">
-							<input type="text" class="form-control" name="questiontimelimit"required>
-						</div>
-					</div>
-						<div style="height:10px;"></div>
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Quiz Title:</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" class="form-control" name="examtitle"required>
-                           
-						</div>
-					</div>
-								<div style="height:10px;"></div>
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Quiz Description:</label>
-						</div>
-						<div class="col-lg-8">
-                        <textarea id="inputDescription" class="form-control" rows="4" name="examdescription"></textarea>
+
          
-						</div>
-					</div>
+					
+         
+          <div style="height:10px;"></div>
+                <div class="row">
+                    <div class="col-lg-4">
+                      <label class="control-label" style="position:relative; top:7px;">School Year</label>
+                      </div>
+                      <div class="col-lg-8">
+                        <select name="schoolyear" class="form-control custom-select" required>
+                        <option selected value="" disabled>Select</option> 
+                        <option value="2020-2021">2020-2021</option>"     
+                        <option value="2021-2022">2021-2022</option>"     
+                        <option value="2022-2023">2022-2023</option>" 
+                        <option value="2023-2024">2023-2024</option>"
+                        <option value="2024-2025">2024-2025</option>"   
+                        </select>
+                      </div>
+                  </div>	
+
+
 									
                 </div> 
 				</div>
@@ -107,10 +118,11 @@ $date = date('Y-m-d H:i:s');
             </div>
         </div>
     </div>
+
 	
 
 <script type="text/javascript">
-$('#datequiz2').datepicker();
+$('#dateexam2').datepicker();
  $('.datepicker').datepicker({
    weekStart:1,
    color: 'red'
@@ -122,21 +134,31 @@ $('#datequiz2').datepicker();
     include 'dbconnect.php';
 
  
-  	// Get image name
-      $datequiz= mysqli_real_escape_string($conn, $_POST['datequiz']);
-		$grade= mysqli_real_escape_string($conn, $_POST['grade']);
-        $examtimelimit = mysqli_real_escape_string($conn, $_POST['examtimelimit']);
-        $questiontimelimit = mysqli_real_escape_string($conn, $_POST['questiontimelimit']);		
-        $examtitle = mysqli_real_escape_string($conn, $_POST['examtitle']);
-        $examdescription = mysqli_real_escape_string($conn, $_POST['examdescription']);	
+    $quizname= mysqli_real_escape_string($conn, $_POST['quizname']);
+	  $gradingperiod= mysqli_real_escape_string($conn, $_POST['gradingperiod']);
+		$classname= mysqli_real_escape_string($conn, $_POST['classname']);    
+    $schoolyear= mysqli_real_escape_string($conn, $_POST['schoolyear']); 
+    $quiztype= mysqli_real_escape_string($conn, $_POST['quiztype']);      
 		$date = date('Y-m-d H:i:s');
+
+    if(!empty($_POST["quizname"])) {
+      $check=mysqli_query($conn,"select * from quiz where quizname='" . $_POST["quizname"] . "' AND gradingperiod='" . $_POST["gradingperiod"] . "' AND  classnameid='" . $_POST["classname"] . "' AND quiztype='" . $_POST["quiztype"] . "'");
+     $erow=mysqli_fetch_array($check);
+      if($erow>0) {
+        $_SESSION["error_remarks"]="Cannot be saved, found quiz info duplication";
+           
+              $_SESSION["error"]="error";
+              header('location:quizz.php');
+              exit();
+                }      
+      }
      
-        $sql = "INSERT INTO quiz VALUES (DEFAULT,'$datequiz','$grade','$examtimelimit','$questiontimelimit','$examtitle','$examdescription','$date')";   
+        $sql = "INSERT INTO quiz VALUES (DEFAULT,'$quizname','$gradingperiod','$classname','$schoolyear','','$date','$quiztype','OPEN')";   
         if (!mysqli_query($conn, $sql)) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
-                      $_SESSION["quizadded"]="add";
-                      header('location:quiz.php');
+                      $_SESSION["added"]="add";
+                      header('location:quizz.php');
                       
                 }
 

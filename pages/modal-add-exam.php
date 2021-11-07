@@ -28,7 +28,7 @@ $date = date('Y-m-d H:i:s');
 						</div>
 						<div class="col-lg-8">
                             <select name="examname" id="" class="form-control custom-select" required>
-                            <option selected value="" disabled>Select Class</option>
+                            <option selected value="" disabled>Select</option>
                           <?php
                                   include('dbconnect.php'); 
                           $query = mysqli_query($conn,"SELECT * FROM examcategory");
@@ -65,7 +65,7 @@ $date = date('Y-m-d H:i:s');
 						</div>
 						<div class="col-lg-8">
                             <select name="classname" id="" class="form-control custom-select" required>
-                            <option selected value="" disabled>Select Class</option>
+                            <option selected value="" disabled>Select</option>
                           <?php
                                   include('dbconnect.php'); 
                           $query = mysqli_query($conn,"SELECT * FROM class");

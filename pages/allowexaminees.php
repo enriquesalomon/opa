@@ -230,6 +230,8 @@ include('../includes/pagetopbar.php');
                 </a>
               </li>
            
+
+              
             
             </ul>
           </li>
@@ -351,7 +353,7 @@ unset($_SESSION['error_remarks']);
                             <option selected value="" disabled>Select Exam</option>
                           <?php
                                   include('dbconnect.php'); 
-                          $query = mysqli_query($conn,"SELECT e.id as eid,e.examtype as examtype,c.classname as cclassname,e.sy as sy,ex.examcategoryname as examcategoryname FROM exam e INNER JOIN class c ON e.classnameid=c.id INNER JOIN examcategory ex ON ex.id=e.examcategoryid");
+                          $query = mysqli_query($conn,"SELECT e.id as eid,e.examtype as examtype,c.classname as cclassname,e.sy as sy,ex.examcategoryname as examcategoryname FROM exam e INNER JOIN class c ON e.classnameid=c.id INNER JOIN examcategory ex ON ex.id=e.examcategoryid WHERE e.status='OPEN'");
 
                           while ($result = mysqli_fetch_array($query)) {
                           echo "<option value="  .$result['eid']. ">" .$result['examcategoryname']. " | ".$result['examtype']. " | ".$result['sy']. " | ".$result['cclassname']."</option>";

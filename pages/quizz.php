@@ -219,14 +219,14 @@ include('../includes/pagetopbar.php');
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./exam.php" class="nav-link active">
+                <a href="./exam.php" class="nav-link ">
                 <i class="far fas-file nav-icon"></i>
                   <p>Exam</p>
                 </a>
               </li>
 
               <li class="nav-item">
-                <a href="./quizz.php" class="nav-link">
+                <a href="./quizz.php" class="nav-link active">
                 <i class="far fas-file nav-icon"></i>
                   <p>Quiz</p>
                 </a>
@@ -277,25 +277,25 @@ include('../includes/pagetopbar.php');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Exam Management</h1>
+            <h1>Quiz Management</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Exam </li>
+              <li class="breadcrumb-item active">Quiz </li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
     <?php
-if ( isset( $_SESSION['examadded']) ) {
+if ( isset( $_SESSION['added']) ) {
 include('toast-add.php');
 }
-if ( isset( $_SESSION['examedited']) ) {
+if ( isset( $_SESSION['edited']) ) {
   include('toast-edited.php');
   }
-if ( isset( $_SESSION['examdeleted']) ) {
+if ( isset( $_SESSION['deleted']) ) {
 include('toast-deleted.php');
 }
 
@@ -304,9 +304,9 @@ if ( isset( $_SESSION['error']) ) {
   include('toast-error.php');
   }
 
-unset($_SESSION['examadded']);
-unset($_SESSION['examedited']);
-unset($_SESSION['examdeleted']);
+unset($_SESSION['added']);
+unset($_SESSION['edited']);
+unset($_SESSION['deleted']);
 unset($_SESSION['error']);
 unset($_SESSION['error_remarks']);
 
@@ -314,7 +314,7 @@ unset($_SESSION['error_remarks']);
 ?> 
  <!-- Main content -->
     
- <?php include 'modal-add-exam.php'?>
+ <?php include 'modal-add-quiz.php'?>
  <section class="content">
        <div class="container-fluid">
        <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam"><i class="fa fa-plus" aria-hidden="true"></i></button>
@@ -331,8 +331,9 @@ unset($_SESSION['error_remarks']);
                   <thead>
                   <tr>
                   <th hidden>Id</th>
-                  <th>Exam Name</th>
-                  <th>Exam Type</th>
+                  <th>Quiz Name</th>
+                  <th>Grading Period</th>
+                  <th>Quiz Type</th>
                     <th>Class Name</th>
                     <th>School Year</th>
                       <th>Result Date & Time</th>
@@ -344,12 +345,13 @@ unset($_SESSION['error_remarks']);
                   <tbody>
                 <?php
                 include('dbconnect.php');                           
-                $query=mysqli_query($conn," select *  from exam");                                            
+                $query=mysqli_query($conn," select *  from quiz");                                            
                 while($getrow=mysqli_fetch_array($query)){
                 ?>
                 <?php 
                 $id=$getrow['id'];   
-                $examcatid=$getrow['examcategoryid'];             
+                $quizname=$getrow['quizname'];   
+                $gradingperiod=$getrow['gradingperiod'];             
                 $classnameid=$getrow['classnameid'];    
                 $schoolyear=$getrow['sy'];           
                 $resultdatetime=$getrow['resultdatetime'];
@@ -357,23 +359,20 @@ unset($_SESSION['error_remarks']);
                   $resultdatetime= "Not Publish";
                 }
                 $createdon=$getrow['createdon'];  
-                $examtype=$getrow['examtype']; 
+                $quiztype=$getrow['quiztype']; 
                 $status=$getrow['status']; 
 
                 $getrow1=mysqli_query($conn,"SELECT * FROM class where id='$classnameid'");
                 $getrow1=mysqli_fetch_array($getrow1);
-                 $classname=$getrow1['classname'];
-
-                 
-                $getrow1=mysqli_query($conn,"SELECT * FROM examcategory where id='$examcatid'");
-                $getrow1=mysqli_fetch_array($getrow1);
-                 $examcat=$getrow1['examcategoryname'];
+                 $classname=$getrow1['classname'];               
                 
                 ?>             
-                <tr>
+                <tr>         
+   
                 <td hidden><?php echo $id; ?></td>
-                <td><?php echo $examcat; ?></td>
-                <td><?php echo $examtype; ?></td>
+                <td><?php echo $quizname; ?></td>
+                <td><?php echo $gradingperiod; ?></td>
+                <td><?php echo $quiztype; ?></td>
                 <td ><?php echo $classname; ?></td>   
                 <td ><?php echo $schoolyear; ?></td>               
                 <td><?php echo $resultdatetime; ?></td>   
@@ -382,19 +381,18 @@ unset($_SESSION['error_remarks']);
                 <td ><?php                  
                        echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                        echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
-                   if ($examtype=='Multiple Choice'){
-                    echo '<a href="examdetails.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
+                   if ($quiztype=='Multiple Choice'){
+                    echo '<a href="quizdetails.php?gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Quiz Subjects</a>';
                    }
-                   if ($examtype=='True or False'){
-                    echo '<a href="examdetailsTF.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
+                   if ($quiztype=='True or False'){
+                    echo '<a href="quizdetailsTF.php?gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Quiz Subjects</a>';
                    }
-                   if ($examtype=='Essay'){
-                    echo '<a href="examdetailsEssay.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
+                   if ($quiztype=='Essay'){
+                    echo '<a href="quizdetailsEssay.php?gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Quiz Subjects</a>';
                    }
                           ?>
                </td>   
-               <td hidden><?php echo $classnameid; ?></td>    
-               <td hidden><?php echo $examcatid; ?></td>               
+               <td hidden><?php echo $classnameid; ?></td>                
                 </tr> 
 <?php
 }                      
@@ -506,13 +504,13 @@ $(document).ready(function(){
         var data=$tr.children("td").map(function(){
           return $(this).text();
         }).get();
-
-        $('#id').val(data[0]);    
-        $('#examtypeid').val(data[2]);   
-        $('#examnameid').val(data[9]);    
-        $('#classnameid').val(data[8]);   
-        $('#schoolyearid').val(data[4]);     
-        $('#statusid').val(data[6]);     
+        $('#id').val(data[0]);   
+        $('#quiznameid').val(data[1]);    
+        $('#gradingperiodid').val(data[2]);   
+        $('#quiztypeid').val(data[3]);    
+        $('#classnameid').val(data[9]);   
+        $('#schoolyearid').val(data[5]);     
+        $('#statusid').val(data[7]);       
        
    
 
@@ -531,9 +529,8 @@ $(document).ready(function(){
         }).get();
 
         $('#iddelete').val(data[0]);  
-        $('#examnamedelete').val(data[1]); 
-        $('#classnamedelete').val(data[3]); 
-        $('#schoolyeardelete').val(data[4]); 
+        $('#quiznamedelete').val(data[1]); 
+        $('#gradingperioddelete').val(data[2]); 
               
        
   });
@@ -549,40 +546,45 @@ $(document).ready(function(){
             <div class="modal-content">
                 <div class="modal-header">
                     
-                    <center><h4 class="modal-title" id="myModalLabel">Edit Exam</h4></center>
+                    <center><h4 class="modal-title" id="myModalLabel">Edit Quiz</h4></center>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">
 				<div class="container-fluid">
 				<form method="POST" action="query-edit.php" enctype="multipart/form-data">
         <input type="hidden" class="form-control" id="id" name="idedit" required >
+
+        <div class="row">
+            <div class="col-lg-4">
+                <label class="control-label" style="position:relative; top:7px;">Quiz Name:</label>
+            </div>
+            <div class="col-lg-8">
+                <input type="text" class="form-control" name="quizname" id="quiznameid" required>
+            </div>
+            </div>
+            <div style="height:10px;"></div>
         <div class="row">
 						<div class="col-lg-4">
 							<label class="control-label" style="position:relative; top:7px;">Grading Period</label>
 						</div>
-						<div class="col-lg-8">
-           
-                            <select name="examname" id="examnameid" class="form-control custom-select" required>
-                            <option selected value="" disabled>Select Class</option>
-                          <?php
-                                  include('dbconnect.php'); 
-                          $query = mysqli_query($conn,"SELECT * FROM examcategory");
-
-                          while ($result = mysqli_fetch_array($query)) {
-                          echo "<option value=" .$result['id']. ">" .$result['examcategoryname']."</option>";
-                          }
-                          ?>
-                          </select>
-						</div>
+            <div class="col-lg-8">
+                        <select name="gradingperiod" id="gradingperiodid" class="form-control custom-select" required>
+                        <option selected value="" disabled>Select</option> 
+                        <option value="First Grading">First Grading</option>"     
+                        <option value="Second Grading">Second Grading</option>"     
+                        <option value="Third Grading">Third Grading</option>"  
+                        <option value="Fourth Grading">Fourth Grading</option>"  
+                        </select>
+                      </div>
 					</div>
           
           <div style="height:10px;"></div>
                 <div class="row">
                     <div class="col-lg-4">
-                      <label class="control-label" style="position:relative; top:7px;">Exam Type</label>
+                      <label class="control-label" style="position:relative; top:7px;">Quiz Type</label>
                       </div>
                       <div class="col-lg-8">
-                        <select name="examtype" id="examtypeid" class="form-control custom-select" required>
+                        <select name="quiztype" id="quiztypeid" class="form-control custom-select" required>
                         <option selected value="" disabled>Select</option> 
                         <option value="Multiple Choice">Multiple Choice</option>"     
                         <option value="Essay">Essay</option>"     
@@ -679,34 +681,25 @@ $(document).ready(function(){
 </div>
 <form action="query-delete.php" method="POST">
 <div class="modal-body">
- <center><h6>Are you sure you want to delete this Exam ?</h6> </center>
+ <center><h6>Are you sure you want to delete this Quiz ?</h6> </center>
 
 					<div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Exam Name</label>
+							<label class="control-label" style="position:relative; top:7px;">Quiz Name</label>
 						</div>
 						<div class="col-lg-8">
             <input type="hidden" name="iddelete" id="iddelete">
-							<input type="text" id="examnamedelete" class="form-control" name="" required readonly>
+							<input type="text" id="quiznamedelete" class="form-control" name="" required readonly>
 						</div>
 					</div>
 					<div style="height:10px;"></div>
           
           <div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Class Name</label>
+							<label class="control-label" style="position:relative; top:7px;">Grading Period</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" id="classnamedelete" class="form-control" name="" required readonly>
-						</div>
-					</div>
-          <div style="height:10px;"></div>
-          <div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">School Year</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" id="schoolyeardelete" class="form-control" name="" required readonly>
+							<input type="text" id="gradingperioddelete" class="form-control" name="" required readonly>
 						</div>
 					</div>
 
@@ -716,7 +709,7 @@ $(document).ready(function(){
 
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-<button type="submit" name="deleteexam" class="btn btn-primary">Yes</button>
+<button type="submit" name="deletequiz" class="btn btn-primary">Yes</button>
 </div>       
 </form>
 

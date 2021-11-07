@@ -82,7 +82,6 @@ if (isset($_POST['deleteexam'])) {
 }
 
 
-
 if (isset($_POST['deletequiz'])) {
   
   $id= mysqli_real_escape_string($conn, $_POST['iddelete']);
@@ -90,13 +89,13 @@ if (isset($_POST['deletequiz'])) {
       if(!empty($_POST["iddelete"])) { 
         
           // check if has 1-1 relationship to other table
-          $check=mysqli_query($conn,"select * from quizresult where id='" . $id . "'");
+          $check=mysqli_query($conn,"select * from quizsubject where quizid='" . $id . "'");
           $erow=mysqli_fetch_array($check);
            if($erow>0) {
-                    $_SESSION["error_remarks"]="Cannot be deleted, found existing record to quiz result";
+                    $_SESSION["error_remarks"]="Cannot be deleted, found existing record to Quiz subject";
                    //  
                    $_SESSION["error"]="error";
-                   header('location:quiz.php');
+                   header('location:quizz.php');
                    exit();
                      }      
            
@@ -104,13 +103,14 @@ if (isset($_POST['deletequiz'])) {
               if (!mysqli_query($conn, "DELETE from quiz where id='$id'")) {
           echo("Error description: " . mysqli_error($conn));
               }else{
-                    $_SESSION["quizdeleted"]="delete";
-                    header('location:quiz.php');
+                    $_SESSION["deleted"]="deleted";
+                    header('location:quizz.php');
                     
               }
 
 }
 }
+
 
 
 
@@ -441,7 +441,7 @@ if (isset($_POST['deleteexaminee'])) {
                     $_SESSION["error_remarks"]="Cannot be deleted, Examinee has already taken the exam";
                    //  
                    $_SESSION["error"]="error";
-                   header('location:allowexaminees.php');
+                 
                    header('location:allowexaminees.php?examid='.$examid.'');
                    exit();
                      }      
