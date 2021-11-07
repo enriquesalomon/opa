@@ -113,7 +113,6 @@ line-height: 2;
     
    }
 
-
    [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
     color: #f8f9fa !important;
     background-color: rgb(50 143 232 / 90%) !important;
@@ -121,7 +120,7 @@ line-height: 2;
 }
 
 [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
-      background-color: #bcc148 !important;
+      background-color: #FFCC00 !important;
       color: #fff !important;
 }
 
