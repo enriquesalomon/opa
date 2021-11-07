@@ -236,7 +236,12 @@ include('../includes/pagetopbar.php');
                   <p>Exam</p>
                 </a>
               </li>
-            
+              <li class="nav-item">
+                <a href="./quizz.php" class="nav-link">
+                <i class="far fas-file nav-icon"></i>
+                  <p>Quiz</p>
+                </a>
+              </li>
         
               <li class="nav-item">
               <a href="./allowexaminees.php?examid=0" class="nav-link">

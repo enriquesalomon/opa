@@ -256,17 +256,31 @@ include('../includes/pagetopbar.php');
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./exam.php" class="nav-link active">
+                <a href="./exam.php" class="nav-link ">
                 <i class="far fas-file nav-icon"></i>
                   <p>Exam</p>
                 </a>
               </li>
-             <!-- <li class="nav-item">
-                <a href="./examsubject.php" class="nav-link">
+              <li class="nav-item">
+                <a href="./quizz.php" class="nav-link active">
                 <i class="far fas-file nav-icon"></i>
-                  <p>Exam Subject</p>
+                  <p>Quiz</p>
                 </a>
-              </li> -->
+              </li>
+              <li class="nav-item">
+              <a href="./allowexaminees.php?examid=0" class="nav-link">
+                <i class="far fas-file nav-icon"></i>
+                  <p>Allow Examinees</p>
+                </a>
+              </li>
+
+              
+              <li class="nav-item">
+                <a href="./allowquiztakers.php?examid=0" class="nav-link">
+                <i class="far fas-file nav-icon"></i>
+                  <p>Allow Quiz Takers</p>
+                </a>
+              </li>
           
             </ul>
           </li>
@@ -447,7 +461,7 @@ unset($_SESSION['error_remarks']);
                 $timelimit=$getrow['timelimit'];   
                 $totalquestion=$getrow['totalquestion'];      
 
-                 $getrow1=mysqli_query($conn,"SELECT SUM(rightmark) as totalPoints FROM quizquestion_MC where quizsubjectid='$id' AND quizid='$eid' ");
+                 $getrow1=mysqli_query($conn,"SELECT SUM(rightmark) as totalPoints FROM quizquestion_mc where quizsubjectid='$qid' ");
                  $getrow1=mysqli_fetch_array($getrow1);
                   $totalPoints=$getrow1['totalPoints'];  
 
@@ -475,7 +489,7 @@ unset($_SESSION['error_remarks']);
                       <td ><?php                  
                         echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                         echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
-                        echo "<a href='quizsubjquestion.php?examsubjectid=".$id."&gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&eid=".$eid."&sy=".$sy."' class='btn btn-sm btn-success'> <i class='fas fa-folder'></i>Manage Questions</a>";
+                        echo "<a href='quizsubjquestion.php?quizubjectid=".$id."&gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&qid=".$qid."&sy=".$sy."' class='btn btn-sm btn-success'> <i class='fas fa-folder'></i>Manage Questions</a>";
                     
                    ?>
                      </td>   
