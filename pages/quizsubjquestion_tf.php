@@ -295,7 +295,7 @@ include('../includes/pagetopbar.php');
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Multiple Choice</li>
+              <li class="breadcrumb-item active">True or False</li>
               <li class="breadcrumb-item active">Question</li>
             </ol>
           </div>
@@ -326,7 +326,7 @@ unset($_SESSION['error_remarks']);
 
 
 ?> 
-<?php include 'modal-add-quiz-question_mc.php'?>
+<?php include 'modal-add-quiz-question_tf.php'?>
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -344,7 +344,7 @@ unset($_SESSION['error_remarks']);
 
                 if(!empty($_GET["quizsubjectid"]) && !empty($_GET["gradingperiod"]) && !empty($_GET["classnameid"]) && !empty($_GET["qid"]) && !empty($_GET["sy"]) ){
 
-                  $check=mysqli_query($conn,"select * from quizsubject_mc where quizid='" .$qid . "'");
+                  $check=mysqli_query($conn,"select * from quizsubject_tf where quizid='" .$qid . "'");
                   $erow=mysqli_fetch_array($check);
                   if($erow>0) {              
                   }else{  
@@ -435,8 +435,6 @@ unset($_SESSION['error_remarks']);
                       <th>Question</th>
                       <th>Choice A</th>
                       <th>Choice B</th>
-                      <th>Choice C</th>
-                      <th>Choice D</th>
                       <th>Answer</th>
                       <th>Right Mark</th>
                       <th>WrongMark</th>
@@ -447,7 +445,7 @@ unset($_SESSION['error_remarks']);
                     <?php
                   
                 include('dbconnect.php');                           
-                $query=mysqli_query($conn," select *  from quizquestion_mc where quizid ='".$qid ."'");                                            
+                $query=mysqli_query($conn," select *  from quizquestion_truefalse where quizid ='".$qid ."'");                                            
                 while($getrow=mysqli_fetch_array($query)){
                 ?>
                 <?php 
@@ -456,8 +454,6 @@ unset($_SESSION['error_remarks']);
                 $questiontitle=$getrow['questiontitle'];    
                 $option1=$getrow['option1'];      
                 $option2=$getrow['option2'];   
-                $option3=$getrow['option3'];   
-                $option4=$getrow['option4']; 
                 $answer=$getrow['answer'];   
                 $rightmark=$getrow['rightmark'];   
                 $wrongmark=$getrow['wrongmark'];   
@@ -469,8 +465,6 @@ unset($_SESSION['error_remarks']);
                       <td><?php echo $questiontitle; ?></td>
                       <td><?php echo $option1; ?></td>
                       <td><?php echo $option2; ?></td>
-                      <td><?php echo $option3; ?></td>
-                      <td><?php echo $option4; ?></td>
                       <td><?php echo $answer; ?></td>
                       <td><?php echo $rightmark; ?></td>
                       <td><?php echo $wrongmark; ?></td>                     
@@ -714,12 +708,10 @@ $(document).ready(function(){
       $('#idedit').val(data[0]);       
       $('#questiontitleedit').val(data[1]);   
       $('#option1edit').val(data[2]); 
-      $('#option2edit').val(data[3]);      
-      $('#option3edit').val(data[4]);      
-      $('#option4edit').val(data[5]);  
-      $('#answeredit').val(data[6]);      
-      $('#rightmarkedit').val(data[7]);      
-      $('#wrongmarkedit').val(data[8]);      
+      $('#option2edit').val(data[3]);   
+      $('#answeredit').val(data[4]);      
+      $('#rightmarkedit').val(data[5]);      
+      $('#wrongmarkedit').val(data[6]);      
        
    
 
@@ -758,7 +750,7 @@ $(document).ready(function(){
             <div class="modal-content">
                 <div class="modal-header">
                     
-                    <center><h4 class="modal-title" id="myModalLabel">Edit Exam</h4></center>
+                    <center><h4 class="modal-title" id="myModalLabel">Edit Question</h4></center>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">  
@@ -788,7 +780,7 @@ $(document).ready(function(){
 							<label class="control-label" style="position:relative; top:7px;">Choice A</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" class="form-control" id="option1edit" name="option1" required>
+							<input type="text" class="form-control" id="option1edit" name="option1" required readonly>
                            
 						</div>
 					</div>
@@ -798,32 +790,11 @@ $(document).ready(function(){
 							<label class="control-label" style="position:relative; top:7px;">Choice B</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="text" class="form-control"  id="option2edit"  name="option2" required>
+							<input type="text" class="form-control"  id="option2edit"  name="option2" required readonly>
                            
 						</div>
 					</div>
                     <div style="height:10px;"></div>
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Choice C</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" class="form-control" id="option3edit"  name="option3" required>
-                           
-						</div>
-					</div>
-					<div style="height:10px;"></div>
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Choice D</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" class="form-control" id="option4edit" name="option4" required>
-                           
-						</div>
-					</div>		
-                    
-                <div style="height:10px;"></div>
                 <div class="row">
                 <div class="col-lg-4">
                 <label class="control-label" style="position:relative; top:7px;">Answer</label>
@@ -831,11 +802,8 @@ $(document).ready(function(){
                 <div class="col-lg-8">
                 <select name="answer" id="answeredit" class="form-control custom-select" required>
                 <option selected value="" disabled>Select</option> 
-                <option value="1">Choice A</option>"     
-                <option value="2">Choice B</option>"     
-                <option value="3">Choice C</option>" 
-                <option value="4">Choice D</option>"
-                <option value="5">None of the above</option>"          
+                <option value="TRUE">TRUE</option>"     
+                <option value="FALSE">FALSE</option>"          
                 </select>
                 </div>
                 </div>
@@ -873,7 +841,7 @@ $(document).ready(function(){
 				</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <button type="submit"name="editquizquestion" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+                    <button type="submit"name="editquizquestiontf" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
                     	
 				</form>
                 </div>
@@ -926,7 +894,7 @@ $(document).ready(function(){
 
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-<button type="submit" name="deletequizquestion" class="btn btn-primary">Yes</button>
+<button type="submit" name="deletequizquestiontf" class="btn btn-primary">Yes</button>
 </div>       
 </form>
 
