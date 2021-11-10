@@ -784,11 +784,10 @@ $(document).ready(function(){
 				<form method="POST" action="query-edit.php" enctype="multipart/form-data">
         <input type="hidden" class="form-control" id="id" name="idedit" required >
 
-
-     <input type="hidden" class="form-control" id="examsubjectidedit" name="examsubjectid" value="<?php echo$_GET['examsubjectid']; ?>" required >
-     <input type="hidden" class="form-control" id="examcategoryidedit" name="examcategoryid" value="<?php echo $_GET['examcategoryid']; ?>" required >
+     <input type="hidden" class="form-control" id="examsubjectidedit" name="quizsubjectid" value="<?php echo$_GET['quizsubjectid']; ?>" required >
+     <input type="hidden" class="form-control" id="examcategoryidedit" name="gradingperiod" value="<?php echo $_GET['gradingperiod']; ?>" required >
      <input type="hidden" class="form-control" id="classnameidedit" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
-     <input type="hidden" class="form-control" id="examidedit" name="examid" value="<?php echo $_GET['eid']; ?>" required >
+     <input type="hidden" class="form-control" id="examidedit" name="qid" value="<?php echo $_GET['qid']; ?>" required >
      <input type="hidden" class="form-control" id="syedit" name="sy" value="<?php echo $_GET['sy']; ?>" required >
 
      <input type="hidden" class="form-control" id="idedit" name="id" required >  
@@ -798,8 +797,7 @@ $(document).ready(function(){
 							<label class="control-label" style="position:relative; top:7px;">Question Title</label>
 						</div>
 						<div class="col-lg-8">
-                            <textarea id="questiontitleedit" class="form-control" rows="2" name="titlequestion"required></textarea>
-                           
+                            <textarea id="questiontitleedit" class="form-control" rows="2" name="titlequestion"required></textarea>            
 						</div>
 					</div>
                     <div style="height:10px;"></div>
@@ -893,7 +891,7 @@ $(document).ready(function(){
 				</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <button type="submit"name="editexamquestion" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+                    <button type="submit"name="editquizquestion" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
                     	
 				</form>
                 </div>

@@ -428,7 +428,7 @@ unset($_SESSION['error_remarks']);
                       <th>Subject</th>
                       <th>Date & Time of Exam</th>
                       <th>Total Question</th>
-                      <th>Time Limit</th>
+                      <th>Time Limit (mins)</th>
                       <th>Total Points</th>
                       <th>Action</th>
                     </tr>
@@ -822,7 +822,7 @@ $(document).ready(function(){
           <div style="height:10px;"></div>
 					<div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Time Limit</label>
+							<label class="control-label" style="position:relative; top:7px;">Time Limit (mins)</label>
 						</div>
 						<div class="col-lg-8">
 							<input type="text" class="form-control" id="timelimitedit" name="timelimit" required>

@@ -307,7 +307,7 @@ session_start();
 
   }
   
-  
+
   if (isset($_POST['editexamquestion'])) {
   
     $id= mysqli_real_escape_string($conn, $_POST['id']);
@@ -504,6 +504,54 @@ session_start();
               }
 
 }
+
+
+if (isset($_POST['editquizquestion'])) {
+  
+  $id= mysqli_real_escape_string($conn, $_POST['id']);
+  $titlequestion= mysqli_real_escape_string($conn, $_POST['titlequestion']);
+  $option1= mysqli_real_escape_string($conn, $_POST['option1']);
+  $option2= mysqli_real_escape_string($conn, $_POST['option2']);
+  $option3= mysqli_real_escape_string($conn, $_POST['option3']);
+  $option4= mysqli_real_escape_string($conn, $_POST['option4']);
+  $answer= mysqli_real_escape_string($conn, $_POST['answer']);
+  $rightmark= mysqli_real_escape_string($conn, $_POST['rightmark']);
+  $wrongmark= mysqli_real_escape_string($conn, $_POST['wrongmark']);
+  
+  $quizsubjectid = mysqli_real_escape_string($conn, $_POST['quizsubjectid']);
+  $gradingperiod =mysqli_real_escape_string($conn, $_POST['gradingperiod']);
+  $classnameid =mysqli_real_escape_string($conn, $_POST['classnameid']);
+  $qid = mysqli_real_escape_string($conn, $_POST['qid']);
+  $sy = mysqli_real_escape_string($conn, $_POST['sy']);
+  $date = date('Y-m-d H:i:s');
+  
+
+  if(!empty($_POST["titlequestion"])) {
+    $check=mysqli_query($conn,"select * from quizquestion_mc where quizsubjectid='".$quizsubjectid."' AND  questiontitle='".$titlequestion."' AND id <> '$id'");        
+   $erow=mysqli_fetch_array($check);
+    if($erow>0) {
+      $_SESSION["error_remarks"]="Cannot be saved, found question title duplication";
+         
+            $_SESSION["error"]="error";
+              header('location:quizsubjquestion_mc.php?quizsubjectid='.$quizsubjectid.'&gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&qid='.$qid.'&sy='.$sy.'');
+              
+            exit();
+              }      
+    }     
+  
+
+
+              if (!mysqli_query($conn, "UPDATE quizquestion_mc set questiontitle='$titlequestion',option1='$option1',option2='$option2',option3='$option3',option4='$option4',answer='$answer',rightmark='$rightmark',wrongmark='$wrongmark' where id='$id'")) {
+          echo("Error description: " . mysqli_error($conn));
+              }else{
+                    $_SESSION["edited"]="edit";
+                    header('location:quizsubjquestion_mc.php?quizsubjectid='.$quizsubjectid.'&gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&qid='.$qid.'&sy='.$sy.'');
+            
+                    
+              }
+
+}
+
 
   
 ?>
