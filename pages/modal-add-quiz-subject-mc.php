@@ -67,7 +67,18 @@ $date = date('Y-m-d H:i:s');
 					</div>
 
                     <div style="height:10px;"></div>
-                <div class="row">
+
+                    <div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Time Limit(Minutes)</label>
+						</div>
+						<div class="col-lg-8">
+							<input type="number" class="form-control" name="timelimit"  onkeypress='validate(event)'  required>
+                           
+						</div>
+					</div>
+
+              <!--  <div class="row">
                 <div class="col-lg-4">
                 <label class="control-label" style="position:relative; top:7px;">Time Limit</label>
                 </div>
@@ -81,7 +92,7 @@ $date = date('Y-m-d H:i:s');
                 </div>
                 </div>
 
-								
+						-->		
 									
                 </div> 
 				</div>
@@ -145,7 +156,7 @@ $date = date('Y-m-d H:i:s');
             $check=mysqli_query($conn,"select * from quizsubject_mc where quizid='" .$qid. "' AND  subjectid='" .$subjectnameid. "' AND  quizdatetime='" .$quizdatetime. "'");        
            $erow=mysqli_fetch_array($check);
             if($erow>0) {
-              $_SESSION["error_remarks"]="Cannot be saved, found exam subject info duplication";
+              $_SESSION["error_remarks"]="Cannot be saved, found quiz subject info duplication";
                  
                     $_SESSION["error"]="error";
                     header('location:quizdetailsMC.php?gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&id='.$qid.'&sy='.$sy.'');

@@ -348,35 +348,35 @@ unset($_SESSION['error_remarks']);
                   $erow=mysqli_fetch_array($check);
                   if($erow>0) {              
                   }else{  
-                  header("location:quizdetailsMC.php?gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&id=".$qid."&sy=".$sy."");
+                  header("location:quizdetailsTF.php?gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&id=".$qid."&sy=".$sy."");
                   exit();
                   }   
                  $check=mysqli_query($conn,"select * from quiz where sy='" .$sy . "'");
                   $erow=mysqli_fetch_array($check);
                   if($erow>0) {              
                   }else{
-                    header("location:quizdetailsMC.php?gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&id=".$qid."&sy=".$sy."");
+                    header("location:quizdetailsTF.php?gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&id=".$qid."&sy=".$sy."");
                     exit();
                   }   
                  $check=mysqli_query($conn,"select * from class where id='" .$classnameid . "'");
                   $erow=mysqli_fetch_array($check);
                   if($erow>0) {              
                   }else{
-                    header("location:quizdetailsMC.php?gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&id=".$qid."&sy=".$sy."");
+                    header("location:quizdetailsTF.php?gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&id=".$qid."&sy=".$sy."");
                     exit();
                   }   
                   $check=mysqli_query($conn,"select * from quiz where gradingperiod='" .$gradingperiod . "'");
                   $erow=mysqli_fetch_array($check);
                   if($erow>0) {              
                   }else{
-                    header("location:quizdetailsMC.php?gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&id=".$qid."&sy=".$sy."");
+                    header("location:quizdetailsTF.php?gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&id=".$qid."&sy=".$sy."");
                     exit();
                   }   
                   
 
 
                 }else{
-                    header("location:quizdetailsMC.php?gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&id=".$qid."&sy=".$sy."");
+                    header("location:quizdetailsTF.php?gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&id=".$qid."&sy=".$sy."");
                
                 }
 

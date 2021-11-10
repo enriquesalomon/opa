@@ -190,7 +190,7 @@ $questno = mysqli_real_escape_string($conn, $_POST['questno']);
 
 
 $quizsubjectid = $_GET['quizsubjectid'];
-$examcategoryid = $_GET['gradingperiod'];
+$gradingperiod = $_GET['gradingperiod'];
 $classnameid = $_GET['classnameid'];
 $qid = $_GET['qid'];
 $sy = $_GET['sy'];
@@ -217,7 +217,7 @@ $date = date('Y-m-d H:i:s');
                 }else{
                       $_SESSION["added"]="add";
                       header('location:quizsubjquestion_mc.php?quizsubjectid='.$quizsubjectid.'&gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&qid='.$qid.'&sy='.$sy.'');
-
+                     
                 }
 
   }
