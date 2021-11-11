@@ -418,7 +418,7 @@ unset($_SESSION['error_remarks']);
                    if ($examtype=='Essay' && $status=='OPEN'){
                     echo '<a href="examdetailsEssay.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
                    }
-                   echo ' <a class="btn btn-info btn-sm publishbtn" href="#"><i class="fas fa-folder-alt"></i> Publish Result</a>&nbsp';
+                   echo ' <a class="btn btn-warning btn-sm publishbtn" href="#"><i class="fas fa-folder-alt"></i> Publish Result</a>&nbsp';
                           ?>
                </td>   
                <td hidden><?php echo $classnameid; ?></td>    

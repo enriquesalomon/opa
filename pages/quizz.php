@@ -418,7 +418,7 @@ unset($_SESSION['error_remarks']);
                    if ($quiztype=='Essay' && $status=='OPEN'){
                     echo '<a href="quizdetailsEssay.php?gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Quiz Subjects</a>';
                    }
-                   echo ' <a class="btn btn-info btn-sm publishbtn" href="#"><i class="fas fa-folder-alt"></i> Publish Result</a>&nbsp';
+                   echo ' <a class="btn btn-warning btn-sm publishbtn" href="#"><i class="fas fa-folder-alt"></i> Publish Result</a>&nbsp';
                
                           ?>
                </td>   
