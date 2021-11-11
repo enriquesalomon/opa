@@ -3,166 +3,138 @@
 session_start();
 session_destroy();?>
 <?php include('server.php');?>
+<?php
+//whether ip is from share internet
+if (!empty($_SERVER['HTTP_CLIENT_IP']))   
+  {
+    $ip_address = $_SERVER['HTTP_CLIENT_IP'];
+  }
+//whether ip is from proxy
+elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))  
+  {
+    $ip_address = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  }
+//whether ip is from remote address
+else
+  {
+    $ip_address = $_SERVER['REMOTE_ADDR'];
+  }
+//echo $ip_address;
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Online Proctored Web App | Log in</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>iPay Payment Center | Your One-Stop Payment Center</title>
+  <!-- MDB icon -->
+  <link rel="icon" href="landing/images/ipay-favicon" type="image/x-icon">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="assets/plugins/fontawesome-free/css/all.min.css">
-  <!-- icheck bootstrap -->
-  <link rel="stylesheet" href="assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
-
-  <style>
-   /**
- * 01/28/2016
- * This pen is years old, and watching at the code after all
- * those years made me fall from my chair, so I:
- * - changed all IDs to classes
- * - converted all units to pixels and em units
- * - changed all global elements to classes or children of
- *   .login
- * - cleaned the syntax to be more consistent
- * - added a lot of spaces that I so hard tried to avoid
- *   a few years ago
- *   (because it's cool to not use them)
- * - and probably something else that I can't remember anymore
- *
- * I sticked to the same philosophy, meaning:
- * - the design is almost the same
- * - only pure HTML and CSS
- * - no frameworks, preprocessors or resets
- */
-
-/* 'Open Sans' font from Google Fonts */
-@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700);
-
-body {
-  background: #456;
-  font-family: 'Open Sans', sans-serif;
-}
-
-.login {
-  width: 400px;
-  margin: 16px auto;
-  font-size: 16px;
-}
-
-/* Reset top and bottom margins from certain elements */
-.login-header,
-.login p {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-/* The triangle form is achieved by a CSS hack */
-.login-triangle {
-  width: 0;
-  margin-right: auto;
-  margin-left: auto;
-  border: 12px solid transparent;
-  border-bottom-color: #28d;
-}
-
-.login-header {
-  background: #28d;
-  padding: 20px;
-  font-size: 1.4em;
-  font-weight: normal;
-  text-align: center;
-  text-transform: uppercase;
-  color: #fff;
-}
-
-.login-container {
-  background: #ebebeb;
-  padding: 12px;
-}
-
-/* Every row inside .login-container is defined with p tags */
-.login p {
-  padding: 12px;
-}
-
-.login input {
-  box-sizing: border-box;
-  display: block;
-  width: 100%;
-  border-width: 1px;
-  border-style: solid;
-  padding: 16px;
-  outline: 0;
-  font-family: inherit;
-  font-size: 0.95em;
-}
-
-.login input[type="email"],
-.login input[type="password"] {
-  background: #fff;
-  border-color: #bbb;
-  color: #555;
-}
-
-/* Text fields' focus effect */
-.login input[type="email"]:focus,
-.login input[type="password"]:focus {
-  border-color: #888;
-}
-
-.login input[type="submit"] {
-  background: #28d;
-  border-color: transparent;
-  color: #fff;
-  cursor: pointer;
-}
-
-.login input[type="submit"]:hover {
-  background: #17c;
-}
-
-/* Buttons' focus effect */
-.login input[type="submit"]:focus {
-  border-color: #05a;
-}
-   </style>
-  
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="landing/css/bootstrap.min.css">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="landing/css/mdb.min.css">
+  <!-- Your custom styles (optional) -->
+  <link rel="stylesheet" href="landing/css/style.css">
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
-
-  <!-- /.login-logo -->
-  <div class="card">
-    <div class="card-body login-card-body">
-    <div class="login">
-  <div class="login-triangle"></div>
-  
-  <h2 class="login-header">Log in</h2>
-
-  <form class="login-container">
-    <p><input type="email" placeholder="Email"></p>
-    <p><input type="password" placeholder="Password"></p>
-    <p><input type="submit" value="Log in"></p>
-  </form>
-</div>
-
-  
+<body >
+<div style="height: 100vh;background-image:url(landing/images/ipay-center-header-dark.png);background-repeat: no-repeat;
+  background-size: cover;">
+    <nav class="mb-1 navbar navbar-expand-lg navbar-dark scrolling-navbar intro-fixed-nav">
+      <div class="container">
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+        aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+        <ul class="navbar-nav ml-auto">
+        <!--<a class="btn btn-danger btn-rounded smooth-scroll" href=""><h4>i.Pay Outlets</h4></a> -->
+        
+          <!--   <li class="nav-item active">
+            <a class="nav-link" href="#">
+           <i ></i>Home
+              <span class="sr-only">(active link)</span>
+            </a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" id="navbarDropdownMenuLink-4" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Services </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-info" aria-labelledby="navbarDropdownMenuLink-4">
+               <a class="dropdown-item" href="#">Electricity</a>
+              <a class="dropdown-item" href="#">Government</a>
+              <a class="dropdown-item" href="#">Insurance</a>
+              <a class="dropdown-item" href="#">Utilities</a>
+              <a class="dropdown-item" href="#">Water</a>
+              <a class="dropdown-item" href="#">Others</a>
+            </div>
+           
+          </li> -->
+           
+     
+        </ul>
+      </div>
+      
+      
+      </div>
+    </nav>
+  <div>
+  <div class="container"style="height:80px;"></div>
+  <div class="container my-auto">
+  <div class="row">
+  <div class="col-lg-4"></div>
+  <div class="col-lg-4 animated bounceInRight">
+       <a class="navbar-brand" href="index.php">
+        <!--   <img src="landing/images/ipay-logo.png" height="80" alt="ipay center logo"> -->
+        <img src="landing/images/ipay-logo.png" height="150" alt="ipay center logo">
+      </a>
+    <div class="card text-center">
+    <div class=" card-header success-color white-text card-header-home">
+      LOG IN TO IPAY
     </div>
-    <!-- /.login-card-body -->
+    <div class="card-body">
+<form class="text-center" action="login.php" method="post">
+    <?php include('errors.php'); ?>
+
+    <input type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Username"name="username">
+    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password"name="password">
+
+    <button class="btn btn-success btn-block my-4" type="submit"name="franchisee_login">Log in</button>
+</form>
+
+    </div>
+<!--    <div class="card-footer text-muted success-color white-text">
+       <p class="margin-0">Don't have an account yet?
+        <a href="">Be a Franchisee!</a>
+    </p>
+    </div> -->
   </div>
 </div>
-<!-- /.login-box -->
+  </div>
+  </div>
+  </div>
+</div>
 
-<!-- jQuery -->
-<script src="assets/plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="assets/dist/js/adminlte.min.js"></script>
+
+  <!-- jQuery -->
+  <script type="text/javascript" src="landing/js/jquery.min.js"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="landing/js/popper.min.js"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="landing/js/bootstrap.min.js"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="landing/js/mdb.min.js"></script>
+  <!-- Your custom scripts (optional) -->
+  <script type="text/javascript"></script>
+
 </body>
 </html>
