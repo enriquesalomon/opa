@@ -362,7 +362,7 @@ while($row=mysqli_fetch_array($query)){
 
                 <h3><?php echo ($row['num']);?></h3>
 <?php }?>
-                <p>Total Exam Questions</p>
+                <p>Total Quiz</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>

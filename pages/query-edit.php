@@ -599,5 +599,35 @@ if (isset($_POST['editquizquestiontf'])) {
 
 }
 
+
+
+
+  
+if (isset($_POST['editquizsubjectessay'])) {
+  
+  $id= mysqli_real_escape_string($conn, $_POST['idedit']);
+  $quizdatetime= mysqli_real_escape_string($conn, $_POST['quizdatetime']);  
+  $subjectnameid= mysqli_real_escape_string($conn, $_POST['subjectnameid']);  
+   $totalquestion= mysqli_real_escape_string($conn, $_POST['totalquestion']);  
+   $timelimit= mysqli_real_escape_string($conn, $_POST['timelimit']);  
+
+   $qid =  mysqli_real_escape_string($conn, $_POST['qid']);  
+   $classnameid =mysqli_real_escape_string($conn, $_POST['classnameid']);  
+   $sy = mysqli_real_escape_string($conn, $_POST['sy']);  
+   $gradingperiod = mysqli_real_escape_string($conn, $_POST['gradingperiod']);  
+
+
+    
+              if (!mysqli_query($conn, "UPDATE quizsubject_essay set subjectid='$subjectnameid',quizdatetime='$quizdatetime',totalquestion='$totalquestion',timelimit='$timelimit' where id='$id'")) {
+          echo("Error description: " . mysqli_error($conn));
+              }else{
+                    $_SESSION["edited"]="edit";
+                    header('location:quizdetailsEssay.php?gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&id='.$qid.'&sy='.$sy.'');
+                 
+                    
+              }
+
+}
+
   
 ?>

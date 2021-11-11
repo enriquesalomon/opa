@@ -300,7 +300,7 @@ include('../includes/pagetopbar.php');
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">True or False</li>
+              <li class="breadcrumb-item active">Essay</li>
             </ol>
           </div>
         </div>
@@ -330,7 +330,7 @@ unset($_SESSION['error_remarks']);
 
 
 ?> 
-<?php include 'modal-add-quiz-subject-tf.php'?>
+<?php include 'modal-add-quiz-subject-essay.php'?>
     <section class="content">
       <div class="container-fluid">
         <div class="row">
@@ -393,7 +393,7 @@ unset($_SESSION['error_remarks']);
 
 
           <div class="callout callout-info">
-              <h5><i class="far fa-file-alt"></i> Quiz Type: True or False</h5> 
+              <h5><i class="far fa-file-alt"></i> Quiz Type: Essay</h5> 
               <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Periodical Quiz: '. $gradingperiod; ?> </br>
               <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Class: '. $classname; ?></br>
               <?php echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; SY: '. $sy; ?></br> 
@@ -425,16 +425,15 @@ unset($_SESSION['error_remarks']);
                       <th>ID</th>
                       <th>Subject</th>
                       <th>Date & Time of Quiz</th>
+                      <th>Time Limit (mins)</th>                      
                       <th>Total Question</th>
-                      <th>Time Limit (mins)</th>
-                      <th>Total Points</th>
                       <th>Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
                 include('dbconnect.php');                           
-                $query=mysqli_query($conn," select *  from quizsubject_tf where quizid='".$qid."'");                                            
+                $query=mysqli_query($conn," select *  from quizsubject_essay where quizid='".$qid."'");                                            
                 while($getrow=mysqli_fetch_array($query)){
                 ?>
                 <?php 
@@ -445,13 +444,7 @@ unset($_SESSION['error_remarks']);
                 $timelimit=$getrow['timelimit'];   
                 $totalquestion=$getrow['totalquestion'];      
 
-                 $getrow1=mysqli_query($conn,"SELECT SUM(rightmark) as totalPoints FROM quizquestion_truefalse where quizsubjectid='$qid' ");
-                 $getrow1=mysqli_fetch_array($getrow1);
-                  $totalPoints=$getrow1['totalPoints'];  
-
-                  if ($totalPoints==""){
-                    $totalPoints='0';
-                  }
+             
                
 
                 $getrow1=mysqli_query($conn,"SELECT * FROM subjects where id='$subjectid'");
@@ -467,9 +460,8 @@ unset($_SESSION['error_remarks']);
                       <td><?php echo $id; ?></td>
                       <td><?php echo $subjectname; ?></td>
                       <td><?php echo $quizdatetime; ?></td>
-                      <td><?php echo $totalquestion; ?></td>
                       <td><?php echo $timelimit; ?></td>
-                      <td><?php echo $totalPoints; ?></td>
+                      <td><?php echo $totalquestion; ?></td>
                       <td ><?php                  
                         echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                         echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
@@ -709,9 +701,9 @@ $(document).ready(function(){
 
         $('#id').val(data[0]);     
         $('#quizdatetimeedit').val(data[2]);   
-        $('#subjectidedit').val(data[7]);   
-        $('#totalquestionedit').val(data[3]);     
-        $('#timelimitedit').val(data[4]);     
+        $('#subjectidedit').val(data[6]);   
+        $('#totalquestionedit').val(data[4]);     
+        $('#timelimitedit').val(data[3]);     
        
    
 
@@ -732,7 +724,7 @@ $(document).ready(function(){
         $('#iddelete').val(data[0]);  
         $('#quiznamedelete').val(data[1]); 
         $('#datetimequizdelete').val(data[2]); 
-        $('#totalquestiondelete').val(data[3]); 
+        $('#totalquestiondelete').val(data[4]); 
         $('#subjectiddelete').val(data[7]);   
               
        
@@ -830,7 +822,7 @@ $(document).ready(function(){
 				</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <button type="submit"name="editquizsubject" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+                    <button type="submit"name="editquizsubjectessay" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
                     	
 				</form>
                 </div>
@@ -899,7 +891,7 @@ $(document).ready(function(){
 
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-<button type="submit" name="deletequizsubjects_tf" class="btn btn-primary">Yes</button>
+<button type="submit" name="deletequizsubjects_essay" class="btn btn-primary">Yes</button>
 </div>       
 </form>
 
