@@ -355,26 +355,14 @@ while($row=mysqli_fetch_array($query)){
               <div class="inner">
               <?php
 include('dbconnect.php');
-$totalqmc=0;
-$totalqessay=0;
-$totalqtf0;
-$query=mysqli_query($conn,"select count(*) as num from examquestion");
-while($row=mysqli_fetch_array($query)){
-  $totalqmc=$row['num'];                 
-}
 
-$query=mysqli_query($conn,"select count(*) as num from examquestion_essay");
+$query=mysqli_query($conn,"select count(*) as num from quiz");
 while($row=mysqli_fetch_array($query)){
-  $totalqessay=$row['num'];                 
-}
-$query=mysqli_query($conn,"select count(*) as num from examquestion_truefalse");
-while($row=mysqli_fetch_array($query)){
-  $totalqtf=$row['num'];                 
-}
-$totalquestions= $totalqtf+$totalqessay+$totalqmc;
 ?>
-<h3><?php echo $totalquestions ;?></h3>
-                <p>Total Questions</p>
+
+                <h3><?php echo ($row['num']);?></h3>
+<?php }?>
+                <p>Total Exam Questions</p>
               </div>
               <div class="icon">
                 <i class="ion ion-stats-bars"></i>
@@ -404,14 +392,44 @@ while($row=mysqli_fetch_array($query)){
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
+
+
+          <?php
+include('dbconnect.php');
+$totalqmc=0;
+$totalqessay=0;
+$totalqtf0;
+$query=mysqli_query($conn,"select count(*) as num from examquestion");
+while($row=mysqli_fetch_array($query)){
+  $totalqmc=$row['num'];                 
+}
+
+$query=mysqli_query($conn,"select count(*) as num from examquestion_essay");
+while($row=mysqli_fetch_array($query)){
+  $totalqessay=$row['num'];                 
+}
+$query=mysqli_query($conn,"select count(*) as num from examquestion_truefalse");
+while($row=mysqli_fetch_array($query)){
+  $totalqtf=$row['num'];                 
+}
+
+
+$query=mysqli_query($conn,"select count(*) as num from examquestion_truefalse");
+while($row=mysqli_fetch_array($query)){
+  $totalqtf=$row['num'];                 
+}
+
+$totalquestions= $totalqtf+$totalqessay+$totalqmc;
+?>
+
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>1</h3>
+              <h3><?php echo $totalquestions ;?></h3>
 
-                <p>Unique Visitors</p>
+                <p>Total Questions</p>
               </div>
               <div class="icon">
                 <i class="ion ion-pie-graph"></i>

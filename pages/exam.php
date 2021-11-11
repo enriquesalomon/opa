@@ -409,13 +409,13 @@ unset($_SESSION['error_remarks']);
                 <td ><?php                  
                        echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
                        echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
-                   if ($examtype=='Multiple Choice'){
+                   if ($examtype=='Multiple Choice' && $status=='OPEN'){
                     echo '<a href="examdetails.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
                    }
-                   if ($examtype=='True or False'){
+                   if ($examtype=='True or False' && $status=='OPEN'){
                     echo '<a href="examdetailsTF.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
                    }
-                   if ($examtype=='Essay'){
+                   if ($examtype=='Essay' && $status=='OPEN'){
                     echo '<a href="examdetailsEssay.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
                    }
                           ?>
