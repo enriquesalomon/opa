@@ -415,7 +415,7 @@ unset($_SESSION['error_remarks']);
               <!-- title row -->
               <div class="row">            
               <div class="col-12">
-              <?php   echo "<a href='./quizdetailsTF.php?gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&id=".$qid."&sy=".$sy."'><button class='btn btn-info' style='margin-bottom: 15px;'data-toggle='modal' ><i class='fas fa-angle-double-left'></i> Back </button></a>";
+              <?php   echo "<a href='./quizdetailsEssay.php?gradingperiod=".$gradingperiod."&classnameid=".$classnameid."&id=".$qid."&sy=".$sy."'><button class='btn btn-info' style='margin-bottom: 15px;'data-toggle='modal' ><i class='fas fa-angle-double-left'></i> Back </button></a>";
             ?>
               <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-quiz-subject"><i class="fa fa-plus" aria-hidden="true"></i> New Question</button>
                 </div>
@@ -696,11 +696,9 @@ $(document).ready(function(){
       
       $('#idedit').val(data[0]);       
       $('#questiontitleedit').val(data[1]);   
-      $('#option1edit').val(data[2]); 
-      $('#option2edit').val(data[3]);   
-      $('#answeredit').val(data[4]);      
-      $('#rightmarkedit').val(data[5]);      
-      $('#wrongmarkedit').val(data[6]);      
+      $('#option1edit').val(data[2]);    
+      $('#rightmarkedit').val(data[2]);      
+      
        
    
 
@@ -762,75 +760,25 @@ $(document).ready(function(){
 						<div class="col-lg-8">
                             <textarea id="questiontitleedit" class="form-control" rows="2" name="titlequestion"required></textarea>            
 						</div>
-					</div>
-                    <div style="height:10px;"></div>
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Choice A</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" class="form-control" id="option1edit" name="option1" required readonly>
-                           
-						</div>
-					</div>
-                    <div style="height:10px;"></div>
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Choice B</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" class="form-control"  id="option2edit"  name="option2" required readonly>
-                           
-						</div>
-					</div>
-                    <div style="height:10px;"></div>
-                <div class="row">
-                <div class="col-lg-4">
-                <label class="control-label" style="position:relative; top:7px;">Answer</label>
-                </div>
-                <div class="col-lg-8">
-                <select name="answer" id="answeredit" class="form-control custom-select" required>
-                <option selected value="" disabled>Select</option> 
-                <option value="TRUE">TRUE</option>"     
-                <option value="FALSE">FALSE</option>"          
-                </select>
-                </div>
-                </div>
-             
+					</div>                  
 
                 <div style="height:10px;"></div>
 					<div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Right Ans(Mark +):</label>
+							<label class="control-label" style="position:relative; top:7px;">Highest Mark:</label>
 						</div>
 						<div class="col-lg-8">
 							<input type="number" class="form-control" id="rightmarkedit"  name="rightmark"  onkeypress='validate(event)'  required>
                            
 						</div>
-					</div>		
-					
-                    <div style="height:10px;"></div>
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Wrong Ans(Mark -):</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="number" class="form-control" id="wrongmarkedit" name="wrongmark"  onkeypress='validate(event)'  required>
-                           
-						</div>
-					</div>		
-					
-
-
-
-									
+					</div>	
         
 									
                 </div> 
 				</div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <button type="submit"name="editquizquestiontf" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+                    <button type="submit"name="editquizquestionessay" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
                     	
 				</form>
                 </div>
@@ -883,7 +831,7 @@ $(document).ready(function(){
 
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-<button type="submit" name="deletequizquestiontf" class="btn btn-primary">Yes</button>
+<button type="submit" name="deletequizquestionessay" class="btn btn-primary">Yes</button>
 </div>       
 </form>
 

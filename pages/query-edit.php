@@ -629,5 +629,49 @@ if (isset($_POST['editquizsubjectessay'])) {
 
 }
 
+
+
+
+
+if (isset($_POST['editquizquestionessay'])) {
+  
+  $id= mysqli_real_escape_string($conn, $_POST['id']);
+  $titlequestion= mysqli_real_escape_string($conn, $_POST['titlequestion']);
+  $rightmark= mysqli_real_escape_string($conn, $_POST['rightmark']);
+  
+  $quizsubjectid = mysqli_real_escape_string($conn, $_POST['quizsubjectid']);
+  $gradingperiod =mysqli_real_escape_string($conn, $_POST['gradingperiod']);
+  $classnameid =mysqli_real_escape_string($conn, $_POST['classnameid']);
+  $qid = mysqli_real_escape_string($conn, $_POST['qid']);
+  $sy = mysqli_real_escape_string($conn, $_POST['sy']);
+  $date = date('Y-m-d H:i:s');
+  
+
+  if(!empty($_POST["titlequestion"])) {
+    $check=mysqli_query($conn,"select * from quizquestion_essay where quizsubjectid='".$quizsubjectid."' AND  questiontitle='".$titlequestion."' AND id <> '$id'");        
+   $erow=mysqli_fetch_array($check);
+    if($erow>0) {
+      $_SESSION["error_remarks"]="Cannot be saved, found question title duplication";
+         
+            $_SESSION["error"]="error";
+                 header('location:quizsubjquestion_essay.php?quizsubjectid='.$quizsubjectid.'&gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&qid='.$qid.'&sy='.$sy.'');
+
+            exit();
+              }      
+    }     
+  
+
+
+              if (!mysqli_query($conn, "UPDATE quizquestion_essay set questiontitle='$titlequestion',highestmark='$rightmark' where id='$id'")) {
+          echo("Error description: " . mysqli_error($conn));
+              }else{
+                    $_SESSION["edited"]="edit";
+                    header('location:quizsubjquestion_essay.php?quizsubjectid='.$quizsubjectid.'&gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&qid='.$qid.'&sy='.$sy.'');
+
+                    
+              }
+
+}
+
   
 ?>

@@ -111,13 +111,9 @@ $quizsubjectid = $_GET['quizsubjectid'];
  
     include 'dbconnect.php';
 
- 
+
 $titlequestion= mysqli_real_escape_string($conn, $_POST['titlequestion']);
-$option1= mysqli_real_escape_string($conn, $_POST['option1']);
-$option2 = mysqli_real_escape_string($conn, $_POST['option2']);
-$answer = mysqli_real_escape_string($conn, $_POST['answer']);
-$rightmark = mysqli_real_escape_string($conn, $_POST['rightmark']);
-$wrongmark = mysqli_real_escape_string($conn, $_POST['wrongmark']);
+$highestmark =  mysqli_real_escape_string($conn, $_POST['highestmark']);
 $questno = mysqli_real_escape_string($conn, $_POST['questno']);
 
 $quizsubjectid = $_GET['quizsubjectid'];
@@ -130,25 +126,25 @@ $date = date('Y-m-d H:i:s');
 
 
         if(!empty($_POST["titlequestion"])) {
-            $check=mysqli_query($conn,"select * from quizquestion_truefalse where quizsubjectid='".$quizsubjectid."' AND  questiontitle='".$titlequestion."'");        
+            $check=mysqli_query($conn,"select * from quizquestion_essay where quizsubjectid='".$quizsubjectid."' AND  questiontitle='".$titlequestion."'");        
            $erow=mysqli_fetch_array($check);
             if($erow>0) {
               $_SESSION["error_remarks"]="Cannot be saved, found question title duplication";
                  
                     $_SESSION["error"]="error";
-                    header('location:quizsubjquestion_tf.php?quizsubjectid='.$quizsubjectid.'&gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&qid='.$qid.'&sy='.$sy.'');
+                    header('location:quizsubjquestion_essay.php?quizsubjectid='.$quizsubjectid.'&gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&qid='.$qid.'&sy='.$sy.'');
 
                     exit();
                       }      
             }
            
      
-        $sql = "INSERT INTO quizquestion_truefalse VALUES (DEFAULT,'$quizsubjectid','$qid','$questno','$titlequestion','$option1','$option2','$answer','$rightmark','$wrongmark','$date')";   
+        $sql = "INSERT INTO quizquestion_essay VALUES (DEFAULT,'$quizsubjectid','$qid','$questno','$titlequestion','$highestmark','$date')";   
         if (!mysqli_query($conn, $sql)) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
                       $_SESSION["added"]="add";
-                      header('location:quizsubjquestion_tf.php?quizsubjectid='.$quizsubjectid.'&gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&qid='.$qid.'&sy='.$sy.'');
+                      header('location:quizsubjquestion_essay.php?quizsubjectid='.$quizsubjectid.'&gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&qid='.$qid.'&sy='.$sy.'');
 
                 }
 

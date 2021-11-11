@@ -418,6 +418,8 @@ unset($_SESSION['error_remarks']);
                    if ($quiztype=='Essay' && $status=='OPEN'){
                     echo '<a href="quizdetailsEssay.php?gradingperiod='.$gradingperiod.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Quiz Subjects</a>';
                    }
+                   echo ' <a class="btn btn-info btn-sm publishbtn" href="#"><i class="fas fa-folder-alt"></i> Publish Result</a>&nbsp';
+               
                           ?>
                </td>   
                <td hidden><?php echo $classnameid; ?></td>                
@@ -564,6 +566,27 @@ $(document).ready(function(){
   });
 });
 
+
+
+$(document).ready(function(){
+  $('.publishbtn').on('click', function(){
+
+      $('#publishmodal').modal('show');
+
+        $tr =$(this).closest('tr');
+
+        var data=$tr.children("td").map(function(){
+          return $(this).text();
+        }).get();
+
+        $('#idpost').val(data[0]);  
+        $('#examnamepost').val(data[1]); 
+        $('#classnamepost').val(data[3]); 
+        $('#schoolyearpost').val(data[4]); 
+              
+       
+  });
+});
 
 </script>
 
@@ -738,6 +761,65 @@ $(document).ready(function(){
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 <button type="submit" name="deletequiz" class="btn btn-primary">Yes</button>
+</div>       
+</form>
+
+
+</div>
+</div>
+</div>
+
+
+<!--modal PUBLISH  -->
+<div id="publishmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<div class="modal-dialog modal-md" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h5 class="modal-title" id="exampleModalLabel">Publish Result Confirmation</h5>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+<form action="query-delete.php" method="POST">
+<div class="modal-body">
+ <center><h6>Are you sure you want to post the result of this exam ?</h6> </center>
+
+					<div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Exam Name</label>
+						</div>
+						<div class="col-lg-8">
+            <input type="hidden" name="iddelete" id="idpost">
+							<input type="text" id="examnamepost" class="form-control" name="" required readonly>
+						</div>
+					</div>
+					<div style="height:10px;"></div>
+          
+          <div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Class Name</label>
+						</div>
+						<div class="col-lg-8">
+							<input type="text" id="classnamepost" class="form-control" name="" required readonly>
+						</div>
+					</div>
+          <div style="height:10px;"></div>
+          <div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">School Year</label>
+						</div>
+						<div class="col-lg-8">
+							<input type="text" id="schoolyearpost" class="form-control" name="" required readonly>
+						</div>
+					</div>
+
+          
+</div>
+
+
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+<button type="submit" name="deleteexam" class="btn btn-primary">AGREE TO POST THE RESULT</button>
 </div>       
 </form>
 
