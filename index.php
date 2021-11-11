@@ -19,8 +19,11 @@ session_destroy();?>
   <!-- Theme style -->
   <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
 </head>
-<body class="hold-transition login-page">
-<div class="login-box">
+<!--<body class="hold-transition login-page">-->
+  <body >
+  <div style="height: 100vh;background-image:url(landing/images/bglogin.png);background-repeat: no-repeat;
+  background-size: cover;" class="hold-transition login-page">
+<div class="login-box" >
   <div class="login-logo">
     <a href="#"><b>OPA</b>LOGIN</a>
   </div>

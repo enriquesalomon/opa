@@ -1,0 +1,71 @@
+.navbar-dark{
+	height:120px;
+}
+.header-blur{
+	 /* Add the blur effect */
+  filter: blur(8px);
+  -webkit-filter: blur(8px);
+	
+}
+.navbar{
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+}
+.header-text-big{
+	color: #20c156;
+	font-weight: 700;
+	font-size: 50px;
+}
+.sub-header-text{
+	color: #ffffff;
+	font-size: 28px;
+}
+.card-header-home{
+	font-size: 18px;
+}
+.margin-0{
+	margin-bottom: 0px;
+}
+.link-light{
+	color: #23cfcf;
+}
+
+.card{
+	background-color: transparent;
+}
+.section-space{
+	margin-top: 5rem;
+}
+.row-space{
+	margin-top: 5rem;
+}
+.ipay-h2{
+	font-size: 280%;
+}
+.text-register{
+	background-color:#00c851;
+	font-weight: 500;
+	border: 1px solid #00c851;
+	border-radius: 520px;
+	padding-top: 10px;
+	padding-right: 18px;
+	padding-bottom: 10px;
+	padding-left: 18px;
+	
+}
+.blurb-icon{
+	font-size:100px;
+	color: #00c851;
+	margin-top:18px;
+}
+html {
+  scroll-behavior: smooth;
+}
+.smooth-scroll-stop{
+	margin-top:20px;
+	
+}
+.footer-bg{
+	background-color: #1b2330 !important;
+}

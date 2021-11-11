@@ -20,6 +20,8 @@ session_destroy();?>
   <link rel="stylesheet" href="assets/dist/css/adminlte.min.css">
 </head>
 <body class="hold-transition login-page">
+<div style="height: 100vh;background-image:url(landing/images/ipay-center-header-dark.png);background-repeat: no-repeat;
+  background-size: cover;">
 <div class="login-box">
   <div class="login-logo">
     <a href="#"><b>OPA</b>LOGIN</a>
@@ -77,5 +79,6 @@ session_destroy();?>
 <script src="assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- AdminLTE App -->
 <script src="assets/dist/js/adminlte.min.js"></script>
+</div>
 </body>
 </html>
