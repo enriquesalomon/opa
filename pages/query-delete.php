@@ -205,6 +205,8 @@ if (isset($_POST['deleteexamsubjects'])) {
               if (!mysqli_query($conn, "DELETE from examsubject where id='$id'")) {
           echo("Error description: " . mysqli_error($conn));
               }else{
+
+                  mysqli_query($conn, "DELETE from exammaster where id='$id'");
                     $_SESSION["deleted"]="delete";
                     header('location:examdetails.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
                       
@@ -242,6 +244,7 @@ if (isset($_POST['deleteexamsubjects_essay'])) {
               if (!mysqli_query($conn, "DELETE from examsubject_essay where id='$id'")) {
           echo("Error description: " . mysqli_error($conn));
               }else{
+                mysqli_query($conn, "DELETE from exammaster where id='$id'");
                     $_SESSION["deleted"]="delete";
                     header('location:examdetailsEssay.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
                       
@@ -388,6 +391,7 @@ if (isset($_POST['deleteexamsubjects_truefalse'])) {
               if (!mysqli_query($conn, "DELETE from examsubject_truefalse where id='$id'")) {
           echo("Error description: " . mysqli_error($conn));
               }else{
+                mysqli_query($conn, "DELETE from exammaster where id='$id'");
                     $_SESSION["deleted"]="delete";
                     header('location:examdetailsTF.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
                       

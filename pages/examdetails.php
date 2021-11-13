@@ -390,6 +390,7 @@ unset($_SESSION['error_remarks']);
             $getrow1=mysqli_query($conn,"SELECT * FROM class where id='$classnameid'");
             $getrow1=mysqli_fetch_array($getrow1);
              $classname=$getrow1['classname'];
+           
           ?>
 
 

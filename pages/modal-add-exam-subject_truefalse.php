@@ -170,6 +170,15 @@ $date = date('Y-m-d H:i:s');
         if (!mysqli_query($conn, $sql)) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
+
+
+                    $query=mysqli_query($conn,"SELECT * FROM examsubject_truefalse ORDER BY id DESC LIMIT 1");
+                    while($row=mysqli_fetch_array($query)){
+                        $exammasterid= $row['id'];
+                    }
+
+                    $sql2 = "INSERT INTO exammaster VALUES ('$exammasterid','$eid','True or False','$examcategoryid','$subjectnameid','$classnameid','')"; 
+                    mysqli_query($conn, $sql2);
                       $_SESSION["added"]="add";
                       header('location:examdetailsTF.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
                       

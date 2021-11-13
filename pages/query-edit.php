@@ -241,10 +241,13 @@ session_start();
                 }      
       }
        */
-      
+                $sql2 = "INSERT INTO exammaster VALUES (UPDATE examsubject set examid='$eid',subjectid='$subjectnameid',examdatetime='$examdatetime',totalquestion='$totalquestion',timelimit='$timelimit' where id='$id')"; 
+                mysqli_query($conn, $sql2);
                 if (!mysqli_query($conn, "UPDATE examsubject set examid='$eid',subjectid='$subjectnameid',examdatetime='$examdatetime',totalquestion='$totalquestion',timelimit='$timelimit' where id='$id'")) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
+
+                  mysqli_query($conn, "UPDATE exammaster set examid='$eid',examcategoryid='$examcategoryid',subjectid='$subjectnameid,classnameid='$classnameid where id='$id'");
                       $_SESSION["edited"]="edit";
                       header('location:examdetails.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
           
@@ -273,6 +276,8 @@ session_start();
                 if (!mysqli_query($conn, "UPDATE examsubject_essay set examid='$eid',subjectid='$subjectnameid',examdatetime='$examdatetime',totalquestion='$totalquestion',timelimit='$timelimit' where id='$id'")) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
+
+                  mysqli_query($conn, "UPDATE exammaster set examid='$eid',examcategoryid='$examcategoryid',subjectid='$subjectnameid,classnameid='$classnameid where id='$id'");
                       $_SESSION["edited"]="edit";
                       header('location:examdetailsEssay.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
           
@@ -299,6 +304,8 @@ session_start();
                 if (!mysqli_query($conn, "UPDATE examsubject_truefalse set examid='$eid',subjectid='$subjectnameid',examdatetime='$examdatetime',totalquestion='$totalquestion',timelimit='$timelimit' where id='$id'")) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
+                  mysqli_query($conn, "UPDATE exammaster set examid='$eid',examcategoryid='$examcategoryid',subjectid='$subjectnameid,classnameid='$classnameid where id='$id'");
+             
                       $_SESSION["edited"]="edit";
                       header('location:examdetailsTF.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
           
