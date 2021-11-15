@@ -669,11 +669,8 @@ $(document).ready(function(){
                 <div class="col-lg-8">
                 <select name="schoolyear" id="schoolyearid" class="form-control custom-select" required>
                 <option selected value="" disabled>Select</option> 
-                 <option value="2020-2021">2020-2021</option>"     
-                 <option value="2021-2022">2021-2022</option>"     
-                 <option value="2022-2023">2022-2023</option>" 
-                 <option value="2023-2024">2023-2024</option>"
-                 <option value="2024-2025">2024-2025</option>"   
+                 <option value="2020-2021">2020-2021</option>"    
+             
                 </select>
                 </div>
                 </div>	
