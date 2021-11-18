@@ -178,7 +178,7 @@ $date = date('Y-m-d H:i:s');
                         $exammasterid= $row['id'];
                     }
 
-                    $sql2 = "INSERT INTO exammaster VALUES ('$exammasterid','$eid','Essay','$examcategoryid','$subjectnameid','$classnameid','')"; 
+                    $sql2 = "INSERT INTO exammaster VALUES ('$exammasterid','$eid','Essay','$examcategoryid','$subjectnameid','$classnameid','','','')"; 
                     mysqli_query($conn, $sql2);
 
                       $_SESSION["added"]="add";

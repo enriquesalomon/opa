@@ -177,7 +177,8 @@ $date = date('Y-m-d H:i:s');
                         $exammasterid= $row['id'];
                     }
 
-                    $sql2 = "INSERT INTO exammaster VALUES ('$exammasterid','$eid','True or False','$examcategoryid','$subjectnameid','$classnameid','')"; 
+                    $sql2 = "INSERT INTO exammaster VALUES ('$exammasterid','$eid','True or False','$examcategoryid','$subjectnameid','$classnameid','','','')"; 
+                   
                     mysqli_query($conn, $sql2);
                       $_SESSION["added"]="add";
                       header('location:examdetailsTF.php?examcategoryid='.$examcategoryid.'&classnameid='.$classnameid.'&id='.$eid.'&sy='.$sy.'');
