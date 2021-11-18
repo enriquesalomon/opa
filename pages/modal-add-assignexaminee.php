@@ -127,7 +127,6 @@ $getexamid=$_GET['examid'];
                 }else{
                       $_SESSION["examadded"]="add";
                       header('location:allowexaminees.php?examid='.$getexamid.'');
-                      header('location:allowexaminees.php?examid='.$getexamid.'');
                       
                 }
 

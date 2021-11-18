@@ -306,6 +306,9 @@ if ( isset( $_SESSION['examedited']) ) {
 if ( isset( $_SESSION['examdeleted']) ) {
 include('toast-deleted.php');
 }
+if ( isset( $_SESSION['publish']) ) {
+include('toast-add.php');
+}
 
 
 if ( isset( $_SESSION['error']) ) {
@@ -317,6 +320,7 @@ unset($_SESSION['examedited']);
 unset($_SESSION['examdeleted']);
 unset($_SESSION['error']);
 unset($_SESSION['error_remarks']);
+unset($_SESSION['publish']);
 
 
 ?> 
@@ -343,7 +347,7 @@ unset($_SESSION['error_remarks']);
                   <th>Exam Type</th>
                     <th>Class Name</th>
                     <th>School Year</th>
-                      <th>Result Date & Time</th>
+                      <th>Publish Date</th>
                     <th>Status</th>
                     <th>Action</th>
                     <th hidden>classid </th>
@@ -364,6 +368,12 @@ unset($_SESSION['error_remarks']);
                 if ($resultdatetime ==''){
                   $resultdatetime= "Not Publish";
                 }
+
+                
+                 
+
+
+
                 $createdon=$getrow['createdon'];  
                 $examtype=$getrow['examtype']; 
                 $status=$getrow['status']; 
@@ -377,6 +387,16 @@ unset($_SESSION['error_remarks']);
                 $getrow1=mysqli_fetch_array($getrow1);
                  $examcat=$getrow1['examcategoryname'];
                 
+                 $getrow2=mysqli_query($conn,"SELECT * FROM exammaster where examid='$id'");
+                $getrow2=mysqli_fetch_array($getrow2);
+                 $publish=$getrow2['published']; 
+
+                if($publish=="YES"){
+                $resultdatetime=$getrow2['datepublish']; 
+                }else{
+                $resultdatetime="Unpublish";
+                }
+
                 ?>             
                 <tr>
                 <td hidden><?php echo $id; ?></td>
@@ -399,8 +419,10 @@ unset($_SESSION['error_remarks']);
                    if ($examtype=='Essay' && $status=='OPEN'){
                     echo '<a href="examdetailsEssay.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
                    }
-                   echo ' <a class="btn btn-warning btn-sm publishbtn" href="#"><i class="fas fa-folder-alt"></i> Publish Result</a>&nbsp';
-                          ?>
+                   if ($resultdatetime=='Unpublish'){
+                    echo ' <a class="btn btn-warning btn-sm publishbtn" href="#"><i class="fas fa-folder-alt"></i> Publish Result</a>&nbsp';
+                   }
+                            ?>
                </td>   
                <td hidden><?php echo $classnameid; ?></td>    
                <td hidden><?php echo $examcatid; ?></td>               
@@ -764,7 +786,7 @@ $(document).ready(function(){
 <span aria-hidden="true">&times;</span>
 </button>
 </div>
-<form action="query-delete.php" method="POST">
+<form action="query-edit.php" method="POST">
 <div class="modal-body">
  <center><h6>Are you sure you want to post the result of this exam ?</h6> </center>
 
@@ -773,7 +795,7 @@ $(document).ready(function(){
 							<label class="control-label" style="position:relative; top:7px;">Exam Name</label>
 						</div>
 						<div class="col-lg-8">
-            <input type="hidden" name="iddelete" id="idpost">
+            <input type="hidden" name="idpostedit" id="idpost">
 							<input type="text" id="examnamepost" class="form-control" name="" required readonly>
 						</div>
 					</div>
@@ -803,7 +825,7 @@ $(document).ready(function(){
 
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-<button type="submit" name="deleteexam" class="btn btn-primary">AGREE TO POST THE RESULT</button>
+<button type="submit" name="publishresult" class="btn btn-primary">AGREE TO POST THE RESULT</button>
 </div>       
 </form>
 

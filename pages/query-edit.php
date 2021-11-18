@@ -680,5 +680,23 @@ if (isset($_POST['editquizquestionessay'])) {
 
 }
 
+
+
+
+
+if (isset($_POST['publishresult'])) {
+  $date = date('Y-m-d H:i:s');
+  $id= mysqli_real_escape_string($conn, $_POST['idpostedit']);
   
+            
+
+              if (!mysqli_query($conn, "UPDATE exammaster set published='YES',datepublish='$date' where examid='$id'")) {
+          echo("Error description: " . mysqli_error($conn));
+              }else{
+                $_SESSION["publish"]="publish";
+                header('location:exam.php');
+              }
+
+}
+
 ?>
