@@ -514,7 +514,12 @@ unset($_SESSION['error_remarks']);
                 <td><?php echo $studentname; ?></td>               
                 <td><?php echo $score; ?></td>  
                 <td><?php echo $items; ?></td>  
-                <td><?php echo $datetaken; ?></td>  
+                <td><?php 
+                 if ($items==''){
+                }else{
+                  echo $datetaken; ?></td>    
+                 }
+                
                 </tr> 
 <?php
 }                      

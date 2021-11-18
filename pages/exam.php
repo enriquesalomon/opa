@@ -348,7 +348,6 @@ unset($_SESSION['publish']);
                   <th>Exam Type</th>
                     <th>Class Name</th>
                     <th>School Year</th>
-                      <th>Result Date Posted</th>
                     <th>Status</th>
                     <th>Action</th>
                     <th hidden>classid </th>
@@ -408,13 +407,18 @@ unset($_SESSION['publish']);
                 <td><?php echo $examtype; ?></td>
                 <td ><?php echo $classname; ?></td>   
                 <td ><?php echo $schoolyear; ?></td>               
-                <td><?php echo $resultdatetime; ?></td>   
+                <td hidden><?php echo $resultdatetime; ?></td>   
                 <td><?php echo $status; ?></td>    
                 
-                <td ><?php                  
-                       echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
-                       echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
-                   if ($examtype=='Multiple Choice' && $status=='OPEN'){
+                <td ><?php      
+                if ($status=='OPEN'){
+                  echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
+                  echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
+         
+                }else{
+                    echo '---';
+                }            
+                  if ($examtype=='Multiple Choice' && $status=='OPEN'){
                     echo '<a href="examdetails.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
                    }
                    if ($examtype=='True or False' && $status=='OPEN'){
@@ -425,9 +429,9 @@ unset($_SESSION['publish']);
                    }
 
 
-                  if ($resultdatetime==''){
-                  echo ' <a class="btn btn-warning btn-sm publishbtn" href="#"><i class="fas fa-folder-alt"></i> Publish Result</a>&nbsp';
-                  }
+              //    if ($resultdatetime==''){
+                //  echo ' <a class="btn btn-warning btn-sm publishbtn" href="#"><i class="fas fa-folder-alt"></i> Publish Result</a>&nbsp';
+               //   }
 
                             ?>
                </td>   
