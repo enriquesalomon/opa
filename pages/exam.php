@@ -347,7 +347,7 @@ unset($_SESSION['publish']);
                   <th>Exam Type</th>
                     <th>Class Name</th>
                     <th>School Year</th>
-                      <th>Publish Date</th>
+                      <th>Result Date Posted</th>
                     <th>Status</th>
                     <th>Action</th>
                     <th hidden>classid </th>
@@ -393,8 +393,9 @@ unset($_SESSION['publish']);
 
                 if($publish=="YES"){
                 $resultdatetime=$getrow2['datepublish']; 
+                $status="CLOSED";
                 }else{
-                $resultdatetime="Unpublish";
+                $resultdatetime="";
                 }
 
                 ?>             
@@ -419,7 +420,7 @@ unset($_SESSION['publish']);
                    if ($examtype=='Essay' && $status=='OPEN'){
                     echo '<a href="examdetailsEssay.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
                    }
-                   if ($resultdatetime=='Unpublish'){
+                   if ($resultdatetime==''){
                     echo ' <a class="btn btn-warning btn-sm publishbtn" href="#"><i class="fas fa-folder-alt"></i> Publish Result</a>&nbsp';
                    }
                             ?>
