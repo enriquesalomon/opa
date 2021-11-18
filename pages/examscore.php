@@ -515,11 +515,13 @@ unset($_SESSION['error_remarks']);
                 <td><?php echo $score; ?></td>  
                 <td><?php echo $items; ?></td>  
                 <td><?php 
-                 if ($items==''){
-                }else{
-                  echo $datetaken; ?></td>    
+                 if ($status=='OPEN'){
+                  echo '';
+                 }else{
+                  echo $datetaken;
                  }
-                
+               
+               ?></td>  
                 </tr> 
 <?php
 }                      
