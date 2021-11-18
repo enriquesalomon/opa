@@ -225,12 +225,15 @@ include('../includes/pagetopbar.php');
               </li>
 
               
+          <!--  
+              
               <li class="nav-item">
                 <a href="./quizz.php" class="nav-link">
                 <i class="far fas-file nav-icon"></i>
                   <p>Quiz</p>
                 </a>
               </li>
+-->
 
               <li class="nav-item">
               <a href="./allowexaminees.php?examid=0" class="nav-link ">
@@ -239,12 +242,7 @@ include('../includes/pagetopbar.php');
                 </a>
               </li>
 
-              <li class="nav-item">
-                <a href="./allowquiztakers.php?examid=0" class="nav-link active">
-                <i class="far fas-file nav-icon"></i>
-                  <p>Allow Quiz Takers</p>
-                </a>
-              </li>
+           
               
             
             </ul>

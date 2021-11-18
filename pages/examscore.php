@@ -83,7 +83,7 @@ line-height: 2;
     
    }
 
-   
+
    [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus, [class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
     color: #f8f9fa !important;
     background-color: rgb(50 143 232 / 90%) !important;
@@ -94,7 +94,6 @@ line-height: 2;
       background-color: #FFCC00 !important;
       color: #fff !important;
 }
-
 
   </style>
 <style>
@@ -209,7 +208,7 @@ include('../includes/pagetopbar.php');
             </ul>
           </li>
 
-          <li class="nav-item menu-open">
+          <li class="nav-item ">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-folder-open"></i>
               <p>
@@ -219,27 +218,33 @@ include('../includes/pagetopbar.php');
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./exam.php" class="nav-link active">
+                <a href="./exam.php" class="nav-link ">
                 <i class="far fas-file nav-icon"></i>
                   <p>Exam</p>
                 </a>
               </li>
-
+ <!--  
+              
               <li class="nav-item">
-                <a href="./allowexaminees.php?examid=0" class="nav-link">
+                <a href="./quizz.php" class="nav-link">
+                <i class="far fas-file nav-icon"></i>
+                  <p>Quiz</p>
+                </a>
+              </li>
+-->
+              <li class="nav-item">
+              <a href="./allowexaminees.php?examid=0" class="nav-link ">
                 <i class="far fas-file nav-icon"></i>
                   <p>Allow Examinees</p>
                 </a>
               </li>
 
-            
-             
-
+      
             </ul>
           </li>
 
-          
-          <li class="nav-item">
+         
+          <li class="nav-item menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-folder-open"></i>
               <p>
@@ -249,17 +254,15 @@ include('../includes/pagetopbar.php');
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./examscore.php" class="nav-link">
+                <a href="./examscore.php" class="nav-link active">
                 <i class="far fas-file nav-icon"></i>
                   <p>Exam Score</p>
                 </a>
-              </li>  
-
+              </li>             
+           
             </ul>
           </li>
 
-         
-        
           <li class="nav-header">Exit</li>
           <li class="nav-item">
           <a href="#" class="nav-link "data-toggle="modal" data-target="#logoutModal">
@@ -283,18 +286,22 @@ include('../includes/pagetopbar.php');
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Exam Management</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Exam </li>
-            </ol>
-          </div>
-        </div>
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                  <h1>Results </h1>
+                </div>
+                <div class="col-sm-6">
+                  <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Scores </li>
+                  </ol>
+                </div>
+            
+            </div>
+
+       
       </div><!-- /.container-fluid -->
+     
     </section>
     <?php
 if ( isset( $_SESSION['examadded']) ) {
@@ -303,7 +310,7 @@ include('toast-add.php');
 if ( isset( $_SESSION['examedited']) ) {
   include('toast-edited.php');
   }
-if ( isset( $_SESSION['examdeleted']) ) {
+if ( isset( $_SESSION['delete']) ) {
 include('toast-deleted.php');
 }
 
@@ -314,7 +321,7 @@ if ( isset( $_SESSION['error']) ) {
 
 unset($_SESSION['examadded']);
 unset($_SESSION['examedited']);
-unset($_SESSION['examdeleted']);
+unset($_SESSION['delete']);
 unset($_SESSION['error']);
 unset($_SESSION['error_remarks']);
 
@@ -322,11 +329,71 @@ unset($_SESSION['error_remarks']);
 ?> 
  <!-- Main content -->
     
- <?php include 'modal-add-exam.php'?>
+ <?php include 'modal-add-assignexaminee.php'?>
+
+<section class="content">
+<div class="container-fluid">
+<div class="row mb-4">
+<div class="col-sm-12">
+<h3>
+      <?php 
+      if (isset( $_GET['examid'])){
+      $getexamid=$_GET['examid'];
+      if($getexamid==""){ $getexamid=0;}
+
+      include('dbconnect.php'); 
+      $query = mysqli_query($conn,"SELECT e.id as eid,e.examtype as examtype,c.classname as cclassname,e.sy as sy,ex.examcategoryname as examcategoryname FROM exam e INNER JOIN class c ON e.classnameid=c.id INNER JOIN examcategory ex ON ex.id=e.examcategoryid WHERE e.id=$getexamid");
+
+      while ($result = mysqli_fetch_array($query)) {
+
+      echo $result['examcategoryname']. ' '.$result['examtype']. ' '.$result['sy']. ' '.$result['cclassname'] ;
+
+
+      }
+    }
+      ?>
+
+  </h3>
+  </div>
+  </div>
+</div>
+</section>
+
  <section class="content">
        <div class="container-fluid">
-       <button class="btn btn-success"style="margin-bottom: 15px;"data-toggle="modal" data-target="#add-exam"><i class="fa fa-plus" aria-hidden="true"></i></button>
+       
+       <div class="row">
+						<div class="col-lg-4">
 
+            <?php
+            if (isset( $_GET['examid'])){
+              if ($_GET['examid']!=0){
+             //   echo "	<button class='btn btn-success'style='margin-bottom: 15px;'data-toggle='modal' data-target='#add-exam'><i class='fa fa-plus' aria-hidden='true'></i></button>";
+     
+              }
+              }
+            ?>
+						</div>
+				<!--		<div class="col-lg-6">
+                            <select name="classnameid" id="examid" class="form-control custom-select" required>
+                            <option selected value="" disabled>Select Exam</option>
+                          <?php
+                                  include('dbconnect.php'); 
+                          $query = mysqli_query($conn,"SELECT e.id as eid,e.examtype as examtype,c.classname as cclassname,e.sy as sy,ex.examcategoryname as examcategoryname FROM exam e INNER JOIN class c ON e.classnameid=c.id INNER JOIN examcategory ex ON ex.id=e.examcategoryid WHERE e.status='OPEN'");
+
+                          while ($result = mysqli_fetch_array($query)) {
+                          echo "<option value="  .$result['eid']. ">" .$result['examcategoryname']. " | ".$result['examtype']. " | ".$result['sy']. " | ".$result['cclassname']."</option>";
+                          }
+                          ?>
+                          </select>
+                          
+						</div>
+            <div class="col-lg-2">
+         <button class="btn btn-success"style="margin-bottom: 15px;" onclick="btnFilter();">Filter Data</button>
+                        -->
+            
+            </div> 
+				</div>
        <div class="row">
           <div class="col-12">
             
@@ -338,72 +405,116 @@ unset($_SESSION['error_remarks']);
                   <table class="table table-striped">
                   <thead>
                   <tr>
-                  <th hidden>Id</th>
-                  <th>Exam Name</th>
+                  <th>Grading Period</th>
+                  <th>Subject</th>
                   <th>Exam Type</th>
-                    <th>Class Name</th>
-                    <th>School Year</th>
-                      <th>Result Date & Time</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                    <th hidden>classid </th>
+                  <th>Student No.</th>
+                  <th>Name</th>
+                    <th>Score</th>
+                    <th>Items</th>
+                    <th>DateTaken</th>
                   </tr>
                   </thead>
                   <tbody>
                 <?php
-                include('dbconnect.php');                           
-                $query=mysqli_query($conn," select *  from exam");                                            
+               
+               
+
+                include('dbconnect.php');    
+                
+                if (isset($_GET["examid"])){
+                  $getexamid = $_GET['examid'];
+
+                if(!empty($_GET["examid"])) {
+                //$check=mysqli_query($conn,"select * from examinee where examid='" .$getexamid . "'");
+                $check=mysqli_query($conn,"select * from examinee where WHERE status='CLOSED'");
+                $erow=mysqli_fetch_array($check);
+                if($erow>0) {              
+                }else{
+                header('location:examscore.php?examid=0');
+                }               
+                }
+
+
+              }else{
+                header('location:examscore.php?examid=0');
+              }
+              $num=0;
+                //$query=mysqli_query($conn," select *  from examinee WHERE  examid='$getexamid' AND status='CLOSED'  ORDER BY studentname ASC");                                            
+                $query=mysqli_query($conn,"select * from examinee WHERE status='CLOSED'");
                 while($getrow=mysqli_fetch_array($query)){
                 ?>
                 <?php 
+   $getexamid=$getrow['examid'];
+              $getrow2=mysqli_query($conn,"SELECT * FROM exammaster where examid='$getexamid'");
+              $getrow2=mysqli_fetch_array($getrow2);
+              $examtype=$getrow2['examtype'];   
+              $examcategoryid=$getrow2['examcategoryid'];    
+              $subjectid=$getrow2['subjectid'];  
+              $exammasterid=$getrow2['id'];  
+
+              $getrow3=mysqli_query($conn,"SELECT * FROM examcategory where id='$examcategoryid'");
+              $getrow3=mysqli_fetch_array($getrow3);
+              $examcategoryname=$getrow3['examcategoryname'];  
+              
+              $getrow4=mysqli_query($conn,"SELECT * FROM subjects where id='$subjectid'");
+              $getrow4=mysqli_fetch_array($getrow4);
+              $subjectname=$getrow4['subjectname']; 
+
+
                 $id=$getrow['id'];   
-                $examcatid=$getrow['examcategoryid'];             
-                $classnameid=$getrow['classnameid'];    
-                $schoolyear=$getrow['sy'];           
-                $resultdatetime=$getrow['resultdatetime'];
-                if ($resultdatetime ==''){
-                  $resultdatetime= "Not Publish";
-                }
-                $createdon=$getrow['createdon'];  
-                $examtype=$getrow['examtype']; 
-                $status=$getrow['status']; 
-
-                $getrow1=mysqli_query($conn,"SELECT * FROM class where id='$classnameid'");
-                $getrow1=mysqli_fetch_array($getrow1);
-                 $classname=$getrow1['classname'];
-
+                $studentid=$getrow['studentid'];               
                  
-                $getrow1=mysqli_query($conn,"SELECT * FROM examcategory where id='$examcatid'");
+                $getrow1=mysqli_query($conn,"SELECT * FROM student where id='$studentid'");
                 $getrow1=mysqli_fetch_array($getrow1);
-                 $examcat=$getrow1['examcategoryname'];
+                 $studentno=$getrow1['studentno'];           
+                $studentname=$getrow1['firstname']." ".$getrow1['middlename']." ".$getrow1['lastname'];    
+                $examid=$getrow['examid'];         
+                $status=$getrow['status'];  
+                $num+=1;
+
+                  $items=0;
+                if ($examtype=="Multiple Choice"){
+                  $getrow5=mysqli_query($conn,"SELECT sum(Correct) as score,sum(totalitems) as items FROM exam_answer_multiplechoice where studentid='$studentid' and examid='$exammasterid' and examsubjectid='$subjectid' ");
+                  $getrow5=mysqli_fetch_array($getrow5);
+                  $score=$getrow5['score']; 
+                  $items=$getrow5['items'];   
+                }
+
                 
+                if ($examtype=="True or False"){
+                  $getrow6=mysqli_query($conn,"SELECT sum(Correct) as score,sum(totalitems) as items FROM exam_answer_truefalse where studentid='$studentid' and examid='$exammasterid' and examsubjectid='$subjectid' ");
+                  $getrow6=mysqli_fetch_array($getrow6);
+                  $score=$getrow6['score']; 
+                  $items=$getrow6['items'];   
+                }
+
+                  
+                if ($examtype=="Essay"){
+                  $getrow7=mysqli_query($conn,"SELECT sum(Correct) as score,sum(totalitems) as items FROM exam_answer_essay where studentid='$studentid' and examid='$exammasterid' and examsubjectid='$subjectid' ");
+                  $getrow7=mysqli_fetch_array($getrow7);
+                  $score=$getrow7['score']; 
+                  $items=$getrow7['items'];   
+                }
+                                      
+          $getrow8=mysqli_query($conn,"select *  from examinee WHERE  examid='$getexamid' AND studentid='$studentid' AND status='CLOSED'");
+          $getrow8=mysqli_fetch_array($getrow8);
+          $datetaken=$getrow8['datetaken']; 
+
+              
+
+
                 ?>             
                 <tr>
-                <td hidden><?php echo $id; ?></td>
-                <td><?php echo $examcat; ?></td>
+             
+                <td><?php echo $examcategoryname; ?></td>
+                <td><?php echo $subjectname; ?></td>
                 <td><?php echo $examtype; ?></td>
-                <td ><?php echo $classname; ?></td>   
-                <td ><?php echo $schoolyear; ?></td>               
-                <td><?php echo $resultdatetime; ?></td>   
-                <td><?php echo $status; ?></td>    
-                
-                <td ><?php                  
-                       echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i></a>&nbsp';
-                       echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
-                   if ($examtype=='Multiple Choice' && $status=='OPEN'){
-                    echo '<a href="examdetails.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
-                   }
-                   if ($examtype=='True or False' && $status=='OPEN'){
-                    echo '<a href="examdetailsTF.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
-                   }
-                   if ($examtype=='Essay' && $status=='OPEN'){
-                    echo '<a href="examdetailsEssay.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
-                   }
-                   echo ' <a class="btn btn-warning btn-sm publishbtn" href="#"><i class="fas fa-folder-alt"></i> Publish Result</a>&nbsp';
-                          ?>
-               </td>   
-               <td hidden><?php echo $classnameid; ?></td>    
-               <td hidden><?php echo $examcatid; ?></td>               
+                <td><?php echo $studentno; ?></td>
+                <td><?php echo $studentname; ?></td>               
+                <td><?php echo $score; ?></td>  
+                <td><?php echo $items; ?></td>  
+                <td><?php echo $datetaken; ?></td>  
                 </tr> 
 <?php
 }                      
@@ -520,8 +631,7 @@ $(document).ready(function(){
         $('#examtypeid').val(data[2]);   
         $('#examnameid').val(data[9]);    
         $('#classnameid').val(data[8]);   
-        $('#schoolyearid').val(data[4]);     
-        $('#statusid').val(data[6]);     
+        $('#schoolyearid').val(data[4]);       
        
    
 
@@ -539,31 +649,11 @@ $(document).ready(function(){
           return $(this).text();
         }).get();
 
-        $('#iddelete').val(data[0]);  
-        $('#examnamedelete').val(data[1]); 
-        $('#classnamedelete').val(data[3]); 
-        $('#schoolyeardelete').val(data[4]); 
-              
-       
-  });
-});
-
-
-$(document).ready(function(){
-  $('.publishbtn').on('click', function(){
-
-      $('#publishmodal').modal('show');
-
-        $tr =$(this).closest('tr');
-
-        var data=$tr.children("td").map(function(){
-          return $(this).text();
-        }).get();
-
-        $('#idpost').val(data[0]);  
-        $('#examnamepost').val(data[1]); 
-        $('#classnamepost').val(data[3]); 
-        $('#schoolyearpost').val(data[4]); 
+        $('#iddelete').val(data[5]);  
+        $('#studentnodelete').val(data[1]);  
+        
+        $('#examnamedelete').val(data[2]); 
+        $('#examiddelete').val(data[4]); 
               
        
   });
@@ -572,127 +662,10 @@ $(document).ready(function(){
 
 </script>
 
-   
-<!-- Edit -->
-<div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    
-                    <center><h4 class="modal-title" id="myModalLabel">Edit Exam</h4></center>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                </div>
-                <div class="modal-body">
-				<div class="container-fluid">
-				<form method="POST" action="query-edit.php" enctype="multipart/form-data">
-        <input type="hidden" class="form-control" id="id" name="idedit" required >
-        <div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Grading Period</label>
-						</div>
-						<div class="col-lg-8">
-           
-                            <select name="examname" id="examnameid" class="form-control custom-select" required>
-                            <option selected value="" disabled>Select Class</option>
-                          <?php
-                                  include('dbconnect.php'); 
-                          $query = mysqli_query($conn,"SELECT * FROM examcategory");
-
-                          while ($result = mysqli_fetch_array($query)) {
-                          echo "<option value=" .$result['id']. ">" .$result['examcategoryname']."</option>";
-                          }
-                          ?>
-                          </select>
-						</div>
-					</div>
-          
-          <div style="height:10px;"></div>
-                <div class="row">
-                    <div class="col-lg-4">
-                      <label class="control-label" style="position:relative; top:7px;">Exam Type</label>
-                      </div>
-                      <div class="col-lg-8">
-                        <select name="examtype" id="examtypeid" class="form-control custom-select" required>
-                        <option selected value="" disabled>Select</option> 
-                        <option value="Multiple Choice">Multiple Choice</option>"     
-                        <option value="Essay">Essay</option>"     
-                        <option value="True or False">True or False</option>"  
-                        </select>
-                      </div>
-                  </div>	
-
-
-								<div style="height:10px;"></div>
-								<div style="height:10px;"></div>
-				<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Class</label>
-						</div>
-						<div class="col-lg-8">
-                            <select name="classname" id="classnameid" class="form-control custom-select" required>
-                            <option selected value="" disabled>Select Class</option>
-                          <?php
-                                  include('dbconnect.php'); 
-                          $query = mysqli_query($conn,"SELECT * FROM class");
-
-                          while ($result = mysqli_fetch_array($query)) {
-                          echo "<option value=" .$result['id']. ">" .$result['classname']."</option>";
-                          }
-                          ?>
-                          </select>
-						</div>
-					</div>
-          <div style="height:10px;"></div>
-                <div class="row">
-                <div class="col-lg-4">
-                <label class="control-label" style="position:relative; top:7px;">School Year</label>
-                </div>
-                <div class="col-lg-8">
-                <select name="schoolyear" id="schoolyearid" class="form-control custom-select" required>
-                <option selected value="" disabled>Select</option> 
-                 <option value="2020-2021">2020-2021</option>"    
-             
-                </select>
-                </div>
-                </div>	
-									
-
-
-
-                <div style="height:10px;"></div>
-                <div class="row">
-                <div class="col-lg-4">
-                <label class="control-label" style="position:relative; top:7px;">Exam Status</label>
-                </div>
-                <div class="col-lg-8">
-                <select name="status" id="statusid" class="form-control custom-select" required>
-                <option selected value="" disabled>Select</option> 
-                 <option value="OPEN">OPEN</option>"     
-                 <option value="CLOSED">CLOSED</option>"   
-                </select>
-                </div>
-                </div>	
-									
-        
-									
-                </div> 
-				</div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <button type="submit"name="editexam" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
-                    	
-				</form>
-                </div>
-				
-            </div>
-        </div>
-    </div>
-
 
 
 </body>
 </html>
-
 
 <!--modal delete  -->
 <div id="deletemodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
@@ -706,104 +679,35 @@ $(document).ready(function(){
 </div>
 <form action="query-delete.php" method="POST">
 <div class="modal-body">
- <center><h6>Are you sure you want to delete this Exam ?</h6> </center>
+ <center><h6>Are you sure you want to remove this Examinee in the List ?</h6> </center>
 
 					<div class="row">
 						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Exam Name</label>
+							<label class="control-label" style="position:relative; top:7px;">Student No.:</label>
 						</div>
 						<div class="col-lg-8">
             <input type="hidden" name="iddelete" id="iddelete">
+            <input type="hidden" id="examiddelete" class="form-control" name="examid" required>
+							<input type="text" id="studentnodelete" class="form-control" name="" required readonly>
+						</div>
+					</div>
+					<div style="height:10px;"></div>
+          
+          <div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Student Name</label>
+						</div>
+						<div class="col-lg-8">
 							<input type="text" id="examnamedelete" class="form-control" name="" required readonly>
 						</div>
 					</div>
-					<div style="height:10px;"></div>
-          
-          <div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Class Name</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" id="classnamedelete" class="form-control" name="" required readonly>
-						</div>
-					</div>
-          <div style="height:10px;"></div>
-          <div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">School Year</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" id="schoolyeardelete" class="form-control" name="" required readonly>
-						</div>
-					</div>
-
-          
+                    
 </div>
 
 
 <div class="modal-footer">
 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-<button type="submit" name="deleteexam" class="btn btn-primary">Yes</button>
-</div>       
-</form>
-
-
-</div>
-</div>
-</div>
-
-
-
-<!--modal PUBLISH  -->
-<div id="publishmodal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
-<div class="modal-dialog modal-md" role="document">
-<div class="modal-content">
-<div class="modal-header">
-<h5 class="modal-title" id="exampleModalLabel">Publish Result Confirmation</h5>
-<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-<span aria-hidden="true">&times;</span>
-</button>
-</div>
-<form action="query-delete.php" method="POST">
-<div class="modal-body">
- <center><h6>Are you sure you want to post the result of this exam ?</h6> </center>
-
-					<div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Exam Name</label>
-						</div>
-						<div class="col-lg-8">
-            <input type="hidden" name="iddelete" id="idpost">
-							<input type="text" id="examnamepost" class="form-control" name="" required readonly>
-						</div>
-					</div>
-					<div style="height:10px;"></div>
-          
-          <div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">Class Name</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" id="classnamepost" class="form-control" name="" required readonly>
-						</div>
-					</div>
-          <div style="height:10px;"></div>
-          <div class="row">
-						<div class="col-lg-4">
-							<label class="control-label" style="position:relative; top:7px;">School Year</label>
-						</div>
-						<div class="col-lg-8">
-							<input type="text" id="schoolyearpost" class="form-control" name="" required readonly>
-						</div>
-					</div>
-
-          
-</div>
-
-
-<div class="modal-footer">
-<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-<button type="submit" name="deleteexam" class="btn btn-primary">AGREE TO POST THE RESULT</button>
+<button type="submit" name="deleteexaminee" class="btn btn-primary">Yes</button>
 </div>       
 </form>
 
@@ -814,6 +718,13 @@ $(document).ready(function(){
 <?php 
 include 'modal-logout.php';
 ?>
+
+<script>
+function btnFilter(){
+  var examid=document.getElementById("examid").value;  
+  location.href = './examscore.php?examid='+examid;
+};   
+</script>
 
 
 
