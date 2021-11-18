@@ -343,6 +343,7 @@ unset($_SESSION['publish']);
                   <thead>
                   <tr>
                   <th hidden>Id</th>
+                  <th>Grading Period</th>
                   <th>Exam Name</th>
                   <th>Exam Type</th>
                     <th>Class Name</th>
@@ -361,6 +362,7 @@ unset($_SESSION['publish']);
                 ?>
                 <?php 
                 $id=$getrow['id'];   
+                $examdescription=$getrow['examdescription'];
                 $examcatid=$getrow['examcategoryid'];             
                 $classnameid=$getrow['classnameid'];    
                 $schoolyear=$getrow['sy'];           
@@ -402,6 +404,7 @@ unset($_SESSION['publish']);
                 <tr>
                 <td hidden><?php echo $id; ?></td>
                 <td><?php echo $examcat; ?></td>
+                <td><?php echo $examdescription; ?></td>
                 <td><?php echo $examtype; ?></td>
                 <td ><?php echo $classname; ?></td>   
                 <td ><?php echo $schoolyear; ?></td>               
@@ -420,9 +423,12 @@ unset($_SESSION['publish']);
                    if ($examtype=='Essay' && $status=='OPEN'){
                     echo '<a href="examdetailsEssay.php?examcategoryid='.$examcatid.'&classnameid='.$classnameid.'&id='.$id.'&sy='.$schoolyear.'" class="btn btn-sm btn-success"> <i class="fas fa-folder"></i> Manage Exam Subjects</a>';
                    }
-                   if ($resultdatetime==''){
-                    echo ' <a class="btn btn-warning btn-sm publishbtn" href="#"><i class="fas fa-folder-alt"></i> Publish Result</a>&nbsp';
-                   }
+
+
+                  if ($resultdatetime==''){
+                  echo ' <a class="btn btn-warning btn-sm publishbtn" href="#"><i class="fas fa-folder-alt"></i> Publish Result</a>&nbsp';
+                  }
+
                             ?>
                </td>   
                <td hidden><?php echo $classnameid; ?></td>    
@@ -540,11 +546,12 @@ $(document).ready(function(){
         }).get();
 
         $('#id').val(data[0]);    
-        $('#examtypeid').val(data[2]);   
-        $('#examnameid').val(data[9]);    
-        $('#classnameid').val(data[8]);   
-        $('#schoolyearid').val(data[4]);     
-        $('#statusid').val(data[6]);     
+        $('#examdescriptionid').val(data[2]);   
+        $('#examtypeid').val(data[3]);   
+        $('#examnameid').val(data[10]);    
+        $('#classnameid').val(data[9]);   
+        $('#schoolyearid').val(data[5]);     
+        $('#statusid').val(data[7]);     
        
    
 
@@ -629,6 +636,17 @@ $(document).ready(function(){
 						</div>
 					</div>
           
+          <div style="height:10px;"></div>
+          <div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Exam Name</label>
+						</div>
+						<div class="col-lg-8">
+           
+							<input type="text" id="examdescriptionid" class="form-control" name="examdescription" required>
+						</div>
+					</div>
+				
           <div style="height:10px;"></div>
                 <div class="row">
                     <div class="col-lg-4">

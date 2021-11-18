@@ -43,6 +43,19 @@ $date = date('Y-m-d H:i:s');
 
             
           <div style="height:10px;"></div>
+          <div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Description</label>
+						</div>
+						<div class="col-lg-8">
+           
+							<input type="text"  class="form-control" name="examdescription" required>
+						</div>
+					</div>
+				
+          <div style="height:10px;"></div>
+
+          
                 <div class="row">
                     <div class="col-lg-4">
                       <label class="control-label" style="position:relative; top:7px;">Exam Type</label>
@@ -126,13 +139,14 @@ $('#dateexam2').datepicker();
  
   	// Get image name
 	  $examname= mysqli_real_escape_string($conn, $_POST['examname']);
+    $examdescription= mysqli_real_escape_string($conn, $_POST['examdescription']);
 		$classname= mysqli_real_escape_string($conn, $_POST['classname']);    
     $schoolyear= mysqli_real_escape_string($conn, $_POST['schoolyear']); 
     $examtype= mysqli_real_escape_string($conn, $_POST['examtype']);      
 		$date = date('Y-m-d H:i:s');
 
     if(!empty($_POST["classname"])) {
-      $check=mysqli_query($conn,"select * from exam where examcategoryid='" . $_POST["examname"] . "' AND  classnameid='" . $_POST["classname"] . "' AND examtype='" . $_POST["examtype"] . "'");
+      $check=mysqli_query($conn,"select * from exam where examcategoryid='" . $_POST["examname"] . "' AND  classnameid='" . $_POST["classname"] . "' AND examtype='" . $_POST["examtype"] . "' AND examdescription='" . $_POST["examdescription"] . "'");
      $erow=mysqli_fetch_array($check);
       if($erow>0) {
         $_SESSION["error_remarks"]="Cannot be saved, found exam info duplication";
@@ -143,7 +157,7 @@ $('#dateexam2').datepicker();
                 }      
       }
      
-        $sql = "INSERT INTO exam VALUES (DEFAULT,'$examname','$classname','$schoolyear','','$date','$examtype','OPEN')";   
+        $sql = "INSERT INTO exam VALUES (DEFAULT,'$examname','$classname','$schoolyear','','$date','$examtype','OPEN','$examdescription')";   
         if (!mysqli_query($conn, $sql)) {
             echo("Error description: " . mysqli_error($conn));
                 }else{
