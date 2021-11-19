@@ -406,6 +406,7 @@ unset($_SESSION['error_remarks']);
                   <thead>
                   <tr>
                   <th>Grading Period</th>
+                  <th>Description</th>
                   <th>Subject</th>
                   <th>Exam Type</th>
                   <th>Student No.</th>
@@ -500,7 +501,9 @@ unset($_SESSION['error_remarks']);
           $getrow8=mysqli_query($conn,"select *  from examinee WHERE  examid='$getexamid' AND studentid='$studentid' AND status='CLOSED'");
           $getrow8=mysqli_fetch_array($getrow8);
           $datetaken=$getrow8['datetaken']; 
-
+          $getrow9=mysqli_query($conn,"select *  from exam WHERE  id='$getexamid'");
+          $getrow9=mysqli_fetch_array($getrow9);
+          $examdescription=$getrow9['examdescription']; 
               
 
 
@@ -508,6 +511,7 @@ unset($_SESSION['error_remarks']);
                 <tr>
              
                 <td><?php echo $examcategoryname; ?></td>
+                <td><?php echo $examdescription; ?></td>
                 <td><?php echo $subjectname; ?></td>
                 <td><?php echo $examtype; ?></td>
                 <td><?php echo $studentno; ?></td>
