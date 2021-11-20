@@ -391,14 +391,22 @@ unset($_SESSION['publish']);
                  $getrow2=mysqli_query($conn,"SELECT * FROM exammaster where examid='$id'");
                 $getrow2=mysqli_fetch_array($getrow2);
                  $publish=$getrow2['published']; 
-
-                if($publish=="YES"){
-                $resultdatetime=$getrow2['datepublish']; 
-                $status="CLOSED";
-                }else{
-                $resultdatetime="";
+                if(isset($publish)){
+                  if($publish=="YES"){
+                    $resultdatetime=$getrow2['datepublish']; 
+                    $status="CLOSED";
+                    }else{
+                    $resultdatetime="";
+                    }
+    
                 }
+              
 
+                
+$getrow2=mysqli_query($conn,"SELECT * FROM exammaster where examid='$id'");
+while($row=mysqli_fetch_array($getrow2)){
+  $publish=$row['published']);
+}
                 ?>             
                 <tr>
                 <td hidden><?php echo $id; ?></td>
