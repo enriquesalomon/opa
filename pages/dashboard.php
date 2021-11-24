@@ -319,7 +319,7 @@ include('../includes/pagetopbar.php');
       <div class="container-fluid">
         <!-- Small boxes (Stat box) -->
         <div class="row">
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
@@ -363,7 +363,7 @@ while($row=mysqli_fetch_array($query)){
             </div>
           </div>
     -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
@@ -415,7 +415,7 @@ $totalquestions= $totalqtf+$totalqessay+$totalqmc;
 ?>
 
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-4 col-6">
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">

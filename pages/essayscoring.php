@@ -208,7 +208,7 @@ include('../includes/pagetopbar.php');
             </ul>
           </li>
 
-          <li class="nav-item ">
+          <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-folder-open"></i>
               <p>
@@ -254,21 +254,22 @@ include('../includes/pagetopbar.php');
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./essayscoring.php" class="nav-link">
+                <a href="./essayscoring.php" class="nav-link active">
                 <i class="far fas-file nav-icon"></i>
                   <p>Essay Scoring</p>
                 </a>
-              </li>             
-           
+              </li>     
             </ul>
+
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="./examscore.php" class="nav-link active">
+                <a href="./examscore.php" class="nav-link">
                 <i class="far fas-file nav-icon"></i>
                   <p>Exam Score</p>
                 </a>
               </li>             
-           
+             
+
             </ul>
           </li>
 
@@ -297,12 +298,12 @@ include('../includes/pagetopbar.php');
       <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                  <h1>Results </h1>
+                  <h1>Essay Answers</h1>
                 </div>
                 <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Scores </li>
+                    <li class="breadcrumb-item active">Esasay Scoring </li>
                   </ol>
                 </div>
             
@@ -377,13 +378,13 @@ unset($_SESSION['error_remarks']);
             <?php
             if (isset( $_GET['examid'])){
               if ($_GET['examid']!=0){
-             //   echo "	<button class='btn btn-success'style='margin-bottom: 15px;'data-toggle='modal' data-target='#add-exam'><i class='fa fa-plus' aria-hidden='true'></i></button>";
+                echo "	<button class='btn btn-success'style='margin-bottom: 15px;'data-toggle='modal' data-target='#add-exam'><i class='fa fa-plus' aria-hidden='true'></i></button>";
      
               }
               }
             ?>
 						</div>
-				<!--		<div class="col-lg-6">
+						<div class="col-lg-6">
                             <select name="classnameid" id="examid" class="form-control custom-select" required>
                             <option selected value="" disabled>Select Exam</option>
                           <?php
@@ -399,7 +400,7 @@ unset($_SESSION['error_remarks']);
 						</div>
             <div class="col-lg-2">
          <button class="btn btn-success"style="margin-bottom: 15px;" onclick="btnFilter();">Filter Data</button>
-                        -->
+      
             
             </div> 
 				</div>
@@ -414,15 +415,10 @@ unset($_SESSION['error_remarks']);
                   <table class="table table-striped">
                   <thead>
                   <tr>
-                  <th>Grading Period</th>
-                  <th>Description</th>
-                  <th>Subject</th>
-                  <th>Exam Type</th>
+                  <th>No</th>
                   <th>Student No.</th>
-                  <th>Name</th>
-                    <th>Score</th>
-                    <th>Items</th>
-                    <th>DateTaken</th>
+                  <th>Student Name</th>
+                    <th>Action</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -436,42 +432,23 @@ unset($_SESSION['error_remarks']);
                   $getexamid = $_GET['examid'];
 
                 if(!empty($_GET["examid"])) {
-                //$check=mysqli_query($conn,"select * from examinee where examid='" .$getexamid . "'");
-                $check=mysqli_query($conn,"select * from examinee where WHERE status='CLOSED'");
+                $check=mysqli_query($conn,"select * from exam where id='" .$getexamid . "'");
                 $erow=mysqli_fetch_array($check);
                 if($erow>0) {              
                 }else{
-                header('location:examscore.php?examid=0');
+                header('location:essayscoring.php?examid=0');
                 }               
                 }
 
 
               }else{
-                header('location:examscore.php?examid=0');
+                header('location:essayscoring.php?examid=0');
               }
               $num=0;
-                //$query=mysqli_query($conn," select *  from examinee WHERE  examid='$getexamid' AND status='CLOSED'  ORDER BY studentname ASC");                                            
-                $query=mysqli_query($conn,"select * from examinee WHERE status='CLOSED'");
+                $query=mysqli_query($conn," select *  from examinee WHERE  examid='$getexamid'  ORDER BY studentname ASC");                                            
                 while($getrow=mysqli_fetch_array($query)){
                 ?>
                 <?php 
-   $getexamid=$getrow['examid'];
-              $getrow2=mysqli_query($conn,"SELECT * FROM exammaster where examid='$getexamid'");
-              $getrow2=mysqli_fetch_array($getrow2);
-              $examtype=$getrow2['examtype'];   
-              $examcategoryid=$getrow2['examcategoryid'];    
-              $subjectid=$getrow2['subjectid'];  
-              $exammasterid=$getrow2['id'];  
-
-              $getrow3=mysqli_query($conn,"SELECT * FROM examcategory where id='$examcategoryid'");
-              $getrow3=mysqli_fetch_array($getrow3);
-              $examcategoryname=$getrow3['examcategoryname'];  
-              
-              $getrow4=mysqli_query($conn,"SELECT * FROM subjects where id='$subjectid'");
-              $getrow4=mysqli_fetch_array($getrow4);
-              $subjectname=$getrow4['subjectname']; 
-
-
                 $id=$getrow['id'];   
                 $studentid=$getrow['studentid'];               
                  
@@ -482,59 +459,20 @@ unset($_SESSION['error_remarks']);
                 $examid=$getrow['examid'];         
                 $status=$getrow['status'];  
                 $num+=1;
-
-                  $items=0;
-                if ($examtype=="Multiple Choice"){
-                  $getrow5=mysqli_query($conn,"SELECT sum(Correct) as score,sum(totalitems) as items FROM exam_answer_multiplechoice where studentid='$studentid' and examid='$exammasterid' and examsubjectid='$subjectid' ");
-                  $getrow5=mysqli_fetch_array($getrow5);
-                  $score=$getrow5['score']; 
-                  $items=$getrow5['items'];   
-                }
-
-                
-                if ($examtype=="True or False"){
-                  $getrow6=mysqli_query($conn,"SELECT sum(Correct) as score,sum(totalitems) as items FROM exam_answer_truefalse where studentid='$studentid' and examid='$exammasterid' and examsubjectid='$subjectid' ");
-                  $getrow6=mysqli_fetch_array($getrow6);
-                  $score=$getrow6['score']; 
-                  $items=$getrow6['items'];   
-                }
-
-                  
-                if ($examtype=="Essay"){
-                  $getrow7=mysqli_query($conn,"SELECT sum(Correct) as score,sum(totalitems) as items FROM exam_answer_essay where studentid='$studentid' and examid='$exammasterid' and examsubjectid='$subjectid' ");
-                  $getrow7=mysqli_fetch_array($getrow7);
-                  $score=$getrow7['score']; 
-                  $items=$getrow7['items'];   
-                }
-                                      
-          $getrow8=mysqli_query($conn,"select *  from examinee WHERE  examid='$getexamid' AND studentid='$studentid' AND status='CLOSED'");
-          $getrow8=mysqli_fetch_array($getrow8);
-          $datetaken=$getrow8['datetaken']; 
-          $getrow9=mysqli_query($conn,"select *  from exam WHERE  id='$getexamid'");
-          $getrow9=mysqli_fetch_array($getrow9);
-          $examdescription=$getrow9['examdescription']; 
-              
-
-
                 ?>             
                 <tr>
-             
-                <td><?php echo $examcategoryname; ?></td>
-                <td><?php echo $examdescription; ?></td>
-                <td><?php echo $subjectname; ?></td>
-                <td><?php echo $examtype; ?></td>
+                <td><?php echo $num; ?></td>
                 <td><?php echo $studentno; ?></td>
-                <td><?php echo $studentname; ?></td>               
-                <td><?php echo $score; ?></td>  
-                <td><?php echo $items; ?></td>  
-                <td><?php 
-                 if ($status=='OPEN'){
-                  echo '';
-                 }else{
-                  echo $datetaken;
-                 }
+                <td><?php echo $studentname; ?></td>
                
-               ?></td>  
+                <td ><?php                         
+                       echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
+                 
+                          ?>
+               </td>   
+               
+               <td hidden><?php  echo $getexamid; ?></td>    
+               <td hidden><?php  echo $id; ?></td>       
                 </tr> 
 <?php
 }                      
@@ -742,7 +680,7 @@ include 'modal-logout.php';
 <script>
 function btnFilter(){
   var examid=document.getElementById("examid").value;  
-  location.href = './examscore.php?examid='+examid;
+  location.href = './essayscoring.php?examid='+examid;
 };   
 </script>
 

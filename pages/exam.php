@@ -405,7 +405,7 @@ unset($_SESSION['publish']);
                 
 $getrow2=mysqli_query($conn,"SELECT * FROM exammaster where examid='$id'");
 while($row=mysqli_fetch_array($getrow2)){
-  $publish=$row['published']);
+  $publish=$row['published'];
 }
                 ?>             
                 <tr>
