@@ -6,9 +6,9 @@ session_start();
 $username = "";
 $errors = array();
 
-//$db = mysqli_connect('localhost', 'root', '123456','ope');
-$db = mysqli_connect('localhost', 'root', '','ope');
 
+$db = mysqli_connect('localhost', 'root', '','ope');
+//$db = mysqli_connect('sql106.epizy.com', 'epiz_30454422', 'RP6lCfpZcn','epiz_30454422_ope');
 if (isset($_POST['user_login'])) {
 
 $username = mysqli_real_escape_string($db, $_POST['username']);

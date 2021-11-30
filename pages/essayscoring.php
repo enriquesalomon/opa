@@ -352,7 +352,7 @@ unset($_SESSION['error_remarks']);
       if($getexamid==""){ $getexamid=0;}
 
       include('dbconnect.php'); 
-      $query = mysqli_query($conn,"SELECT e.id as eid,e.examtype as examtype,c.classname as cclassname,e.sy as sy,ex.examcategoryname as examcategoryname FROM exam e INNER JOIN class c ON e.classnameid=c.id INNER JOIN examcategory ex ON ex.id=e.examcategoryid WHERE e.id=$getexamid");
+      $query = mysqli_query($conn,"SELECT e.id as eid,e.examtype as examtype,c.classname as cclassname,e.sy as sy,ex.examcategoryname as examcategoryname FROM exam e INNER JOIN class c ON e.classnameid=c.id INNER JOIN examcategory ex ON ex.id=e.examcategoryid WHERE e.id=$getexamid AND e.examtype='Essay'");
 
       while ($result = mysqli_fetch_array($query)) {
 
@@ -378,7 +378,7 @@ unset($_SESSION['error_remarks']);
             <?php
             if (isset( $_GET['examid'])){
               if ($_GET['examid']!=0){
-                echo "	<button class='btn btn-success'style='margin-bottom: 15px;'data-toggle='modal' data-target='#add-exam'><i class='fa fa-plus' aria-hidden='true'></i></button>";
+               // echo "	<button class='btn btn-success'style='margin-bottom: 15px;'data-toggle='modal' data-target='#add-exam'><i class='fa fa-plus' aria-hidden='true'></i></button>";
      
               }
               }
@@ -389,7 +389,7 @@ unset($_SESSION['error_remarks']);
                             <option selected value="" disabled>Select Exam</option>
                           <?php
                                   include('dbconnect.php'); 
-                          $query = mysqli_query($conn,"SELECT e.id as eid,e.examtype as examtype,c.classname as cclassname,e.sy as sy,ex.examcategoryname as examcategoryname FROM exam e INNER JOIN class c ON e.classnameid=c.id INNER JOIN examcategory ex ON ex.id=e.examcategoryid WHERE e.status='OPEN'");
+                          $query = mysqli_query($conn,"SELECT e.id as eid,e.examtype as examtype,c.classname as cclassname,e.sy as sy,ex.examcategoryname as examcategoryname FROM exam e INNER JOIN class c ON e.classnameid=c.id INNER JOIN examcategory ex ON ex.id=e.examcategoryid WHERE e.status='OPEN' and e.examtype='Essay'");
 
                           while ($result = mysqli_fetch_array($query)) {
                           echo "<option value="  .$result['eid']. ">" .$result['examcategoryname']. " | ".$result['examtype']. " | ".$result['sy']. " | ".$result['cclassname']."</option>";
@@ -415,9 +415,13 @@ unset($_SESSION['error_remarks']);
                   <table class="table table-striped">
                   <thead>
                   <tr>
-                  <th>No</th>
-                  <th>Student No.</th>
-                  <th>Student Name</th>
+                  <th>Grading Period</th>
+                  <th>Subject</th>
+                  <th>Student</th>
+                  <th>Question#</th>
+                  <th>Question</th>
+                     <th>Answer</th>
+                     <th>Points</th>
                     <th>Action</th>
                   </tr>
                   </thead>
@@ -432,7 +436,7 @@ unset($_SESSION['error_remarks']);
                   $getexamid = $_GET['examid'];
 
                 if(!empty($_GET["examid"])) {
-                $check=mysqli_query($conn,"select * from exam where id='" .$getexamid . "'");
+                $check=mysqli_query($conn,"select * from exammaster where examid='" .$getexamid . "'");
                 $erow=mysqli_fetch_array($check);
                 if($erow>0) {              
                 }else{
@@ -445,29 +449,62 @@ unset($_SESSION['error_remarks']);
                 header('location:essayscoring.php?examid=0');
               }
               $num=0;
-                $query=mysqli_query($conn," select *  from examinee WHERE  examid='$getexamid'  ORDER BY studentname ASC");                                            
-                while($getrow=mysqli_fetch_array($query)){
+                 $query=mysqli_query($conn," select *  from  exam_answer_essay a INNER JOIN examquestion_essay b ON a.examquestionid=b.id  WHERE  b.examid='$getexamid'");                                            
+                while($getrowMain=mysqli_fetch_array($query)){
                 ?>
                 <?php 
-                $id=$getrow['id'];   
-                $studentid=$getrow['studentid'];               
-                 
-                $getrow1=mysqli_query($conn,"SELECT * FROM student where id='$studentid'");
+  $exammaster_examcategoryid=$getrowMain['examid'];   
+  $answer=$getrowMain['answer'];  
+  $questiontitle=$getrowMain['questiontitle'];  
+  $answerpoints=$getrowMain['Correct'];  
+  $studentid=$getrowMain['studentid']; 
+  $questno=$getrowMain['num']; 
+
+              $getrow=mysqli_query($conn,"SELECT * FROM exammaster where examid='$exammaster_examcategoryid'");
+              $getrow=mysqli_fetch_array($getrow);
+
+              $exammaster_id=$getrow['id'];   
+              $exammaster_examid=$getrow['examid'];  
+              $exammaster_examcategoryid=$getrow['examcategoryid'];  
+              $exammaster_subjectid=$getrow['subjectid'];
+
+                ///////////////////////////////////////       
+           $getrow1=mysqli_query($conn,"SELECT * FROM student where id='$studentid'");
                 $getrow1=mysqli_fetch_array($getrow1);
                  $studentno=$getrow1['studentno'];           
                 $studentname=$getrow1['firstname']." ".$getrow1['middlename']." ".$getrow1['lastname'];    
-                $examid=$getrow['examid'];         
-                $status=$getrow['status'];  
-                $num+=1;
+        
+               // $num+=1;
+            
+                ///////////////////////////////////////
+                $getrow2=mysqli_query($conn,"SELECT * FROM examcategory where id='$exammaster_examcategoryid'");
+                $getrow2=mysqli_fetch_array($getrow2);
+                 $examcateogryname=$getrow2['examcategoryname']; 
+                 $getrow3=mysqli_query($conn,"SELECT * FROM subjects where id='$exammaster_subjectid'");
+                 $getrow3=mysqli_fetch_array($getrow3);
+                  $subjectname=$getrow3['subjectname'];   
+            ///            
+          //  $getrow4=mysqli_query($conn,"SELECT * FROM examquestion_essay where examsubjectid='$exammaster_id' and examid='$exammaster_examid'");
+          //  $getrow4=mysqli_fetch_array($getrow4);
+           //  $questiontitle=$getrow4['questiontitle'];   
+              ///            
+           // $getrow5=mysqli_query($conn,"SELECT * FROM exam_answer_essay where examsubjectid='$exammaster_id' and examid='$exammaster_examid'");
+            //$getrow5=mysqli_fetch_array($getrow5);
+            // $answer=$getrow5['answer'];   
+
                 ?>             
                 <tr>
-                <td><?php echo $num; ?></td>
-                <td><?php echo $studentno; ?></td>
+                <td><?php echo $examcateogryname; ?></td>
+                <td><?php echo $subjectname; ?></td>
                 <td><?php echo $studentname; ?></td>
+                <td><?php echo $questno; ?></td>
+                <td><?php echo $questiontitle; ?></td>
+                <td><?php echo $answer; ?></td>
+                <td><?php echo $answerpoints; ?></td>
+                <td ><?php                        
+
+                       echo ' <a class="btn btn-info btn-sm editbtn" href="#"><i class="fas fa-pencil-alt"></i>   Update Points</a>&nbsp';
                
-                <td ><?php                         
-                       echo '<a class="btn btn-danger btn-sm deletebtn" href="#"><i class="fas fa-trash"></i></a>&nbsp';
-                 
                           ?>
                </td>   
                
@@ -685,6 +722,66 @@ function btnFilter(){
 </script>
 
 
+
+<!-- Edit -->
+<div class="modal fade" id="editmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    
+                    <center><h4 class="modal-title" id="myModalLabel">Update Points</h4></center>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">  
+				<div class="container-fluid">
+				<form method="POST" action="query-edit.php" enctype="multipart/form-data">
+        <input type="hidden" class="form-control" id="id" name="idedit" required >
+
+
+     <input type="hidden" class="form-control" id="examsubjectidedit" name="examsubjectid" value="<?php echo$_GET['examsubjectid']; ?>" required >
+     <input type="hidden" class="form-control" id="examcategoryidedit" name="examcategoryid" value="<?php echo $_GET['examcategoryid']; ?>" required >
+     <input type="hidden" class="form-control" id="classnameidedit" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
+     <input type="hidden" class="form-control" id="examidedit" name="eid" value="<?php echo $_GET['eid']; ?>" required >
+     <input type="hidden" class="form-control" id="syedit" name="sy" value="<?php echo $_GET['sy']; ?>" required >
+
+
+
+
+
+     <input type="hidden" class="form-control" id="idedit" name="id" required >  
+
+        <div class="row">
+            <div class="col-lg-4">
+            <label class="control-label" style="position:relative; top:7px;">Question Title</label>
+            </div>
+            <div class="col-lg-8">
+            <textarea id="questiontitleedit" class="form-control" rows="2" name="titlequestion"required></textarea>
+            </div>
+        </div>
+
+        <div style="height:10px;"></div>
+                    <div class="row">
+						<div class="col-lg-4">
+							<label class="control-label" style="position:relative; top:7px;">Points</label>
+						</div>
+						<div class="col-lg-8">
+							<input type="number" id="pointsedit"  class="form-control" name="points"required>
+						</div>
+					</div>
+                    <div style="height:10px;"></div>
+									
+        </div> 
+        </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+                    <button type="submit"name="editexamquestion_essay" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+                    	
+				</form>
+                </div>
+				
+            </div>
+        </div>
+    </div>
 
 
  

@@ -28,7 +28,7 @@ $date = date('Y-m-d H:i:s');
 						</div>
 						<div class="col-lg-8">
                             <select name="studentid" id="" class="form-control custom-select" required>
-                            <option selected value="" disabled>Select Class</option>
+                            <option selected value="" disabled>Select Student</option>
                           <?php
                                   include('dbconnect.php'); 
                           $query = mysqli_query($conn,"SELECT * FROM student");

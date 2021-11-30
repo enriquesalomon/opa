@@ -451,7 +451,7 @@ unset($_SESSION['error_remarks']);
               }
               $num=0;
                 //$query=mysqli_query($conn," select *  from examinee WHERE  examid='$getexamid' AND status='CLOSED'  ORDER BY studentname ASC");                                            
-                $query=mysqli_query($conn,"select * from examinee WHERE status='CLOSED'");
+                $query=mysqli_query($conn,"select * from examinee ");
                 while($getrow=mysqli_fetch_array($query)){
                 ?>
                 <?php 
