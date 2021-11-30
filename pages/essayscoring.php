@@ -412,7 +412,8 @@ unset($_SESSION['error_remarks']);
             <div class="card">
               <!-- /.card-header -->
               <div class="col-12 table-responsive">
-                  <table class="table table-striped">
+                 <!-- <table class="table table-striped">-->
+                  <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                   <th>Grading Period</th>
@@ -595,8 +596,7 @@ unset($_SESSION['error_remarks']);
 <script>
   $(function () {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+  
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,

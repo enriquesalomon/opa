@@ -339,7 +339,8 @@ unset($_SESSION['publish']);
             <div class="card">
               <!-- /.card-header -->
               <div class="col-12 table-responsive">
-                  <table class="table table-striped">
+                  <!--<table class="table table-striped">-->
+                  <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                   <th hidden>Id</th>
@@ -529,8 +530,6 @@ while($row=mysqli_fetch_array($getrow2)){
 <script>
   $(function () {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,

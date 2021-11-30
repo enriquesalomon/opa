@@ -411,7 +411,9 @@ unset($_SESSION['error_remarks']);
             <div class="card">
               <!-- /.card-header -->
               <div class="col-12 table-responsive">
-                  <table class="table table-striped">
+                <!-- <table class="table table-striped"> -->
+                    
+                  <table id="example1" class="table table-bordered table-striped">
                   <thead>
                   <tr>
                   <th>Grading Period</th>
@@ -451,7 +453,7 @@ unset($_SESSION['error_remarks']);
                 //$query=mysqli_query($conn," select *  from examinee WHERE  examid='$getexamid' AND status='CLOSED'  ORDER BY studentname ASC");                                            
                // $query = mysqli_query($conn,"SELECT a.examid,a.studentname,a.studentid,e.sy as sy,ex.examcategoryname as examcategoryname FROM examinee a INNER JOIN exammaster b ON a.examid=b.examid");
 
-                $query=mysqli_query($conn,"select * from exammaster Group by subjectid");
+                $query=mysqli_query($conn,"select * from exammaster");
                 while($getrow=mysqli_fetch_array($query)){
                 ?>
                 <?php 
@@ -626,8 +628,7 @@ unset($_SESSION['error_remarks']);
 <script>
   $(function () {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    
     }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     $('#example2').DataTable({
       "paging": true,
