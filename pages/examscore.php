@@ -420,9 +420,7 @@ unset($_SESSION['error_remarks']);
                   <th>Exam Type</th>
                   <th>Student No.</th>
                   <th>Name</th>
-                    <th>Score</th>
-                    <th>Items</th>
-                    <th>DateTaken</th>
+                    <th>Score</th>         
                   </tr>
                   </thead>
                   <tbody>
@@ -451,17 +449,19 @@ unset($_SESSION['error_remarks']);
               }
               $num=0;
                 //$query=mysqli_query($conn," select *  from examinee WHERE  examid='$getexamid' AND status='CLOSED'  ORDER BY studentname ASC");                                            
-                $query=mysqli_query($conn,"select * from examinee ");
+               // $query = mysqli_query($conn,"SELECT a.examid,a.studentname,a.studentid,e.sy as sy,ex.examcategoryname as examcategoryname FROM examinee a INNER JOIN exammaster b ON a.examid=b.examid");
+
+                $query=mysqli_query($conn,"select * from exammaster Group by subjectid");
                 while($getrow=mysqli_fetch_array($query)){
                 ?>
                 <?php 
-   $getexamid=$getrow['examid'];
-              $getrow2=mysqli_query($conn,"SELECT * FROM exammaster where examid='$getexamid'");
-              $getrow2=mysqli_fetch_array($getrow2);
-              $examtype=$getrow2['examtype'];   
-              $examcategoryid=$getrow2['examcategoryid'];    
-              $subjectid=$getrow2['subjectid'];  
-              $exammasterid=$getrow2['id'];  
+
+              $examtype=$getrow['examtype'];   
+              $examcategoryid=$getrow['examcategoryid'];    
+              $subjectid=$getrow['subjectid'];  
+              $exammasterid=$getrow['id'];  
+              $examid=$getrow['examid'];  
+           
 
               $getrow3=mysqli_query($conn,"SELECT * FROM examcategory where id='$examcategoryid'");
               $getrow3=mysqli_fetch_array($getrow3);
@@ -473,52 +473,66 @@ unset($_SESSION['error_remarks']);
 
 
                 $id=$getrow['id'];   
-                $studentid=$getrow['studentid'];               
+                            
                  
-                $getrow1=mysqli_query($conn,"SELECT * FROM student where id='$studentid'");
-                $getrow1=mysqli_fetch_array($getrow1);
-                 $studentno=$getrow1['studentno'];           
-                $studentname=$getrow1['firstname']." ".$getrow1['middlename']." ".$getrow1['lastname'];    
-                $examid=$getrow['examid'];         
-                $status=$getrow['status'];  
-                $num+=1;
+                   
+              
+          
 
                   $items=0;
                 if ($examtype=="Multiple Choice"){
-                  $getrow5=mysqli_query($conn,"SELECT sum(Correct) as score,sum(totalitems) as items FROM exam_answer_multiplechoice where studentid='$studentid' and examid='$exammasterid' and examsubjectid='$subjectid' ");
+                  $getrow5=mysqli_query($conn,"SELECT sum(Correct) as score,sum(totalitems) as items FROM exam_answer_multiplechoice where examid='$exammasterid' and examsubjectid='$subjectid' ");
                   $getrow5=mysqli_fetch_array($getrow5);
                   $score=$getrow5['score']; 
                   $items=$getrow5['items'];   
+                  $getrow55=mysqli_query($conn,"SELECT * from exam_answer_truefalse where  examid='$exammasterid' and examsubjectid='$subjectid' ");
+                  $getrow55=mysqli_fetch_array($getrow55);   
+                  $studentid=$getrow55['studentid'];   
                 }
 
                 
                 if ($examtype=="True or False"){
-                  $getrow6=mysqli_query($conn,"SELECT sum(Correct) as score,sum(totalitems) as items FROM exam_answer_truefalse where studentid='$studentid' and examid='$exammasterid' and examsubjectid='$subjectid' ");
+                  $getrow6=mysqli_query($conn,"SELECT sum(Correct) as score,sum(totalitems) as items FROM exam_answer_truefalse where examid='$exammasterid' and examsubjectid='$subjectid' ");
                   $getrow6=mysqli_fetch_array($getrow6);
                   $score=$getrow6['score']; 
-                  $items=$getrow6['items'];   
+                  $items=$getrow6['items']; 
+                  $getrow66=mysqli_query($conn,"SELECT * from exam_answer_truefalse where  examid='$exammasterid' and examsubjectid='$subjectid' ");
+                  $getrow66=mysqli_fetch_array($getrow66);   
+                  $studentid=$getrow66['studentid'];    
                 }
 
                   
                 if ($examtype=="Essay"){
-                  $getrow7=mysqli_query($conn,"SELECT sum(Correct) as score,sum(totalitems) as items FROM exam_answer_essay where studentid='$studentid' and examid='$exammasterid' and examsubjectid='$subjectid' ");
+                  $getrow7=mysqli_query($conn,"SELECT sum(Correct) as score,sum(totalitems) as items FROM exam_answer_essay where  examid='$exammasterid' and examsubjectid='$subjectid' ");
                   $getrow7=mysqli_fetch_array($getrow7);
                   $score=$getrow7['score']; 
-                  $items=$getrow7['items'];   
+                  $items=$getrow7['items'];
+                  $getrow77=mysqli_query($conn,"SELECT * from exam_answer_essay where  examid='$exammasterid' and examsubjectid='$subjectid' ");
+                  $getrow77=mysqli_fetch_array($getrow77);   
+                  $studentid=$getrow77['studentid'];   
                 }
-                                      
-          $getrow8=mysqli_query($conn,"select *  from examinee WHERE  examid='$getexamid' AND studentid='$studentid' AND status='CLOSED'");
-          $getrow8=mysqli_fetch_array($getrow8);
-          $datetaken=$getrow8['datetaken']; 
-          $getrow9=mysqli_query($conn,"select *  from exam WHERE  id='$getexamid'");
+                                
+        
+          $getrow9=mysqli_query($conn,"select *  from exam WHERE  id='$examid'");
           $getrow9=mysqli_fetch_array($getrow9);
           $examdescription=$getrow9['examdescription']; 
               
+          $getrow1=mysqli_query($conn,"SELECT * FROM student where id='$studentid'");
+          $getrow1=mysqli_fetch_array($getrow1);
+           $studentno=$getrow1['studentno'];           
+          $studentname=$getrow1['firstname']." ".$getrow1['middlename']." ".$getrow1['lastname'];    
+          $examid=$getrow['examid'];     
 
+          $num+=1;
+          
+            if ($studentno==""){
+              $score="";
+            }
+     
+               
 
                 ?>             
                 <tr>
-             
                 <td><?php echo $examcategoryname; ?></td>
                 <td><?php echo $examdescription; ?></td>
                 <td><?php echo $subjectname; ?></td>
@@ -526,15 +540,8 @@ unset($_SESSION['error_remarks']);
                 <td><?php echo $studentno; ?></td>
                 <td><?php echo $studentname; ?></td>               
                 <td><?php echo $score; ?></td>  
-                <td><?php echo $items; ?></td>  
-                <td><?php 
-                 if ($status=='OPEN'){
-                  echo '';
-                 }else{
-                  echo $datetaken;
-                 }
-               
-               ?></td>  
+          
+                
                 </tr> 
 <?php
 }                      
