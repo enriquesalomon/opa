@@ -449,7 +449,7 @@ unset($_SESSION['error_remarks']);
                 header('location:essayscoring.php?examid=0');
               }
               $num=0;
-                 $query=mysqli_query($conn," select *  from  exam_answer_essay a INNER JOIN examquestion_essay b ON a.examquestionid=b.id  WHERE  b.examid='$getexamid'");                                            
+                 $query=mysqli_query($conn," select a.id,b.examid,a.answer,b.questiontitle ,a.Correct,a.studentid,b.num from  exam_answer_essay a INNER JOIN examquestion_essay b ON a.examquestionid=b.id  WHERE  b.examid='$getexamid'");                                            
                 while($getrowMain=mysqli_fetch_array($query)){
                 ?>
                 <?php 
@@ -459,6 +459,7 @@ unset($_SESSION['error_remarks']);
   $answerpoints=$getrowMain['Correct'];  
   $studentid=$getrowMain['studentid']; 
   $questno=$getrowMain['num']; 
+  $answeressay_id=$getrowMain['id']; 
 
               $getrow=mysqli_query($conn,"SELECT * FROM exammaster where examid='$exammaster_examcategoryid'");
               $getrow=mysqli_fetch_array($getrow);
@@ -509,7 +510,7 @@ unset($_SESSION['error_remarks']);
                </td>   
                
                <td hidden><?php  echo $getexamid; ?></td>    
-               <td hidden><?php  echo $id; ?></td>       
+               <td hidden><?php  echo $answeressay_id; ?></td>       
                 </tr> 
 <?php
 }                      
@@ -622,11 +623,12 @@ $(document).ready(function(){
           return $(this).text();
         }).get();
 
-        $('#id').val(data[0]);    
-        $('#examtypeid').val(data[2]);   
-        $('#examnameid').val(data[9]);    
-        $('#classnameid').val(data[8]);   
-        $('#schoolyearid').val(data[4]);       
+        $('#idedit').val(data[9]);    
+        $('#answerquestionedit').val(data[4]);   
+        $('#answeredit').val(data[5]);    
+        $('#answerpointsedit').val(data[6]);   
+        $('#examidedit').val(data[8]);   
+           
        
    
 
@@ -735,19 +737,7 @@ function btnFilter(){
                 <div class="modal-body">  
 				<div class="container-fluid">
 				<form method="POST" action="query-edit.php" enctype="multipart/form-data">
-        <input type="hidden" class="form-control" id="id" name="idedit" required >
-
-
-     <input type="hidden" class="form-control" id="examsubjectidedit" name="examsubjectid" value="<?php echo$_GET['examsubjectid']; ?>" required >
-     <input type="hidden" class="form-control" id="examcategoryidedit" name="examcategoryid" value="<?php echo $_GET['examcategoryid']; ?>" required >
-     <input type="hidden" class="form-control" id="classnameidedit" name="classnameid" value="<?php echo $_GET['classnameid']; ?>" required >
-     <input type="hidden" class="form-control" id="examidedit" name="eid" value="<?php echo $_GET['eid']; ?>" required >
-     <input type="hidden" class="form-control" id="syedit" name="sy" value="<?php echo $_GET['sy']; ?>" required >
-
-
-
-
-
+      <input type="hidden" class="form-control" id="" name="examid" value="<?php echo $_GET['examid']; ?>" required >
      <input type="hidden" class="form-control" id="idedit" name="id" required >  
 
         <div class="row">
@@ -755,7 +745,18 @@ function btnFilter(){
             <label class="control-label" style="position:relative; top:7px;">Question Title</label>
             </div>
             <div class="col-lg-8">
-            <textarea id="questiontitleedit" class="form-control" rows="2" name="titlequestion"required></textarea>
+            <textarea id="answerquestionedit" class="form-control" rows="2" name="titlequestion" readonly></textarea>
+            </div>
+        </div>
+
+        <div style="height:10px;"></div>
+
+        <div class="row">
+            <div class="col-lg-4">
+            <label class="control-label" style="position:relative; top:7px;">Answer</label>
+            </div>
+            <div class="col-lg-8">
+            <textarea id="answeredit" class="form-control" rows="2" name="answer" readonly></textarea>
             </div>
         </div>
 
@@ -765,7 +766,7 @@ function btnFilter(){
 							<label class="control-label" style="position:relative; top:7px;">Points</label>
 						</div>
 						<div class="col-lg-8">
-							<input type="number" id="pointsedit"  class="form-control" name="points"required>
+							<input type="number" id="answerpointsedit"  class="form-control" name="points"required>
 						</div>
 					</div>
                     <div style="height:10px;"></div>
@@ -774,7 +775,7 @@ function btnFilter(){
         </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-                    <button type="submit"name="editexamquestion_essay" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
+                    <button type="submit"name="editexamanswer_points" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a>
                     	
 				</form>
                 </div>

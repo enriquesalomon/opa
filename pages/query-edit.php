@@ -700,4 +700,27 @@ if (isset($_POST['publishresult'])) {
 
 }
 
+
+
+
+if (isset($_POST['editexamanswer_points'])) {
+
+  $id= mysqli_real_escape_string($conn, $_POST['id']);
+  $examid= mysqli_real_escape_string($conn, $_POST['examid']);
+  $points= mysqli_real_escape_string($conn, $_POST['points']);    
+
+              if (!mysqli_query($conn, "UPDATE exam_answer_essay set Correct=$points where id='$id'")) {
+          echo("Error description: " . mysqli_error($conn));
+              }else{
+                $_SESSION["examedited"]="examedited";
+                header('location:essayscoring.php?examid='.$examid.'');
+              
+
+              }
+
+}
+
+
 ?>
+
+
